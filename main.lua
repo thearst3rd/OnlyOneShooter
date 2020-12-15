@@ -10,12 +10,15 @@ local PLAYER_ACCEL = 1000
 local PLAYER_FRICTION = 300
 local BULLET_SPEED = 200
 
+local ARENA_WIDTH = 1600
+local ARENA_HEIGHT = 900
+
 
 function love.load()
 	-- Create player
 	player.x = love.graphics.getWidth() / 2
 	player.y = love.graphics.getHeight() / 2
-	player.size = 20
+	player.radius = 15
 	player.xspeed = 0
 	player.yspeed = 0
 
@@ -65,6 +68,24 @@ function love.update(dt)
 	player.x = player.x + player.xspeed * dt
 	player.y = player.y + player.yspeed * dt
 
+	-- Collide with walls
+	if player.x < player.radius then
+		player.x = player.radius
+		player.xspeed = 0
+	end
+	if player.x > ARENA_WIDTH - player.radius then
+		player.x = ARENA_WIDTH - player.radius
+		player.xspeed = 0
+	end
+	if player.y < player.radius then
+		player.y = player.radius
+		player.yspeed = 0
+	end
+	if player.y > ARENA_HEIGHT - player.radius then
+		player.y = ARENA_HEIGHT - player.radius
+		player.yspeed = 0
+	end
+
 	-- Apply friction
 	if speed > 0 then
 		speed = speed - PLAYER_FRICTION * dt
@@ -78,13 +99,24 @@ function love.update(dt)
 		bullet.y = bullet.y + bullet.yspeed * dt
 	end
 
+	-- Delete off-screen bullets
+	for i = #bullets, 1, -1 do
+		local bullet = bullets[i]
+		if bullet.x < -bullet.radius
+				or bullet.x > ARENA_WIDTH + bullet.radius
+				or bullet.y < -bullet.radius
+				or bullet.y > ARENA_HEIGHT + bullet.radius then
+			table.remove(bullets, i)
+		end
+	end
+
 	-- Create bullets
 	if love.mouse.isDown(1) then
 		table.insert(bullets,
 		{
 			x = player.x,
 			y = player.y,
-			size = 15,
+			radius = 8,
 			xspeed = BULLET_SPEED * math.cos(aimAng),
 			yspeed = BULLET_SPEED * math.sin(aimAng),
 		})
@@ -94,12 +126,12 @@ end
 function love.draw()
 	-- Draw de playor
 	love.graphics.setColor(0, 0, 0)
-	love.graphics.circle("fill", player.x, player.y, player.size / 2)
+	love.graphics.circle("fill", player.x, player.y, player.radius)
 
 	-- Draw de bullots
 	for _, bullet in ipairs(bullets) do
 		love.graphics.setColor(0.7, 0.1, 0.1)
-		love.graphics.circle("fill", bullet.x, bullet.y, bullet.size / 2)
+		love.graphics.circle("fill", bullet.x, bullet.y, bullet.radius)
 	end
 end
 
