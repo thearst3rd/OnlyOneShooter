@@ -5,10 +5,13 @@ local balls = {}
 
 local player = {}
 
+local bullets = {}
+
 -- Define constants
 local PLAYER_MAXSPEED = 300
 local PLAYER_ACCEL = 1000
 local PLAYER_FRICTION = 300
+local BULLET_SPEED = 200
 
 
 local ballColors =
@@ -44,6 +47,9 @@ function love.load()
 end
 
 function love.update(dt)
+	-- Update per-frame variables
+	local aimAng = math.atan2(love.mouse.getY() - player.y, love.mouse.getX() - player.x)
+
 	for _, ball in ipairs(balls) do
 		ball.x = ball.x + (ball.xspeed * dt)
 		ball.y = ball.y + (ball.yspeed * dt)
@@ -95,6 +101,25 @@ function love.update(dt)
 
 	player.x = player.x + player.xspeed * dt
 	player.y = player.y + player.yspeed * dt
+
+	-- Update existing bullets
+	for _, bullet in ipairs(bullets) do
+		bullet.x = bullet.x + bullet.xspeed * dt
+		bullet.y = bullet.y + bullet.yspeed * dt
+	end
+
+	-- Create bullets
+	if love.mouse.isDown(1) then
+		table.insert(bullets,
+		{
+			x = player.x,
+			y = player.y,
+			size = 15,
+			xspeed = BULLET_SPEED * math.cos(aimAng),
+			yspeed = BULLET_SPEED * math.sin(aimAng),
+		})
+	end
+
 end
 
 function love.draw()
@@ -107,6 +132,12 @@ function love.draw()
 	-- Draw de playor
 	love.graphics.setColor(0, 0, 0)
 	love.graphics.circle("fill", player.x, player.y, player.size / 2)
+
+	-- Draw de bullots
+	for _, bullet in ipairs(bullets) do
+		love.graphics.setColor(0.7, 0.1, 0.1)
+		love.graphics.circle("fill", bullet.x, bullet.y, bullet.size / 2)
+	end
 end
 
 
