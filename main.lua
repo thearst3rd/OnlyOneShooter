@@ -6,15 +6,21 @@ local bullets = {}
 local timeSinceLastShot = 0
 
 -- Define constants
-local PLAYER_MAXSPEED = 300
-local PLAYER_ACCEL = 1000
-local PLAYER_FRICTION = 300
-local BULLET_SPEED = 200
-local BULLET_COOLDOWN = 0.3
+local PLAYER_MAXSPEED = 450
+local PLAYER_ACCEL = 900
+local PLAYER_FRICTION = 150
+local BULLET_SPEED = 1000
+local BULLET_COOLDOWN = 0.25
 
 local ARENA_WIDTH = 1600
 local ARENA_HEIGHT = 900
 
+local debug = false
+
+
+--------------------
+-- MAIN CALLBACKS --
+--------------------
 
 function love.load()
 	-- Create player
@@ -23,13 +29,17 @@ function love.load()
 	player.radius = 15
 	player.xspeed = 0
 	player.yspeed = 0
+	player.angle = 0
 
 	love.graphics.setBackgroundColor(0.1, 0.3, 0.5)
 end
 
 function love.update(dt)
-	-- Update per-frame variables
-	local aimAng = math.atan2(love.mouse.getY() - player.y, love.mouse.getX() - player.x)
+	-- Limit dt
+	if dt > 1/15 then dt = 1/15 end
+
+	-- Update player values
+	player.angle = math.atan2(love.mouse.getY() - player.y, love.mouse.getX() - player.x)
 	timeSinceLastShot = timeSinceLastShot + dt
 
 	-- Have player react to keypresses
@@ -121,22 +131,67 @@ function love.update(dt)
 			x = player.x,
 			y = player.y,
 			radius = 8,
-			xspeed = BULLET_SPEED * math.cos(aimAng),
-			yspeed = BULLET_SPEED * math.sin(aimAng),
+			xspeed = BULLET_SPEED * math.cos(player.angle),
+			yspeed = BULLET_SPEED * math.sin(player.angle),
 		})
 		timeSinceLastShot = 0
 	end
 end
 
-function love.draw()
-	-- Draw de playor
-	love.graphics.setColor(0, 0, 0)
-	love.graphics.circle("fill", player.x, player.y, player.radius)
+local playerPolygon =
+{
+	30, 0,
+	-20, 15,
+	-12, 0,
+	-20, -15,
+	30, 0,
+}
 
-	-- Draw de bullots
+local playerPolygonTri = love.math.triangulate(playerPolygon)
+
+function love.draw()
+	-- Draw the bullets
 	for _, bullet in ipairs(bullets) do
 		love.graphics.setColor(0.7, 0.1, 0.1)
 		love.graphics.circle("fill", bullet.x, bullet.y, bullet.radius)
+	end
+
+	-- Draw the player
+	love.graphics.push()
+		love.graphics.translate(player.x, player.y)
+		love.graphics.rotate(player.angle)
+
+		love.graphics.setColor(1, 1, 1)
+		for _, poly in ipairs(playerPolygonTri) do
+			love.graphics.polygon("fill", poly)
+		end
+
+		local width = love.graphics.getLineWidth()
+		love.graphics.setLineWidth(3)
+		love.graphics.setColor(0, 0, 0)
+		love.graphics.line(playerPolygon)
+		love.graphics.setLineWidth(width)
+	love.graphics.pop()
+
+	-- Debug player hitbox
+	if debug then
+		love.graphics.setColor(1, 0, 0)
+		love.graphics.circle("line", player.x, player.y, player.radius)
+	end
+end
+
+
+---------------------
+-- OTHER CALLBACKS --
+---------------------
+
+function love.keypressed(key, scancode, isrepeat)
+	if key == "escape" then
+		love.event.quit()
+	end
+
+	if key == "f12" then
+		debug = not debug
 	end
 end
 
