@@ -1,10 +1,7 @@
 -- Shooter following "Only One"
 -- by Kyle Reese and Terry Hearst
 
-local balls = {}
-
 local player = {}
-
 local bullets = {}
 
 -- Define constants
@@ -14,28 +11,7 @@ local PLAYER_FRICTION = 300
 local BULLET_SPEED = 200
 
 
-local ballColors =
-{
-	{1, 0.3, 0.3},
-	{1, 1, 0.3},
-	{0.3, 1, 0.3},
-}
-
-
 function love.load()
-	-- Generate ballz
-	for i = 1, 10 do
-		balls[i] =
-		{
-			x = math.random() * love.graphics.getWidth(),
-			y = math.random() * love.graphics.getHeight(),
-			size = 10 + math.random() * 10,
-			xspeed = (math.random() * 400) - 200,
-			yspeed = (math.random() * 400) - 200,
-			color = ballColors[math.ceil(math.random() * #ballColors)]
-		}
-	end
-
 	-- Create player
 	player.x = love.graphics.getWidth() / 2
 	player.y = love.graphics.getHeight() / 2
@@ -49,11 +25,6 @@ end
 function love.update(dt)
 	-- Update per-frame variables
 	local aimAng = math.atan2(love.mouse.getY() - player.y, love.mouse.getX() - player.x)
-
-	for _, ball in ipairs(balls) do
-		ball.x = ball.x + (ball.xspeed * dt)
-		ball.y = ball.y + (ball.yspeed * dt)
-	end
 
 	-- Have player react to keypresses
 	local accelVector = {x = 0, y = 0}
@@ -121,12 +92,6 @@ function love.update(dt)
 end
 
 function love.draw()
-	-- Draw de bawlz
-	for _, ball in ipairs(balls) do
-		love.graphics.setColor(ball.color)
-		love.graphics.circle("fill", ball.x, ball.y, ball.size / 2)
-	end
-
 	-- Draw de playor
 	love.graphics.setColor(0, 0, 0)
 	love.graphics.circle("fill", player.x, player.y, player.size / 2)
