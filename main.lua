@@ -55,9 +55,6 @@ function love.update(dt)
 		ball.y = ball.y + (ball.yspeed * dt)
 	end
 
-	-- Apply friction
-	local speed, ang = toPolar(player.xspeed, player.yspeed)
-
 	-- Have player react to keypresses
 	local accelVector = {x = 0, y = 0}
 
@@ -76,7 +73,6 @@ function love.update(dt)
 
 	if accelVector.x ~= 0 or accelVector.y ~= 0 then
 		-- Normalize vector
-
 		local accelMag, accelAng = toPolar(accelVector.x, accelVector.y)
 		accelMag = PLAYER_ACCEL
 
@@ -84,23 +80,26 @@ function love.update(dt)
 
 		player.xspeed = player.xspeed + accelVector.x * dt
 		player.yspeed = player.yspeed + accelVector.y * dt
-	else
-		speed = speed - (PLAYER_FRICTION * dt)
-		if speed < 0 then speed = 0 end
-
-		player.xspeed, player.yspeed = toCartesian(speed, ang)
 	end
 
-	speed = math.sqrt(player.xspeed * player.xspeed + player.yspeed * player.yspeed)
-	ang = math.atan2(player.yspeed, player.xspeed)
+	local speed = math.sqrt(player.xspeed * player.xspeed + player.yspeed * player.yspeed)
+	local ang = math.atan2(player.yspeed, player.xspeed)
 
 	if speed > PLAYER_MAXSPEED then
+		speed = PLAYER_MAXSPEED
 		player.xspeed = PLAYER_MAXSPEED * math.cos(ang)
 		player.yspeed = PLAYER_MAXSPEED * math.sin(ang)
 	end
 
 	player.x = player.x + player.xspeed * dt
 	player.y = player.y + player.yspeed * dt
+
+	-- Apply friction
+	if speed > 0 then
+		speed = speed - PLAYER_FRICTION * dt
+		if speed < 0 then speed = 0 end
+		player.xspeed, player.yspeed = toCartesian(speed, ang)
+	end
 
 	-- Update existing bullets
 	for _, bullet in ipairs(bullets) do
@@ -119,7 +118,6 @@ function love.update(dt)
 			yspeed = BULLET_SPEED * math.sin(aimAng),
 		})
 	end
-
 end
 
 function love.draw()
