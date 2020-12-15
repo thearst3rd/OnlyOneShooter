@@ -3,12 +3,14 @@
 
 local player = {}
 local bullets = {}
+local timeSinceLastShot = 0
 
 -- Define constants
 local PLAYER_MAXSPEED = 300
 local PLAYER_ACCEL = 1000
 local PLAYER_FRICTION = 300
 local BULLET_SPEED = 200
+local BULLET_COOLDOWN = 0.3
 
 local ARENA_WIDTH = 1600
 local ARENA_HEIGHT = 900
@@ -28,6 +30,7 @@ end
 function love.update(dt)
 	-- Update per-frame variables
 	local aimAng = math.atan2(love.mouse.getY() - player.y, love.mouse.getX() - player.x)
+	timeSinceLastShot = timeSinceLastShot + dt
 
 	-- Have player react to keypresses
 	local accelVector = {x = 0, y = 0}
@@ -111,7 +114,8 @@ function love.update(dt)
 	end
 
 	-- Create bullets
-	if love.mouse.isDown(1) then
+	if love.mouse.isDown(1)
+			and timeSinceLastShot > BULLET_COOLDOWN then
 		table.insert(bullets,
 		{
 			x = player.x,
@@ -120,6 +124,7 @@ function love.update(dt)
 			xspeed = BULLET_SPEED * math.cos(aimAng),
 			yspeed = BULLET_SPEED * math.sin(aimAng),
 		})
+		timeSinceLastShot = 0
 	end
 end
 
