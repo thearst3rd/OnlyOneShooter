@@ -2,20 +2,28 @@
 -- by Kyle Reese and Terry Hearst
 
 local player = {}
+local opponent = {}
 local bullets = {}
 local timeSinceLastShot = 0
+local opponentShotCooldown = 0
+local opponentAdvanceDist = 0
+local bulletsOut = 0
 
 -- Define constants
 local PLAYER_MAXSPEED = 450
 local PLAYER_ACCEL = 900
 local PLAYER_FRICTION = 150
-local BULLET_SPEED = 1000
-local BULLET_COOLDOWN = 0.25
+local PLAYER_BULLET_SPEED = 1000
+local PLAYER_BULLET_COOLDOWN = 0.25
+local OPPONENT_SPEED = 200
+local OPPONENT_BULLET_SPEED = 250
+local OPPONENT_BULLET_COOLDOWN = 1
 
 local ARENA_WIDTH = 1600
 local ARENA_HEIGHT = 900
 
 local debug = false
+local opponentiFrameToggle = false
 
 
 --------------------
@@ -31,6 +39,16 @@ function love.load()
 	player.yspeed = 0
 	player.angle = 0
 
+	-- Create Opponent
+	opponent.radius = 25
+	opponent.x = love.graphics.getWidth() - opponent.radius * 4
+	opponent.y = opponent.radius * 4
+	opponent.xspeed = 0
+	opponent.yspeed = 0
+	opponent.direction = false
+	opponent.advance = false
+	opponent.life = 3
+
 	love.graphics.setBackgroundColor(0.1, 0.3, 0.5)
 end
 
@@ -41,6 +59,11 @@ function love.update(dt)
 	-- Update player values
 	player.angle = math.atan2(love.mouse.getY() - player.y, love.mouse.getX() - player.x)
 	timeSinceLastShot = timeSinceLastShot + dt
+
+	-- Update opponent values
+	opponentShotCooldown = opponentShotCooldown + dt
+	opponentAdvanceDist = opponentAdvanceDist + OPPONENT_SPEED * dt
+	bulletsOut = 0
 
 	-- Have player react to keypresses
 	local accelVector = {x = 0, y = 0}
@@ -106,6 +129,52 @@ function love.update(dt)
 		player.xspeed, player.yspeed = toCartesian(speed, ang)
 	end
 
+	-- Update opponent movement
+	if not opponent.advance then
+		if opponent.direction then
+			opponent.x = opponent.x + OPPONENT_SPEED * dt
+		else
+			opponent.x = opponent.x - OPPONENT_SPEED * dt
+		end
+	else
+		opponent.y = opponent.y + OPPONENT_SPEED * dt
+	end
+
+	if opponent.x - opponent.radius <= 0 then opponent.direction = true end
+	if opponent.x + opponent.radius >= ARENA_WIDTH then
+		opponent.advance = true
+		opponent.direction = false
+	end
+
+	if opponentAdvanceDist >= 125 then
+		opponent.advance = false
+		opponentAdvanceDist = 0
+	end
+
+	-- Update opponent living status
+	for _, bullet in ipairs(bullets) do
+		if bullet.friendly then
+			if math.sqrt((opponent.x - bullet.x) ^ 2 + (opponent.y - bullet.y) ^ 2) <= opponent.radius + bullet.radius and not opponentiFrameToggle then
+				opponent.life = opponent.life - 1
+				opponentiFrameToggle = true
+			elseif math.sqrt((opponent.x - bullet.x) ^ 2 + (opponent.y - bullet.y) ^ 2) > opponent.radius + bullet.radius then
+				bulletsOut = bulletsOut + 1
+			end
+		else
+			bulletsOut = bulletsOut + 1
+		end
+	end
+	if bulletsOut == #bullets then
+		opponentiFrameToggle = false
+		bulletsOut = 0
+	end
+
+	if opponent.life == 0 then
+		-- This teleport should be temporary, we should just not draw the sprite during this time
+		opponent.x = -100
+		opponent.y = -100
+	end
+
 	-- Update existing bullets
 	for _, bullet in ipairs(bullets) do
 		bullet.x = bullet.x + bullet.xspeed * dt
@@ -125,16 +194,29 @@ function love.update(dt)
 
 	-- Create bullets
 	if love.mouse.isDown(1)
-			and timeSinceLastShot > BULLET_COOLDOWN then
+			and timeSinceLastShot > PLAYER_BULLET_COOLDOWN then
 		table.insert(bullets,
 		{
 			x = player.x,
 			y = player.y,
 			radius = 8,
-			xspeed = BULLET_SPEED * math.cos(player.angle),
-			yspeed = BULLET_SPEED * math.sin(player.angle),
+			xspeed = PLAYER_BULLET_SPEED * math.cos(player.angle),
+			yspeed = PLAYER_BULLET_SPEED * math.sin(player.angle),
+			friendly = true,
 		})
 		timeSinceLastShot = 0
+	end
+	if opponentShotCooldown > OPPONENT_BULLET_COOLDOWN then
+		table.insert(bullets,
+		{
+			x = opponent.x,
+			y = opponent.y,
+			radius = 8,
+			xspeed = 0,
+			yspeed = OPPONENT_BULLET_SPEED,
+			friendly = false,
+		})
+		opponentShotCooldown = 0
 	end
 end
 
@@ -178,6 +260,10 @@ function love.draw()
 		love.graphics.setColor(1, 0, 0)
 		love.graphics.circle("line", player.x, player.y, player.radius)
 	end
+
+	-- Draw the opponent
+	love.graphics.setColor(0.1, 0.4, 0.7)
+	love.graphics.circle("fill", opponent.x, opponent.y, opponent.radius)
 end
 
 
