@@ -6,6 +6,7 @@
 classes = {}
 require "classes/player"
 require "classes/opponent"
+require "classes/bullet"
 
 -- Global variables
 bullets = {}
@@ -16,7 +17,6 @@ ARENA_HEIGHT = 900
 
 -- Debug variables
 debug = false
-local opponentiFrameToggle = false
 
 
 --------------------
@@ -38,43 +38,35 @@ function love.update(dt)
 	if dt > 1/15 then dt = 1/15 end
 
 	-- Update player
-	if player then player:update(dt) end
+	if player then
+		player:update(dt)
+		if player.markForDeletion then
+			player = nil
+		end
+	end
 
 	-- Update opponent
 	if opponent then
 		opponent:update(dt)
-		if opponent.life == 0 then
+		if opponent.markForDeletion then
 			opponent = nil
 		end
 	end
 
-	-- Update existing bullets
-	for _, bullet in ipairs(bullets) do
-		bullet.x = bullet.x + bullet.xspeed * dt
-		bullet.y = bullet.y + bullet.yspeed * dt
-	end
-
-	-- Delete off-screen bullets
+	-- Update bullets (in reverse so deletion works properly)
 	for i = #bullets, 1, -1 do
 		local bullet = bullets[i]
-		if bullet.x < -bullet.radius
-				or bullet.x > ARENA_WIDTH + bullet.radius
-				or bullet.y < -bullet.radius
-				or bullet.y > ARENA_HEIGHT + bullet.radius then
+		bullet:update(dt)
+		if bullet.markForDeletion then
 			table.remove(bullets, i)
 		end
 	end
-
-
 end
-
-
 
 function love.draw()
 	-- Draw the bullets
 	for _, bullet in ipairs(bullets) do
-		love.graphics.setColor(0.7, 0.1, 0.1)
-		love.graphics.circle("fill", bullet.x, bullet.y, bullet.radius)
+		bullet:draw()
 	end
 
 	-- Draw the player

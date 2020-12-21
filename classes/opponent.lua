@@ -5,7 +5,6 @@ opponent.__index = opponent
 
 -- Constants
 local OPPONENT_SPEED = 200
-local OPPONENT_BULLET_SPEED = 250
 local OPPONENT_BULLET_COOLDOWN = 1
 local OPPONENT_IFRAME_TIME = 0.5
 
@@ -57,15 +56,7 @@ function opponent:update(dt)
 
 	-- Shoot bullets
 	if self.shotCooldown > OPPONENT_BULLET_COOLDOWN then
-		table.insert(bullets,
-		{
-			x = self.x,
-			y = self.y,
-			radius = 8,
-			xspeed = 0,
-			yspeed = OPPONENT_BULLET_SPEED,
-			friendly = false,
-		})
+		table.insert(bullets, classes.bullet.new(self.x, self.y, math.pi / 2, false))
 		self.shotCooldown = 0
 	end
 
@@ -73,11 +64,12 @@ function opponent:update(dt)
 	if self.iframes <= 0 then
 		for i, bullet in ipairs(bullets) do
 			if bullet.friendly then
-				if math.sqrt((self.x - bullet.x) ^ 2 + (self.y - bullet.y) ^ 2) <= self.radius + bullet.radius and not opponentiFrameToggle then
+				if math.sqrt((self.x - bullet.x) ^ 2 + (self.y - bullet.y) ^ 2) <= (self.radius + bullet.radius) then
 					self.life = self.life - 1
+					if self.life == 0 then self.markForDeletion = true end
 					self.iframes = OPPONENT_IFRAME_TIME
 
-					table.remove(bullets, i)
+					bullet.markForDeletion = true
 					break
 				end
 			end

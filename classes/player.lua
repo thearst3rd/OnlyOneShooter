@@ -8,7 +8,6 @@ player.__index = player
 local PLAYER_MAXSPEED = 450
 local PLAYER_ACCEL = 900
 local PLAYER_FRICTION = 150
-local PLAYER_BULLET_SPEED = 1000
 local PLAYER_BULLET_COOLDOWN = 0.25
 
 
@@ -97,15 +96,7 @@ function player:update(dt)
 
 	-- Create bullets
 	if love.mouse.isDown(1) and self.timeSinceLastShot > PLAYER_BULLET_COOLDOWN then
-		table.insert(bullets,
-		{
-			x = self.x,
-			y = self.y,
-			radius = 8,
-			xspeed = PLAYER_BULLET_SPEED * math.cos(self.angle),
-			yspeed = PLAYER_BULLET_SPEED * math.sin(self.angle),
-			friendly = true,
-		})
+		table.insert(bullets, classes.bullet.new(self.x, self.y, self.angle, true))
 		self.timeSinceLastShot = 0
 	end
 end
