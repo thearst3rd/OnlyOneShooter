@@ -16,8 +16,12 @@ function game.new()
 	local self = setmetatable({}, game)
 
 	self.player = classes.player.new()
-	self.opponent = classes.opponentPhaseNormal.new()
+	self.opponentSpawner = classes.opponentSpawner.new()
+	self.opponent = nil
 	self.bullets = {}
+
+	-- Wait a bit to spawn the first enemy
+	self.opponentSpawner:triggerNext(1)
 
 	return self
 end
@@ -38,6 +42,15 @@ function game:update(dt)
 		if self.opponent.markForDeletion then
 			if self.opponent.onDestroy then self.opponent:onDestroy() end
 			self.opponent = nil
+		end
+	end
+
+	-- Update opponent spawner
+	if self.opponentSpawner then
+		self.opponentSpawner:update(dt)
+		if self.opponentSpawner.markForDeletion then
+			if self.opponentSpawner.onDestroy then self.opponentSpawner:onDestroy() end
+			self.opponentSpawner = nil
 		end
 	end
 
@@ -63,6 +76,9 @@ function game:draw()
 
 	-- Draw the opponent
 	if self.opponent then self.opponent:draw() end
+
+	-- Draw the opponent spawner
+	if self.opponentSpawner then self.opponentSpawner:draw() end
 end
 
 

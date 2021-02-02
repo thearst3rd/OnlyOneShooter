@@ -71,4 +71,9 @@ function opponentPhaseNormal:draw()
 	classes.opponentBase.draw(self)
 end
 
+function opponentPhaseNormal:onDestroy()
+	-- Call default superclass method
+	classes.opponentBase.onDestroy(self)
+end
+
 classes.opponentPhaseNormal = opponentPhaseNormal

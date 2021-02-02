@@ -5,9 +5,11 @@
 -- Load up all classes
 classes = {}
 require "classes/player"
+require "classes/bullet"
+require "classes/opponentSpawner"
 require "classes/opponentBase"
 require "classes/opponentPhaseNormal"
-require "classes/bullet"
+require "classes/opponentPhaseNoBehavior"
 
 -- Load up all states
 states = {}

@@ -72,5 +72,10 @@ function opponentBase:draw()
 	love.graphics.circle("fill", self.x, self.y, self.radius)
 end
 
+function opponentBase:onDestroy()
+	-- Setup the opponent spawner to spawn the next opponent in 1 second
+	state.opponentSpawner:triggerNext(2.5)
+end
+
 -- Register class
 classes.opponentBase = opponentBase

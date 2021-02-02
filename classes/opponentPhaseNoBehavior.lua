@@ -1,20 +1,20 @@
 -- The template opponent phase
 
-local opponentPhaseTEMPLATE = {}
-opponentPhaseTEMPLATE.__index = opponentPhaseTEMPLATE
+local opponentPhaseNoBehavior = {}
+opponentPhaseNoBehavior.__index = opponentPhaseNoBehavior
 
 
 --------------------
 -- MAIN CALLBACKS --
 --------------------
 
-function opponentPhaseTEMPLATE.new()
+function opponentPhaseNoBehavior.new()
 	local self = classes.opponentBase.new()
-	setmetatable(self, opponentPhaseTEMPLATE)
+	setmetatable(self, opponentPhaseNoBehavior)
 	return self
 end
 
-function opponentPhaseTEMPLATE:update(dt)
+function opponentPhaseNoBehavior:update(dt)
 	-- Call superclass method
 	classes.opponentBase.update(self, dt)
 
@@ -23,15 +23,14 @@ function opponentPhaseTEMPLATE:update(dt)
 	-- ... rest of method here ...
 end
 
-function opponentPhaseTEMPLATE:draw()
+function opponentPhaseNoBehavior:draw()
 	-- Optional - draw default opponent
 	classes.opponentBase.draw(self)
 end
 
-function opponentPhaseTEMPLATE:onDestroy()
+function opponentPhaseNoBehavior:onDestroy()
 	-- Call default superclass method
 	classes.opponentBase.onDestroy(self)
 end
 
--- Uncomment this
---classes.opponentPhaseTEMPLATE = opponentPhaseTEMPLATE
+classes.opponentPhaseNoBehavior = opponentPhaseNoBehavior
