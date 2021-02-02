@@ -14,8 +14,8 @@ local PLAYER_BULLET_COOLDOWN = 0.25
 function player.new()
 	local self = setmetatable({}, player)
 
-	self.x = love.graphics.getWidth() / 2
-	self.y = love.graphics.getHeight() / 2
+	self.x = ARENA_WIDTH / 2
+	self.y = ARENA_HEIGHT * (4 / 5)
 	self.radius = 15
 	self.xspeed = 0
 	self.yspeed = 0

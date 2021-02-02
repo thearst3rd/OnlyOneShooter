@@ -5,7 +5,8 @@
 -- Load up all classes
 classes = {}
 require "classes/player"
-require "classes/opponent"
+require "classes/opponentBase"
+require "classes/opponentPhaseNormal"
 require "classes/bullet"
 
 -- Load up all states

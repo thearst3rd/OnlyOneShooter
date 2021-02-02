@@ -16,7 +16,7 @@ function game.new()
 	local self = setmetatable({}, game)
 
 	self.player = classes.player.new()
-	self.opponent = classes.opponent.new()
+	self.opponent = classes.opponentPhaseNormal.new()
 	self.bullets = {}
 
 	return self
@@ -27,6 +27,7 @@ function game:update(dt)
 	if self.player then
 		self.player:update(dt)
 		if self.player.markForDeletion then
+			if self.player.onDestroy then self.player:onDestroy() end
 			self.player = nil
 		end
 	end
@@ -35,6 +36,7 @@ function game:update(dt)
 	if self.opponent then
 		self.opponent:update(dt)
 		if self.opponent.markForDeletion then
+			if self.opponent.onDestroy then self.opponent:onDestroy() end
 			self.opponent = nil
 		end
 	end
@@ -44,6 +46,7 @@ function game:update(dt)
 		local bullet = self.bullets[i]
 		bullet:update(dt)
 		if bullet.markForDeletion then
+			if bullet.onDestroy then bullet:onDestroy() end
 			table.remove(self.bullets, i)
 		end
 	end
