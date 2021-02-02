@@ -96,7 +96,7 @@ function player:update(dt)
 
 	-- Create bullets
 	if love.mouse.isDown(1) and self.timeSinceLastShot > PLAYER_BULLET_COOLDOWN then
-		table.insert(bullets, classes.bullet.new(self.x, self.y, self.angle, true))
+		table.insert(state.bullets, classes.bullet.new(self.x, self.y, self.angle, true))
 		self.timeSinceLastShot = 0
 	end
 end

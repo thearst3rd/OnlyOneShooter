@@ -56,13 +56,13 @@ function opponent:update(dt)
 
 	-- Shoot bullets
 	if self.shotCooldown > OPPONENT_BULLET_COOLDOWN then
-		table.insert(bullets, classes.bullet.new(self.x, self.y, math.pi / 2, false))
+		table.insert(state.bullets, classes.bullet.new(self.x, self.y, math.pi / 2, false))
 		self.shotCooldown = 0
 	end
 
 	-- Collide with bullets
 	if self.iframes <= 0 then
-		for i, bullet in ipairs(bullets) do
+		for i, bullet in ipairs(state.bullets) do
 			if bullet.friendly then
 				if math.sqrt((self.x - bullet.x) ^ 2 + (self.y - bullet.y) ^ 2) <= (self.radius + bullet.radius) then
 					self.life = self.life - 1

@@ -8,12 +8,13 @@ require "classes/player"
 require "classes/opponent"
 require "classes/bullet"
 
--- Global variables
-bullets = {}
+-- Load up all states
+states = {}
+require "states/menu"
+require "states/game"
 
--- Define constants
-ARENA_WIDTH = 1600
-ARENA_HEIGHT = 900
+-- Global variables
+state = nil 	-- Currently loaded state
 
 -- Debug variables
 debug = false
@@ -24,56 +25,25 @@ debug = false
 --------------------
 
 function love.load()
-	-- Create player
-	player = classes.player.new()
-
-	-- Create Opponent
-	opponent = classes.opponent.new()
-
 	love.graphics.setBackgroundColor(0.1, 0.3, 0.5)
+
+	-- Load menu state
+	state = states.menu.new()
 end
 
 function love.update(dt)
 	-- Limit dt
 	if dt > 1/15 then dt = 1/15 end
 
-	-- Update player
-	if player then
-		player:update(dt)
-		if player.markForDeletion then
-			player = nil
-		end
-	end
-
-	-- Update opponent
-	if opponent then
-		opponent:update(dt)
-		if opponent.markForDeletion then
-			opponent = nil
-		end
-	end
-
-	-- Update bullets (in reverse so deletion works properly)
-	for i = #bullets, 1, -1 do
-		local bullet = bullets[i]
-		bullet:update(dt)
-		if bullet.markForDeletion then
-			table.remove(bullets, i)
-		end
+	if state and state.update then
+		state:update(dt)
 	end
 end
 
 function love.draw()
-	-- Draw the bullets
-	for _, bullet in ipairs(bullets) do
-		bullet:draw()
+	if state and state.draw then
+		state:draw()
 	end
-
-	-- Draw the player
-	if player then player:draw() end
-
-	-- Draw the opponent
-	if opponent then opponent:draw() end
 end
 
 
@@ -82,12 +52,10 @@ end
 ---------------------
 
 function love.keypressed(key, scancode, isrepeat)
-	if key == "escape" then
-		love.event.quit()
-	end
-
 	if key == "f12" then
 		debug = not debug
+	elseif state and state.keypressed then
+		state:keypressed(key, scancode, isrepeat)
 	end
 end
 
