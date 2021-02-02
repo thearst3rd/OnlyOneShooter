@@ -73,7 +73,7 @@ function opponentBase:draw()
 end
 
 function opponentBase:onDestroy()
-	-- Setup the opponent spawner to spawn the next opponent in 1 second
+	-- Setup the opponent spawner to spawn the next opponent after a delay
 	state.opponentSpawner:triggerNext(2.5)
 end
 

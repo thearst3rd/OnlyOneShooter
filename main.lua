@@ -38,15 +38,11 @@ function love.update(dt)
 	-- Limit dt
 	if dt > 1/15 then dt = 1/15 end
 
-	if state and state.update then
-		state:update(dt)
-	end
+	state:update(dt)
 end
 
 function love.draw()
-	if state and state.draw then
-		state:draw()
-	end
+	state:draw()
 end
 
 
@@ -57,7 +53,7 @@ end
 function love.keypressed(key, scancode, isrepeat)
 	if key == "f12" then
 		debug = not debug
-	elseif state and state.keypressed then
+	else
 		state:keypressed(key, scancode, isrepeat)
 	end
 end
