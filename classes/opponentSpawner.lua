@@ -29,8 +29,12 @@ function opponentSpawner:update(dt)
 			self.spawning = false
 			self.spawningTimeRemaining = 0
 
-			state.opponent = self.list[self.index].new()
-			self.index = self.index + 1
+			if self.list[self.index] then
+				state.opponent = self.list[self.index].new()
+				self.index = self.index + 1
+			else
+				state = states.ending.new()
+			end
 		end
 	end
 end

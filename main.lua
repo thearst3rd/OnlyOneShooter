@@ -15,6 +15,7 @@ require "classes/opponentPhaseNoBehavior"
 states = {}
 require "states/menu"
 require "states/game"
+require "states/ending"
 
 -- Global variables
 state = nil 	-- Currently loaded state
