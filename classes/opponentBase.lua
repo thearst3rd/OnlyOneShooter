@@ -33,7 +33,6 @@ function opponentBase:update(dt)
 			self.iframeTime = self.IFRAME_LENGTH
 		end
 	else
-		self.angle = self.angle + math.pi * dt
 		if self.iframeTime > 0 then
 			self.iframeTime = self.iframeTime - dt
 			if self.iframeTime < 0 then self.iframeTime = 0 end
