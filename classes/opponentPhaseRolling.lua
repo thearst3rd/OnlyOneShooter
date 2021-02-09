@@ -3,7 +3,7 @@
 local opponentPhaseRolling = {}
 opponentPhaseRolling.__index = opponentPhaseRolling
 
-local OPPONENT_GRAVITY = 250
+local OPPONENT_GRAVITY = 400
 
 
 --------------------
@@ -45,7 +45,7 @@ function opponentPhaseRolling:update(dt)
 		self.xspeed = -math.abs(self.xspeed)
 	end
 
-	self.y = self.y + self.yspeed * dt + 0.5 * OPPONENT_GRAVITY * dt ^ 2
+	self.y = self.y + self.yspeed * dt
 	self.yspeed = self.yspeed + OPPONENT_GRAVITY * dt
 
 	if self.y + self.radius >= ARENA_HEIGHT then
