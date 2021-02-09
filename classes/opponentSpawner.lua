@@ -14,6 +14,8 @@ function opponentSpawner.new()
 		classes.opponentPhaseNormal,
 		classes.opponentPhaseNoBehavior,
 		classes.opponentPhaseNoBehavior,
+		classes.opponentPhaseSpin,
+		classes.opponentPhaseSpin,
 	}
 
 	self.spawning = false
