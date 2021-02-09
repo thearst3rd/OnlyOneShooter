@@ -12,6 +12,8 @@ function opponentSpawner.new()
 		classes.opponentPhaseNormal,
 		classes.opponentPhaseNormal,
 		classes.opponentPhaseNormal,
+		classes.opponentPhaseRolling,
+		classes.opponentPhaseRolling,
 		classes.opponentPhaseNoBehavior,
 		classes.opponentPhaseNoBehavior,
 		classes.opponentPhaseSpin,

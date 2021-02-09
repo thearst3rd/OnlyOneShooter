@@ -1,33 +1,32 @@
--- The "normal" opponent phase where it acts like a space invader
+-- The opponent phase with normal gravity
 
-local opponentPhaseNormal = {}
-opponentPhaseNormal.__index = opponentPhaseNormal
+local opponentPhaseRolling = {}
+opponentPhaseRolling.__index = opponentPhaseRolling
+
+local OPPONENT_GRAVITY = 400
 
 
 --------------------
 -- MAIN CALLBACKS --
 --------------------
 
-function opponentPhaseNormal.new()
+function opponentPhaseRolling.new()
 	local self = classes.opponentBase.new()
-	setmetatable(self, opponentPhaseNormal)
+	setmetatable(self, opponentPhaseRolling)
 
 	-- Constants
-	self.ADVANCE_DISTANCE = 125
 	self.BULLET_COOLDOWN_LENGTH = 1
 
 	-- Movement variables
-	self.advance = false
 	self.xspeed = 200
-	self.yspeed = 200
+	self.yspeed = 0
 
 	self.shotCooldown = self.BULLET_COOLDOWN_LENGTH
-	self.advanceDist = 0
 
 	return self
 end
 
-function opponentPhaseNormal:update(dt)
+function opponentPhaseRolling:update(dt)
 	-- Call superclass method
 	classes.opponentBase.update(self, dt)
 
@@ -35,32 +34,23 @@ function opponentPhaseNormal:update(dt)
 
 	-- Update opponent values
 	self.shotCooldown = self.shotCooldown - dt
-	self.advanceDist = self.advanceDist + self.yspeed * dt
 
 	-- Update opponent movement
-	if not self.advance then
-		self.x = self.x + self.xspeed * dt
-	else
-		self.y = self.y + self.yspeed * dt
-	end
-
+	self.x = self.x + self.xspeed * dt
 	if self.x < self.radius then
 		self.x = self.radius
 		self.xspeed = math.abs(self.xspeed)
-		if self.y < ARENA_HEIGHT - self.ADVANCE_DISTANCE - self.radius - 1 then
-			self.advance = true
-		end
 	elseif self.x >= ARENA_WIDTH - self.radius then
 		self.x = ARENA_WIDTH - self.radius - 1
 		self.xspeed = -math.abs(self.xspeed)
-		if self.y < ARENA_HEIGHT - self.ADVANCE_DISTANCE - self.radius - 1 then
-			self.advance = true
-		end
 	end
 
-	if self.advanceDist >= self.ADVANCE_DISTANCE then
-		self.advance = false
-		self.advanceDist = 0
+	self.y = self.y + self.yspeed * dt
+	self.yspeed = self.yspeed + OPPONENT_GRAVITY * dt
+
+	if self.y + self.radius >= ARENA_HEIGHT then
+		self.y = ARENA_HEIGHT - self.radius - 1
+		self.yspeed = self.yspeed * -0.9
 	end
 
 	-- Shoot bullets
@@ -70,14 +60,14 @@ function opponentPhaseNormal:update(dt)
 	end
 end
 
-function opponentPhaseNormal:draw()
+function opponentPhaseRolling:draw()
 	-- Optional - draw default opponent
 	classes.opponentBase.draw(self)
 end
 
-function opponentPhaseNormal:onDestroy()
+function opponentPhaseRolling:onDestroy()
 	-- Call default superclass method
 	classes.opponentBase.onDestroy(self)
 end
 
-classes.opponentPhaseNormal = opponentPhaseNormal
+classes.opponentPhaseRolling = opponentPhaseRolling
