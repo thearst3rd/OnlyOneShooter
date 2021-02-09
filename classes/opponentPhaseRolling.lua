@@ -3,6 +3,8 @@
 local opponentPhaseRolling = {}
 opponentPhaseRolling.__index = opponentPhaseRolling
 
+local OPPONENT_GRAVITY = 250
+
 
 --------------------
 -- MAIN CALLBACKS --
@@ -13,13 +15,11 @@ function opponentPhaseRolling.new()
 	setmetatable(self, opponentPhaseRolling)
 
 	-- Constants
-	self.MOVE_SPEED = 200
 	self.BULLET_COOLDOWN_LENGTH = 1
-	GRAVITY = 250
 
 	-- Movement variables
-	self.direction = false
-	self.speed = 0
+	self.xspeed = 200
+	self.yspeed = 0
 
 	self.shotCooldown = self.BULLET_COOLDOWN_LENGTH
 
@@ -36,22 +36,21 @@ function opponentPhaseRolling:update(dt)
 	self.shotCooldown = self.shotCooldown - dt
 
 	-- Update opponent movement
-	if self.direction then
-		self.x = self.x + self.MOVE_SPEED * dt
-	else
-		self.x = self.x - self.MOVE_SPEED * dt
+	self.x = self.x + self.xspeed * dt
+	if self.x < self.radius then
+		self.x = self.radius
+		self.xspeed = math.abs(self.xspeed)
+	elseif self.x >= ARENA_WIDTH - self.radius then
+		self.x = ARENA_WIDTH - self.radius - 1
+		self.xspeed = -math.abs(self.xspeed)
 	end
 
-	self.y = self.y + self.speed * dt + 0.5 * GRAVITY * dt ^ 2
-	self.speed = self.speed + GRAVITY * dt
-
-	if self.x - self.radius <= 0 then self.direction = true end
-	if self.x + self.radius >= ARENA_WIDTH then
-		self.direction = false
-	end
+	self.y = self.y + self.yspeed * dt + 0.5 * OPPONENT_GRAVITY * dt ^ 2
+	self.yspeed = self.yspeed + OPPONENT_GRAVITY * dt
 
 	if self.y + self.radius >= ARENA_HEIGHT then
-		self.speed = self.speed * -0.9
+		self.y = ARENA_HEIGHT - self.radius - 1
+		self.yspeed = self.yspeed * -0.9
 	end
 
 	-- Shoot bullets

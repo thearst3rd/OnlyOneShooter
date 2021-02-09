@@ -13,13 +13,13 @@ function opponentPhaseNormal.new()
 	setmetatable(self, opponentPhaseNormal)
 
 	-- Constants
-	self.MOVE_SPEED = 200
 	self.ADVANCE_DISTANCE = 125
 	self.BULLET_COOLDOWN_LENGTH = 1
 
 	-- Movement variables
-	self.direction = false
 	self.advance = false
+	self.xspeed = 200
+	self.yspeed = 200
 
 	self.shotCooldown = self.BULLET_COOLDOWN_LENGTH
 	self.advanceDist = 0
@@ -35,23 +35,27 @@ function opponentPhaseNormal:update(dt)
 
 	-- Update opponent values
 	self.shotCooldown = self.shotCooldown - dt
-	self.advanceDist = self.advanceDist + self.MOVE_SPEED * dt
+	self.advanceDist = self.advanceDist + self.yspeed * dt
 
 	-- Update opponent movement
 	if not self.advance then
-		if self.direction then
-			self.x = self.x + self.MOVE_SPEED * dt
-		else
-			self.x = self.x - self.MOVE_SPEED * dt
-		end
+		self.x = self.x + self.xspeed * dt
 	else
-		self.y = self.y + self.MOVE_SPEED * dt
+		self.y = self.y + self.yspeed * dt
 	end
 
-	if self.x - self.radius <= 0 then self.direction = true end
-	if self.x + self.radius >= ARENA_WIDTH then
-		self.advance = true
-		self.direction = false
+	if self.x < self.radius then
+		self.x = self.radius
+		self.xspeed = math.abs(self.xspeed)
+		if self.y < ARENA_HEIGHT - self.ADVANCE_DISTANCE - self.radius - 1 then
+			self.advance = true
+		end
+	elseif self.x >= ARENA_WIDTH - self.radius then
+		self.x = ARENA_WIDTH - self.radius - 1
+		self.xspeed = -math.abs(self.xspeed)
+		if self.y < ARENA_HEIGHT - self.ADVANCE_DISTANCE - self.radius - 1 then
+			self.advance = true
+		end
 	end
 
 	if self.advanceDist >= self.ADVANCE_DISTANCE then
