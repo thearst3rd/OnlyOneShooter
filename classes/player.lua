@@ -119,8 +119,8 @@ function player:draw()
 		love.graphics.rotate(self.angle)
 
 		love.graphics.setColor(1, 1, 1)
-		for _, poly in ipairs(playerPolygonTri) do
-			love.graphics.polygon("fill", poly)
+		for _, tri in ipairs(playerPolygonTri) do
+			love.graphics.polygon("fill", tri)
 		end
 
 		local width = love.graphics.getLineWidth()
