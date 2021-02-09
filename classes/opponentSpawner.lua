@@ -16,6 +16,8 @@ function opponentSpawner.new()
 		classes.opponentPhaseRolling,
 		classes.opponentPhaseNoBehavior,
 		classes.opponentPhaseNoBehavior,
+		classes.opponentPhaseSpin,
+		classes.opponentPhaseSpin,
 	}
 
 	self.spawning = false

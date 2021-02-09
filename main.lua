@@ -11,6 +11,7 @@ require "classes/opponentBase"
 require "classes/opponentPhaseNormal"
 require "classes/opponentPhaseNoBehavior"
 require "classes/opponentPhaseRolling"
+require "classes/opponentPhaseSpin"
 
 -- Load up all states
 states = {}
