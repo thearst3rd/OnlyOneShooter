@@ -18,6 +18,7 @@ function opponentSpawner.new()
 		classes.opponentPhaseNoBehavior,
 		classes.opponentPhaseSpin,
 		classes.opponentPhaseSpin,
+		classes.opponentPhaseOrbit,
 	}
 
 	self.spawning = false
@@ -45,12 +46,19 @@ end
 
 function opponentSpawner:draw()
 	if self.spawning then
-		local prevWidth = love.graphics.getLineWidth()
-		love.graphics.setLineWidth(3)
-		love.graphics.setColor(0, 0, 0)
-		love.graphics.circle("line", ARENA_WIDTH / 2, ARENA_HEIGHT / 2, self.spawningTimeRemaining * 1500)
+		local next = self.list[self.index]
+		if next then
+			local prevWidth = love.graphics.getLineWidth()
+			love.graphics.setLineWidth(3)
+			love.graphics.setColor(0, 0, 0)
 
-		love.graphics.setLineWidth(prevWidth)
+			local originX = next.SPAWN_X or ARENA_WIDTH / 2
+			local originY = next.SPAWN_Y or ARENA_HEIGHT / 2
+
+			love.graphics.circle("line", originX, originY, self.spawningTimeRemaining * 1200)
+
+			love.graphics.setLineWidth(prevWidth)
+		end
 	end
 
 	if debug then
