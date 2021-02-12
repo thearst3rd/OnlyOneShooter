@@ -17,6 +17,7 @@ require "classes/opponentPhaseSpin"
 states = {}
 require "states/menu"
 require "states/game"
+require "states/pause"
 require "states/ending"
 
 -- Global variables
