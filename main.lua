@@ -10,7 +10,7 @@ require "classes/opponentSpawner"
 require "classes/opponentBase"
 require "classes/opponentPhaseNormal"
 require "classes/opponentPhaseNoBehavior"
-require "classes/opponentPhaseRolling"
+require "classes/opponentPhaseBouncing"
 require "classes/opponentPhaseSpin"
 
 -- Load up all states

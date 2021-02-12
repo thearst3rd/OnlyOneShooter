@@ -1,7 +1,7 @@
 -- The opponent phase with normal gravity
 
-local opponentPhaseRolling = {}
-opponentPhaseRolling.__index = opponentPhaseRolling
+local opponentPhaseBouncing = {}
+opponentPhaseBouncing.__index = opponentPhaseBouncing
 
 local OPPONENT_GRAVITY = 400
 
@@ -10,9 +10,9 @@ local OPPONENT_GRAVITY = 400
 -- MAIN CALLBACKS --
 --------------------
 
-function opponentPhaseRolling.new()
+function opponentPhaseBouncing.new()
 	local self = classes.opponentBase.new()
-	setmetatable(self, opponentPhaseRolling)
+	setmetatable(self, opponentPhaseBouncing)
 
 	-- Constants
 	self.BULLET_COOLDOWN_LENGTH = 1
@@ -26,7 +26,7 @@ function opponentPhaseRolling.new()
 	return self
 end
 
-function opponentPhaseRolling:update(dt)
+function opponentPhaseBouncing:update(dt)
 	-- Call superclass method
 	classes.opponentBase.update(self, dt)
 
@@ -60,14 +60,14 @@ function opponentPhaseRolling:update(dt)
 	end
 end
 
-function opponentPhaseRolling:draw()
+function opponentPhaseBouncing:draw()
 	-- Optional - draw default opponent
 	classes.opponentBase.draw(self)
 end
 
-function opponentPhaseRolling:onDestroy()
+function opponentPhaseBouncing:onDestroy()
 	-- Call default superclass method
 	classes.opponentBase.onDestroy(self)
 end
 
-classes.opponentPhaseRolling = opponentPhaseRolling
+classes.opponentPhaseBouncing = opponentPhaseBouncing
