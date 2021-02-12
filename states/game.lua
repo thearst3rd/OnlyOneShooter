@@ -87,9 +87,10 @@ end
 ---------------------
 
 function game:keypressed(key, scancode, isrepeat)
-	-- Return to menu
+	-- Pause the game
 	if key == "escape" then
-		state = states.menu.new()
+		local new_state = states.pause.new(state)
+		state = new_state
 	end
 end
 
