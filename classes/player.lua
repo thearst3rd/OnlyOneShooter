@@ -14,6 +14,10 @@ local PLAYER_BULLET_COOLDOWN = 0.25
 function player.new()
 	local self = setmetatable({}, player)
 
+	-- Constants
+	self.IFRAME_LENGTH = 1
+
+	-- Variables
 	self.x = ARENA_WIDTH / 2
 	self.y = ARENA_HEIGHT * (4 / 5)
 	self.radius = 15
@@ -21,6 +25,9 @@ function player.new()
 	self.yspeed = 0
 	self.angle = 0
 	self.timeSinceLastShot = 0
+	self.health = 3
+	self.iframeTime = 0
+	self.markForDeletion = false
 
 	return self
 end
@@ -94,6 +101,32 @@ function player:update(dt)
 		self.xspeed, self.yspeed = toCartesian(speed, ang)
 	end
 
+	-- Check for hurt
+	if self.iframeTime > 0 then
+		self.iframeTime = self.iframeTime - dt
+		if self.iframeTime < 0 then self.iframeTime = 0 end
+	else
+		if state.opponent then
+			if math.sqrt((self.x - state.opponent.x) ^ 2 + (self.y - state.opponent.y) ^ 2) <= (self.radius + state.opponent.radius) then
+				self.health = self.health - 1
+				if self.health == 0 then self.markForDeletion = true end
+				self.iframeTime = self.IFRAME_LENGTH
+			else
+				for i, bullet in ipairs(state.bullets) do
+					if not bullet.friendly then
+						if math.sqrt((self.x - bullet.x) ^ 2 + (self.y - bullet.y) ^ 2) <= (self.radius + bullet.radius) then
+							self.health = self.health - 1
+							if self.health == 0 then self.markForDeletion = true end
+							self.iframeTime = self.IFRAME_LENGTH
+							bullet.markForDeletion = true
+							break
+						end
+					end
+				end
+			end
+		end
+	end
+
 	-- Create bullets
 	if love.mouse.isDown(1) and self.timeSinceLastShot > PLAYER_BULLET_COOLDOWN then
 		table.insert(state.bullets, classes.bullet.new(self.x, self.y, self.angle, true))
@@ -118,7 +151,12 @@ function player:draw()
 		love.graphics.translate(self.x, self.y)
 		love.graphics.rotate(self.angle)
 
-		love.graphics.setColor(1, 1, 1)
+		if self.iframeTime > 0.5 then
+			love.graphics.setColor(0.8, 0.2, 0.2, 1-self.iframeTime)
+		else
+			love.graphics.setColor(1, 1, 1, 1-self.iframeTime)
+		end
+
 		for _, tri in ipairs(playerPolygonTri) do
 			love.graphics.polygon("fill", tri)
 		end
