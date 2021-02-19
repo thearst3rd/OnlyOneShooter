@@ -5,23 +5,18 @@ opponentPhaseBouncing.__index = opponentPhaseBouncing
 
 local OPPONENT_GRAVITY = 400
 
+opponentPhaseBouncing.DEFAULT_BULLET_COOLDOWN = 1
 
 --------------------
 -- MAIN CALLBACKS --
 --------------------
 
 function opponentPhaseBouncing.new()
-	local self = classes.opponentBase.new()
-	setmetatable(self, opponentPhaseBouncing)
-
-	-- Constants
-	self.BULLET_COOLDOWN_LENGTH = 1
+	local self = classes.opponentBase.new(opponentPhaseBouncing)
 
 	-- Movement variables
 	self.xspeed = 200
 	self.yspeed = 0
-
-	self.shotCooldown = self.BULLET_COOLDOWN_LENGTH
 
 	return self
 end
@@ -31,9 +26,6 @@ function opponentPhaseBouncing:update(dt)
 	classes.opponentBase.update(self, dt)
 
 	if self.stunned then return end
-
-	-- Update opponent values
-	self.shotCooldown = self.shotCooldown - dt
 
 	-- Update opponent movement
 	self.x = self.x + self.xspeed * dt
@@ -51,12 +43,6 @@ function opponentPhaseBouncing:update(dt)
 	if self.y + self.radius >= ARENA_HEIGHT then
 		self.y = ARENA_HEIGHT - self.radius - 1
 		self.yspeed = self.yspeed * -0.9
-	end
-
-	-- Shoot bullets
-	if self.shotCooldown <= 0 then
-		table.insert(state.bullets, classes.bullet.new(self.x, self.y, math.pi / 2, false))
-		self.shotCooldown = self.BULLET_COOLDOWN_LENGTH
 	end
 end
 

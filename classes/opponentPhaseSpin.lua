@@ -3,17 +3,27 @@
 local opponentPhaseSpin = {}
 opponentPhaseSpin.__index = opponentPhaseSpin
 
+opponentPhaseSpin.DEFAULT_BULLET_COOLDOWN = 0.3
+opponentPhaseSpin.DEFAULT_BULLET_SPEED = 750
 
 --------------------
 -- MAIN CALLBACKS --
 --------------------
 
 function opponentPhaseSpin.new()
-	local self = classes.opponentBase.new()
-	setmetatable(self, opponentPhaseSpin)
+	local self = classes.opponentBase.new(opponentPhaseSpin)
 
-	self.xspeed = 400
-	self.yspeed = 200
+	-- Randomize direction to one of 8 directions
+	local r = math.random()
+	if r <= 0.5 then
+		self.xspeed = 400
+		self.yspeed = 200
+	else
+		self.xspeed = 200
+		self.yspeed = 400
+	end
+	if r % 0.5 <= 0.25 then self.xspeed = -self.xspeed end
+	if r % 0.25 <= 0.125 then self.yspeed = -self.yspeed end
 
 	self.angspeed = 2.4 * math.pi
 

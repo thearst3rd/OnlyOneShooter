@@ -52,8 +52,8 @@ function opponentSpawner:draw()
 			love.graphics.setLineWidth(3)
 			love.graphics.setColor(0, 0, 0)
 
-			local originX = next.SPAWN_X or ARENA_WIDTH / 2
-			local originY = next.SPAWN_Y or ARENA_HEIGHT / 2
+			local originX = next.SPAWN_X or (ARENA_WIDTH / 2)
+			local originY = next.SPAWN_Y or (ARENA_HEIGHT / 2)
 
 			love.graphics.circle("line", originX, originY, self.spawningTimeRemaining * 1200)
 

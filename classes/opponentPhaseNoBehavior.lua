@@ -9,8 +9,7 @@ opponentPhaseNoBehavior.__index = opponentPhaseNoBehavior
 --------------------
 
 function opponentPhaseNoBehavior.new()
-	local self = classes.opponentBase.new()
-	setmetatable(self, opponentPhaseNoBehavior)
+	local self = classes.opponentBase.new(opponentPhaseNoBehavior)
 	return self
 end
 
