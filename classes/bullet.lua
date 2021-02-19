@@ -6,18 +6,18 @@ bullet.__index = bullet
 local PLAYER_BULLET_SPEED = 1000
 local OPPONENT_BULLET_SPEED = 250
 
-function bullet.new(x, y, angle, friendly)
+function bullet.new(x, y, angle, friendly, speed)
 	x = x or 100
 	y = y or 100
 	angle = angle or 0
 	if friendly == nil then friendly = true end
+	speed = speed or (friendly and PLAYER_BULLET_SPEED or OPPONENT_BULLET_SPEED)
 
 	local self = setmetatable({}, bullet)
 
 	self.x = x
 	self.y = y
 	self.friendly = friendly
-	local speed = friendly and PLAYER_BULLET_SPEED or OPPONENT_BULLET_SPEED
 	self.xspeed = math.cos(angle) * speed
 	self.yspeed = math.sin(angle) * speed
 

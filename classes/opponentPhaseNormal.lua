@@ -4,24 +4,22 @@ local opponentPhaseNormal = {}
 opponentPhaseNormal.__index = opponentPhaseNormal
 
 
+opponentPhaseNormal.DEFAULT_BULLET_COOLDOWN = 1
+
 --------------------
 -- MAIN CALLBACKS --
 --------------------
 
 function opponentPhaseNormal.new()
-	local self = classes.opponentBase.new()
-	setmetatable(self, opponentPhaseNormal)
+	local self = classes.opponentBase.new(opponentPhaseNormal)
 
 	-- Constants
 	self.ADVANCE_DISTANCE = 125
-	self.BULLET_COOLDOWN_LENGTH = 1
 
 	-- Movement variables
 	self.advance = false
 	self.xspeed = 200
 	self.yspeed = 200
-
-	self.shotCooldown = self.BULLET_COOLDOWN_LENGTH
 	self.advanceDist = 0
 
 	return self
@@ -34,7 +32,6 @@ function opponentPhaseNormal:update(dt)
 	if self.stunned then return end
 
 	-- Update opponent values
-	self.shotCooldown = self.shotCooldown - dt
 	self.advanceDist = self.advanceDist + self.yspeed * dt
 
 	-- Update opponent movement
@@ -61,12 +58,6 @@ function opponentPhaseNormal:update(dt)
 	if self.advanceDist >= self.ADVANCE_DISTANCE then
 		self.advance = false
 		self.advanceDist = 0
-	end
-
-	-- Shoot bullets
-	if self.shotCooldown <= 0 then
-		table.insert(state.bullets, classes.bullet.new(self.x, self.y, math.pi / 2, false))
-		self.shotCooldown = self.BULLET_COOLDOWN_LENGTH
 	end
 end
 

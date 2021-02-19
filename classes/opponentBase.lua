@@ -3,28 +3,35 @@
 local opponentBase = {}
 opponentBase.__index = opponentBase
 
-function opponentBase.new()
-	local self = setmetatable({}, opponentBase)
+function opponentBase.new(implClass)
+	local self = setmetatable({}, implClass)
 
 	-- CONSTANTS - override these if needed for opponent phases
-	self.STUN_LENGTH = 0.3
-	self.IFRAME_LENGTH = 0.7
+	self.STUN_LENGTH = implClass.STUN_LENGTH or 0.3
+	self.IFRAME_LENGTH = implClass.IFRAME_LENGTH or 0.7
 
-	self.radius = 25
-	self.x = ARENA_WIDTH / 2
-	self.y = ARENA_HEIGHT / 2
-	self.angle = math.pi / 2
+	self.radius = implClass.RADIUS or  25
+	self.x = implClass.SPAWN_X or (ARENA_WIDTH / 2)
+	self.y = implClass.SPAWN_Y or (ARENA_HEIGHT / 2)
+	self.angle = implClass.SPAWN_ANG or (math.pi / 2)
 
-	self.life = 3
+	self.life = implClass.NUM_LIVES or 3
 	self.iframeTime = 0
 	self.stunned = false
 	self.stunTime = 0
+
+	-- Default shooting method: if implClass.DEFAULT_BULLET_COOLDOWN is defined then shoot bullets by default
+	if implClass.DEFAULT_BULLET_COOLDOWN and implClass.DEFAULT_BULLET_COOLDOWN >= 0 then
+		self.useDefaultShooting = true
+		self.bulletCooldownTime = implClass.DEFAULT_BULLET_COOLDOWN
+		self.bulletSpeed = implClass.DEFAULT_BULLET_SPEED
+		self.currentCooldown = self.bulletCooldownTime
+	end
 
 	return self
 end
 
 function opponentBase:update(dt)
-	-- Collide with bullets
 	if self.stunned then
 		self.stunTime = self.stunTime - dt
 		if self.stunTime <= 0 then
@@ -33,13 +40,15 @@ function opponentBase:update(dt)
 			self.iframeTime = self.IFRAME_LENGTH
 		end
 	else
+		-- Collide with bullets
 		if self.iframeTime > 0 then
 			self.iframeTime = self.iframeTime - dt
 			if self.iframeTime < 0 then self.iframeTime = 0 end
 		else
 			for i, bullet in ipairs(state.bullets) do
 				if bullet.friendly then
-					if math.sqrt((self.x - bullet.x) ^ 2 + (self.y - bullet.y) ^ 2) <= (self.radius + bullet.radius) then
+					if math.sqrt((self.x - bullet.x) ^ 2 + (self.y - bullet.y) ^ 2) <= (self.radius +
+							bullet.radius) then
 						self.life = self.life - 1
 						if self.life == 0 then self.markForDeletion = true end
 						self.stunned = true
@@ -49,6 +58,15 @@ function opponentBase:update(dt)
 						break
 					end
 				end
+			end
+		end
+
+		-- Shoot bullets
+		if self.useDefaultShooting then
+			self.currentCooldown = self.currentCooldown - dt
+			if self.currentCooldown <= 0 then
+				table.insert(state.bullets, classes.bullet.new(self.x, self.y, self.angle, false, self.bulletSpeed))
+				self.currentCooldown = self.currentCooldown + self.bulletCooldownTime
 			end
 		end
 	end
