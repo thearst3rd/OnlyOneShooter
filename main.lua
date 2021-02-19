@@ -2,6 +2,13 @@
 -- by Kyle Reese and Terry Hearst
 
 
+-- Load up all states
+states = {}
+require "states/menu"
+require "states/game"
+require "states/pause"
+require "states/ending"
+
 -- Load up all classes
 classes = {}
 require "classes/player"
@@ -12,13 +19,7 @@ require "classes/opponentPhaseNormal"
 require "classes/opponentPhaseNoBehavior"
 require "classes/opponentPhaseBouncing"
 require "classes/opponentPhaseSpin"
-
--- Load up all states
-states = {}
-require "states/menu"
-require "states/game"
-require "states/pause"
-require "states/ending"
+require "classes/opponentPhaseOrbit"
 
 -- Global variables
 state = nil 	-- Currently loaded state
