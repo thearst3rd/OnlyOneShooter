@@ -10,12 +10,9 @@ function opponentSpawner.new()
 	self.list =
 	{
 		classes.opponentPhaseNormal,
-		classes.opponentPhaseNormal,
-		classes.opponentPhaseNormal,
-		classes.opponentPhaseBouncing,
 		classes.opponentPhaseBouncing,
 		classes.opponentPhaseNoBehavior,
-		classes.opponentPhaseNoBehavior,
+		classes.opponentPhaseCharge,
 		classes.opponentPhaseSpin,
 		classes.opponentPhaseSpin,
 		classes.opponentPhaseOrbit,
