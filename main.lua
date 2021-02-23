@@ -8,6 +8,7 @@ require "states/menu"
 require "states/game"
 require "states/pause"
 require "states/victory"
+require "states/gameOver"
 
 -- Load up all classes
 classes = {}
@@ -20,6 +21,7 @@ require "classes/opponentPhaseNoBehavior"
 require "classes/opponentPhaseBouncing"
 require "classes/opponentPhaseSpin"
 require "classes/opponentPhaseOrbit"
+require "classes/gameOverTimer"
 
 -- Global variables
 state = nil 	-- Currently loaded state

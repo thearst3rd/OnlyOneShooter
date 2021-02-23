@@ -12,11 +12,12 @@ ARENA_HEIGHT = 900
 -- MAIN CALLBACKS --
 --------------------
 
-function game.new()
+function game.new(startIndex)
+	-- startIndex is optional - used for "continues" to start part way through
 	local self = setmetatable({}, game)
 
 	self.player = classes.player.new()
-	self.opponentSpawner = classes.opponentSpawner.new()
+	self.opponentSpawner = classes.opponentSpawner.new(startIndex)
 	self.opponent = nil
 	self.bullets = {}
 
@@ -63,6 +64,15 @@ function game:update(dt)
 			table.remove(self.bullets, i)
 		end
 	end
+
+	-- Update game over timer
+	if self.gameOverTimer then
+		self.gameOverTimer:update(dt)
+		if self.gameOverTimer.markForDeletion then
+			if self.gameOverTimer.onDestroy then self.gameOverTimer:onDestroy() end
+			self.gameOverTimer = nil
+		end
+	end
 end
 
 function game:draw()
@@ -79,6 +89,9 @@ function game:draw()
 
 	-- Draw the opponent spawner
 	if self.opponentSpawner then self.opponentSpawner:draw() end
+
+	-- Update game over timer
+	if self.gameOverTimer then self.gameOverTimer:draw() end
 end
 
 
