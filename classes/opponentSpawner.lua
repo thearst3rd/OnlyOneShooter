@@ -13,6 +13,7 @@ function opponentSpawner.new()
 		classes.opponentPhaseBouncing,
 		classes.opponentPhaseNoBehavior,
 		classes.opponentPhaseCharge,
+		classes.opponentPhaseChargeShot,
 		classes.opponentPhaseChase,
 		classes.opponentPhaseSpin,
 		classes.opponentPhaseOrbit,
