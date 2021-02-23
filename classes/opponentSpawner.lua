@@ -14,7 +14,6 @@ function opponentSpawner.new()
 		classes.opponentPhaseNoBehavior,
 		classes.opponentPhaseCharge,
 		classes.opponentPhaseSpin,
-		classes.opponentPhaseSpin,
 		classes.opponentPhaseOrbit,
 	}
 

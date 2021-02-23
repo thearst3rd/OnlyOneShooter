@@ -4,13 +4,6 @@ local opponentPhaseCharge = {}
 opponentPhaseCharge.__index = opponentPhaseCharge
 
 
-local isCharging = false
-local chargeUpTime = 1.5
-local chargeTime = 1.5
-
-local CHARGE_SPEED = 500
-
-
 opponentPhaseCharge.SPAWN_Y = 150
 opponentPhaseCharge.DEFAULT_BULLET_COOLDOWN = 1
 
@@ -21,6 +14,12 @@ opponentPhaseCharge.DEFAULT_BULLET_COOLDOWN = 1
 
 function opponentPhaseCharge.new()
 	local self = classes.opponentBase.new(opponentPhaseCharge)
+
+	self.isCharging = false
+	self.chargeTime = 1.5
+	self.chargeUpTime = 1.5
+	self.CHARGE_SPEED = 500
+
 	return self
 end
 
@@ -31,13 +30,13 @@ function opponentPhaseCharge:update(dt)
 	if self.stunned then return end
 
 
-	if isCharging then
-		self.x = self.x + math.cos(self.angle) * CHARGE_SPEED * dt
-		self.y = self.y + math.sin(self.angle) * CHARGE_SPEED * dt
-		chargeTime = chargeTime - dt
+	if self.isCharging then
+		self.x = self.x + math.cos(self.angle) * self.CHARGE_SPEED * dt
+		self.y = self.y + math.sin(self.angle) * self.CHARGE_SPEED * dt
+		self.chargeTime = self.chargeTime - dt
 	else
 		self.angle = math.atan2(state.player.y - self.y, state.player.x - self.x)
-		chargeUpTime = chargeUpTime - dt
+		self.chargeUpTime = self.chargeUpTime - dt
 	end
 
 	if self.x - self.radius < 0 then self.x = self.radius end
@@ -45,12 +44,12 @@ function opponentPhaseCharge:update(dt)
 	if self.y - self.radius < 0 then self.y = self.radius end
 	if self.y + self.radius >= ARENA_HEIGHT then self.x = ARENA_HEIGHT - self.radius - 1 end
 
-	if chargeUpTime <= 0 then
-		isCharging = true
-		chargeUpTime = 1.5
-	elseif chargeTime <= 0 then
-		isCharging = false
-		chargeTime = 1.5
+	if self.chargeUpTime <= 0 then
+		self.isCharging = true
+		self.chargeUpTime = 1.5
+	elseif self.chargeTime <= 0 then
+		self.isCharging = false
+		self.chargeTime = 1.5
 	end
 end
 
