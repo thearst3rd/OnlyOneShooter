@@ -21,7 +21,10 @@ end
 
 function menu:draw()
 	love.graphics.setColor(0, 0, 0)
-	love.graphics.print("press space to go to game lul", 10, 10)
+	love.graphics.setFont(fonts.title)
+	love.graphics.printf("ONLY ONE SHOOTER", 0, 100, ARENA_WIDTH, "center")
+	love.graphics.setFont(fonts.medium)
+	love.graphics.printf("press space to go to game lul", 0, 500, ARENA_WIDTH, "center")
 end
 
 

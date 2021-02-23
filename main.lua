@@ -7,7 +7,7 @@ states = {}
 require "states/menu"
 require "states/game"
 require "states/pause"
-require "states/ending"
+require "states/victory"
 
 -- Load up all classes
 classes = {}
@@ -27,13 +27,23 @@ state = nil 	-- Currently loaded state
 -- Debug variables
 debug = false
 
+-- Fonts
+fonts = {}
+
 
 --------------------
 -- MAIN CALLBACKS --
 --------------------
 
 function love.load()
+	-- Set default background color
 	love.graphics.setBackgroundColor(0.1, 0.3, 0.5)
+
+	-- Create some fonts
+	fonts.small = love.graphics.newFont(14)
+	fonts.medium = love.graphics.newFont(22)
+	fonts.large = love.graphics.newFont(40)
+	fonts.title = love.graphics.newFont(96)
 
 	-- Load menu state
 	state = states.menu.new()

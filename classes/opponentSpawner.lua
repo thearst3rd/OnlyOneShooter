@@ -38,7 +38,7 @@ function opponentSpawner:update(dt)
 				state.opponent = self.list[self.index].new()
 				self.index = self.index + 1
 			else
-				state = states.ending.new()
+				state = states.victory.new()
 			end
 		end
 	end
@@ -63,8 +63,10 @@ function opponentSpawner:draw()
 
 	if debug then
 		if self.spawning then
+			love.graphics.setFont(fonts.small)
 			love.graphics.setColor(0, 0, 0)
-			love.graphics.print(self.spawningTimeRemaining, 10, 10)
+			local str = string.format("%.2f", self.spawningTimeRemaining)
+			love.graphics.print(str, 10, 10)
 		end
 	end
 end
