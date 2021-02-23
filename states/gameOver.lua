@@ -11,7 +11,7 @@ gameOver.__index = gameOver
 function gameOver.new(index)
 	local self = setmetatable({}, gameOver)
 
-	self.continueIndex = index or 0
+	self.continueIndex = index or 1
 
 	return self
 end
