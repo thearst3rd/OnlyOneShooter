@@ -4,7 +4,7 @@ local opponentPhaseCharge = {}
 opponentPhaseCharge.__index = opponentPhaseCharge
 
 
-local isCharging = true
+local isCharging = false
 local chargeUpTime = 1.5
 local chargeTime = 1.5
 
@@ -32,12 +32,12 @@ function opponentPhaseCharge:update(dt)
 
 
 	if isCharging then
-		chargeUpTime = chargeUpTime - dt
-		self.angle = math.atan2(state.player.y - self.y, state.player.x - self.x)
-	else
 		self.x = self.x + math.cos(self.angle) * CHARGE_SPEED * dt
 		self.y = self.y + math.sin(self.angle) * CHARGE_SPEED * dt
 		chargeTime = chargeTime - dt
+	else
+		self.angle = math.atan2(state.player.y - self.y, state.player.x - self.x)
+		chargeUpTime = chargeUpTime - dt
 	end
 
 	if self.x - self.radius < 0 then self.x = self.radius end
@@ -46,10 +46,10 @@ function opponentPhaseCharge:update(dt)
 	if self.y + self.radius >= ARENA_HEIGHT then self.x = ARENA_HEIGHT - self.radius - 1 end
 
 	if chargeUpTime <= 0 then
-		isCharging = false
+		isCharging = true
 		chargeUpTime = 1.5
 	elseif chargeTime <= 0 then
-		isCharging = true
+		isCharging = false
 		chargeTime = 1.5
 	end
 end
