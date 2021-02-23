@@ -19,6 +19,7 @@ end
 
 function ending:draw()
 	love.graphics.setColor(0, 0, 0)
+	love.graphics.setFont(fonts.medium)
 	love.graphics.printf("Thank you so much for playing my game", 0, 200, ARENA_WIDTH, "center")
 end
 

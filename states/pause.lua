@@ -23,6 +23,7 @@ end
 function pause:draw()
 	self.gameState:draw()
 	love.graphics.setColor(0, 0, 0)
+	love.graphics.setFont(fonts.medium)
 	love.graphics.printf("Press 'esc' to return to the game --- Press 'enter' to exit to the menu", 0, 200, ARENA_WIDTH, "center")
 end
 
