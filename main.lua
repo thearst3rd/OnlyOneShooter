@@ -7,7 +7,7 @@ states = {}
 require "states/menu"
 require "states/game"
 require "states/pause"
-require "states/ending"
+require "states/victory"
 
 -- Load up all classes
 classes = {}
