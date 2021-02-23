@@ -19,6 +19,7 @@ require "classes/opponentPhaseNormal"
 require "classes/opponentPhaseNoBehavior"
 require "classes/opponentPhaseBouncing"
 require "classes/opponentPhaseCharge"
+require "classes/opponentPhaseChase"
 require "classes/opponentPhaseSpin"
 require "classes/opponentPhaseOrbit"
 
