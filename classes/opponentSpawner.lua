@@ -3,10 +3,10 @@
 local opponentSpawner = {}
 opponentSpawner.__index = opponentSpawner
 
-function opponentSpawner.new()
+function opponentSpawner.new(startIndex)
 	local self = setmetatable({}, opponentSpawner)
 
-	self.index = 1
+	self.index = startIndex or 1
 	self.list =
 	{
 		classes.opponentPhaseNormal,

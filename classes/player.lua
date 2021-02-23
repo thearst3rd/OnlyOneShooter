@@ -175,6 +175,10 @@ function player:draw()
 	end
 end
 
+function player:onDestroy()
+	state.gameOverTimer = classes.gameOverTimer.new()
+end
+
 
 -- Register class
 classes.player = player
