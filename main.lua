@@ -24,6 +24,7 @@ require "classes/opponentPhaseChargeShot"
 require "classes/opponentPhaseChase"
 require "classes/opponentPhaseSpin"
 require "classes/opponentPhaseOrbit"
+require "classes/opponentPhaseTeleport"
 require "classes/opponentPhaseFakeout"
 require "classes/gameOverTimer"
 
