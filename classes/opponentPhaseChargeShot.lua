@@ -29,12 +29,12 @@ function opponentPhaseChargeShot:update(dt)
 	self.angle = math.atan2(state.player.y - self.y, state.player.x - self.x)
 
 	self.shot_cooldown = self.shot_cooldown - dt
-		if self.shot_cooldown <= 0 then
-			local big_bullet = classes.bullet.new(self.x, self.y, self.angle, false, self.bulletSpeed)
-			big_bullet.radius = 100
-			table.insert(state.bullets, big_bullet)
-			self.shot_cooldown = self.shot_cooldown + self.CHARGE_TIME
-		end
+	if self.shot_cooldown <= 0 then
+		local big_bullet = classes.bullet.new(self.x, self.y, self.angle, false, self.bulletSpeed)
+		big_bullet.radius = 100
+		table.insert(state.bullets, big_bullet)
+		self.shot_cooldown = self.shot_cooldown + self.CHARGE_TIME
+	end
 end
 
 function opponentPhaseChargeShot:draw()
