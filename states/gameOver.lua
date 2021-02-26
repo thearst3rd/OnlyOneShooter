@@ -35,11 +35,11 @@ end
 
 function gameOver:keypressed(key, scancode, isrepeat)
 	if key == "c" then
-		state = states.game.new(self.continueIndex)
+		nextState = states.game.new(self.continueIndex)
 	elseif key == "r" then
-		state = states.game.new()
+		nextState = states.game.new()
 	elseif key == "escape" then
-		state = states.menu.new()
+		nextState = states.menu.new()
 	end
 end
 
