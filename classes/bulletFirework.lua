@@ -12,6 +12,7 @@ function bulletFirework.new(x, y, angle, friendly, speed)
 	local self = classes.bullet.new(x, y, angle, friendly, speed)
 	setmetatable(self, bulletFirework)
 
+	self.radius = 12
 	self.countdownTime = 1.5
 	self.shake = false
 	self.shakeTime = 1
@@ -22,7 +23,6 @@ function bulletFirework.new(x, y, angle, friendly, speed)
 	self.NUM_BULLETS = 6
 	self.OUTGOING_BULLET_SPEED = 200
 	self.SHAKE_OFFSET = 5
-	self.radius = 12
 
 	return self
 end

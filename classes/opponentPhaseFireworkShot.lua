@@ -33,8 +33,8 @@ function opponentPhaseFireworkShot:update(dt)
 
 	self.shotCooldown = self.shotCooldown - dt
 	if self.shotCooldown <= 0 then
-		local firework_bullet = classes.bulletFirework.new(self.x, self.y, self.angle, false, self.bulletSpeed)
-		table.insert(state.bullets, firework_bullet)
+		local fireworkBullet = classes.bulletFirework.new(self.x, self.y, self.angle, false, self.bulletSpeed)
+		table.insert(state.bullets, fireworkBullet)
 		self.shotCooldown = self.shotCooldown + self.SHOT_COOLDOWN
 	end
 end
