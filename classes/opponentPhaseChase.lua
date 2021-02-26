@@ -27,6 +27,8 @@ function opponentPhaseChase:update(dt)
 
 	if self.stunned then return end
 
+	if not state.player then return end
+
 	self.angle = math.atan2(state.player.y - self.y, state.player.x - self.x)
 	self.x = self.x + math.cos(self.angle) * self.CHASE_SPEED * dt
 	self.y = self.y + math.sin(self.angle) * self.CHASE_SPEED * dt
