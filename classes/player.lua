@@ -106,7 +106,7 @@ function player:update(dt)
 		self.iframeTime = self.iframeTime - dt
 		if self.iframeTime < 0 then self.iframeTime = 0 end
 	else
-		if state.opponent then
+		if state.opponent and not state.opponent.intangible then
 			if math.sqrt((self.x - state.opponent.x) ^ 2 + (self.y - state.opponent.y) ^ 2) <= (self.radius + state.opponent.radius) then
 				self.health = self.health - 1
 				if self.health == 0 then self.markForDeletion = true end

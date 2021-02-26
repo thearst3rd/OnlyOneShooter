@@ -20,6 +20,8 @@ function opponentBase.new(implClass)
 	self.stunned = false
 	self.stunTime = 0
 
+	self.intangible = false 	-- Set to true if it shouldn't collide with player
+
 	-- Default shooting method: if implClass.DEFAULT_BULLET_COOLDOWN is defined then shoot bullets by default
 	if implClass.DEFAULT_BULLET_COOLDOWN and implClass.DEFAULT_BULLET_COOLDOWN >= 0 then
 		self.useDefaultShooting = true
@@ -109,8 +111,7 @@ end
 
 local opponentPolygon3Tri = love.math.triangulate(opponentPolygon3)
 
-function opponentBase:draw()
-	local alpha = 1
+function opponentBase:draw(alphaOverride)
 	local fillColor = {0.1, 0.4, 0.7, 1}
 	local outlineColor = {0, 0, 0, 1}
 	if self.stunned then
@@ -128,6 +129,11 @@ function opponentBase:draw()
 			fillColor[4] = 0.4
 			outlineColor[4] = 0.6
 		end
+	end
+	-- Override alpha if need be
+	if alphaOverride then
+		fillColor[4] = alphaOverride
+		outlineColor[4] = alphaOverride
 	end
 	-- Draw the opponent polygons
 	love.graphics.push()
