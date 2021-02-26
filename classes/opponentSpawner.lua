@@ -18,6 +18,7 @@ function opponentSpawner.new(startIndex)
 		classes.opponentPhaseTeleport,
 		classes.opponentPhaseSpin,
 		classes.opponentPhaseOrbit,
+		classes.opponentPhaseFireworkShot,
 		classes.opponentPhaseFakeout,
 	}
 
