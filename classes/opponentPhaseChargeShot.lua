@@ -12,7 +12,7 @@ function opponentPhaseChargeShot.new()
 	local self = classes.opponentBase.new(opponentPhaseChargeShot)
 
 	self.CHARGE_TIME = 3
-	self.shot_cooldown = self.CHARGE_TIME
+	self.shotCooldown = self.CHARGE_TIME
 	self.bulletSpeed = 1000
 
 	return self
@@ -28,12 +28,12 @@ function opponentPhaseChargeShot:update(dt)
 
 	self.angle = math.atan2(state.player.y - self.y, state.player.x - self.x)
 
-	self.shot_cooldown = self.shot_cooldown - dt
-	if self.shot_cooldown <= 0 then
+	self.shotCooldown = self.shotCooldown - dt
+	if self.shotCooldown <= 0 then
 		local bigBullet = classes.bullet.new(self.x, self.y, self.angle, false, self.bulletSpeed)
 		bigBullet.radius = 100
 		table.insert(state.bullets, bigBullet)
-		self.shot_cooldown = self.shot_cooldown + self.CHARGE_TIME
+		self.shotCooldown = self.shotCooldown + self.CHARGE_TIME
 	end
 end
 
