@@ -15,7 +15,7 @@ end
 
 function menu:update(dt)
 	if love.keyboard.isDown("space") then
-		state = states.game.new()
+		nextState = states.game.new()
 	end
 end
 

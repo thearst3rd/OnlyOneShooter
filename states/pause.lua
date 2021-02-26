@@ -35,9 +35,9 @@ end
 function pause:keypressed(key, scancode, isrepeat)
 	-- Return to the game
 	if key == "escape" then
-		state = self.gameState
+		nextState = self.gameState
 	elseif key == "return" then
-		state = states.menu.new()
+		nextState = states.menu.new()
 	end
 end
 

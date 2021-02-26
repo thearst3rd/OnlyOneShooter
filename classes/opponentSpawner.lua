@@ -37,7 +37,7 @@ function opponentSpawner:update(dt)
 				state.opponent = self.list[self.index].new()
 				self.index = self.index + 1
 			else
-				state = states.victory.new()
+				nextState = states.victory.new()
 			end
 		end
 	end

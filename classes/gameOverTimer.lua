@@ -20,7 +20,7 @@ function gameOverTimer:update(dt)
 	self.timeLeft = self.timeLeft - dt
 
 	if self.timeLeft <= 0 then
-		state = states.gameOver.new(state.opponentSpawner.index)
+		nextState = states.gameOver.new(state.opponentSpawner.index - 1)
 	end
 end
 

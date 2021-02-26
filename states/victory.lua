@@ -31,7 +31,7 @@ end
 function victory:keypressed(key, scancode, isrepeat)
 	-- Return to menu
 	if key == "escape" then
-		state = states.menu.new()
+		nextState = states.menu.new()
 	end
 end
 

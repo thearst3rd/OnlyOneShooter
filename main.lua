@@ -28,7 +28,8 @@ require "classes/opponentPhaseFakeout"
 require "classes/gameOverTimer"
 
 -- Global variables
-state = nil 	-- Currently loaded state
+state = nil 		-- Currently loaded state
+nextState = nil 	-- State to load when the frame is done
 
 -- Debug variables
 debug = false
@@ -52,12 +53,17 @@ function love.load()
 	fonts.title = love.graphics.newFont(96)
 
 	-- Load menu state
-	state = states.menu.new()
+	nextState = states.menu.new()
 end
 
 function love.update(dt)
 	-- Limit dt
 	if dt > 1/15 then dt = 1/15 end
+
+	if nextState then
+		state = nextState
+		nextState = nil
+	end
 
 	state:update(dt)
 end

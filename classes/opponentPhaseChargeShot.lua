@@ -24,6 +24,8 @@ function opponentPhaseChargeShot:update(dt)
 
 	if self.stunned then return end
 
+	if not state.player then return end
+
 	self.angle = math.atan2(state.player.y - self.y, state.player.x - self.x)
 
 	self.shot_cooldown = self.shot_cooldown - dt

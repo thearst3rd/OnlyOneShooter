@@ -29,6 +29,7 @@ function opponentPhaseCharge:update(dt)
 
 	if self.stunned then return end
 
+	if not state.player then return end
 
 	if self.isCharging then
 		self.x = self.x + math.cos(self.angle) * self.CHARGE_SPEED * dt
