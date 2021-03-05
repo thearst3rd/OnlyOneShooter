@@ -28,7 +28,9 @@ end
 
 function bulletTEMPLATE:onDestroy()
 	-- Call default superclass method
-	classes.bullet.onDestroy(self)
+	if classes.bullet.onDestroy then
+		classes.bullet.onDestroy(self)
+	end
 end
 
 classes.bulletTEMPLATE = bulletTEMPLATE
