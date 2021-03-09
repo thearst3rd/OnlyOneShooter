@@ -35,19 +35,24 @@ function opponentPhasePortals:update(dt)
 
 	self.shotCooldown = self.shotCooldown - dt
 	if self.shotCooldown <= 0 and self.shotNumber % self.SHOTS_BETWEEN_PORTALS == 0 then
-		local bluePortal = classes.bulletBluePortal.new(self.x, self.y, self.angle, false, self.bulletSpeed)
-		table.insert(state.bullets, bluePortal)
+		local bluePortalBullet = classes.bulletPortal.new(self.x, self.y, self.angle, false, self.bulletSpeed, "blue")
+		table.insert(state.bullets, bluePortalBullet)
 		self.shotCooldown = self.shotCooldown + self.SHOT_COOLDOWN
 		self.shotNumber = self.shotNumber + 1
-	elseif self.shotCooldown <= 0 and self.shotNumber % self.SHOTS_BETWEEN_PORTALS == 1 then
-		local orangePortal = classes.bulletOrangePortal.new(self.x, self.y, self.angle, false, self.bulletSpeed)
-		table.insert(state.bullets, orangePortal)
+	elseif self.shotCooldown <= 0 and self.shotNumber % self.SHOTS_BETWEEN_PORTALS == 3 then
+		local orangePortalBullet = classes.bulletPortal.new(self.x, self.y, self.angle, false, self.bulletSpeed, "orange")
+		table.insert(state.bullets, orangePortalBullet)
 		self.shotCooldown = self.shotCooldown + self.SHOT_COOLDOWN
 		self.shotNumber = self.shotNumber + 1
 	elseif self.shotCooldown <= 0 then
 		table.insert(state.bullets, classes.bullet.new(self.x, self.y, self.angle, false, self.bulletSpeed))
 		self.shotCooldown = self.shotCooldown + self.SHOT_COOLDOWN
 		self.shotNumber = self.shotNumber + 1
+	end
+
+	if self.portaled then
+		self.portaled = self.portaled - dt
+		if self.portaled <= 0 then self.portaled = nil end
 	end
 end
 
@@ -59,6 +64,15 @@ end
 function opponentPhasePortals:onDestroy()
 	-- Call default superclass method
 	classes.opponentBase.onDestroy(self)
+
+	if state.bluePortal then state.bluePortal.markForDeletion = true end
+	if state.orangePortal then state.orangePortal.markForDeletion = true end
+	for i, bullet in ipairs(state.bullets) do
+		if bullet.color then
+			bullet.markForDeletion = true
+			bullet.noSpawnPortal = true
+		end
+	end
 end
 
 classes.opponentPhasePortals = opponentPhasePortals

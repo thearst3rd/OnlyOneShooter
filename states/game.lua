@@ -46,6 +46,23 @@ function game:update(dt)
 		end
 	end
 
+	-- Update portals
+	if self.bluePortal then
+		self.bluePortal:update(dt)
+		if self.bluePortal.markForDeletion then
+			if self.bluePortal.onDestroy then self.bluePortal:onDestroy() end
+			self.bluePortal = nil
+		end
+	end
+
+	if self.orangePortal then
+		self.orangePortal:update(dt)
+		if self.orangePortal.markForDeletion then
+			if self.orangePortal.onDestroy then self.orangePortal:onDestroy() end
+			self.orangePortal = nil
+		end
+	end
+
 	-- Update opponent spawner
 	if self.opponentSpawner then
 		self.opponentSpawner:update(dt)
@@ -86,6 +103,10 @@ function game:draw()
 
 	-- Draw the opponent
 	if self.opponent then self.opponent:draw() end
+
+	-- Draw the portals
+	if self.bluePortal then self.bluePortal:draw() end
+	if self.orangePortal then self.orangePortal:draw() end
 
 	-- Draw the opponent spawner
 	if self.opponentSpawner then self.opponentSpawner:draw() end

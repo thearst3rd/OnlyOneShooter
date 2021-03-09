@@ -127,6 +127,11 @@ function player:update(dt)
 		end
 	end
 
+	if self.portaled then
+		self.portaled = self.portaled - dt
+		if self.portaled <= 0 then self.portaled = nil end
+	end
+
 	-- Create bullets
 	if love.mouse.isDown(1) and self.timeSinceLastShot > PLAYER_BULLET_COOLDOWN then
 		table.insert(state.bullets, classes.bullet.new(self.x, self.y, self.angle, true))
