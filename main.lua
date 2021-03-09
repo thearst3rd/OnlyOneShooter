@@ -38,7 +38,8 @@ nextState = nil 	-- State to load when the frame is done
 -- Debug variables
 debug = false
 
--- Fonts
+-- Assets
+images = {}
 fonts = {}
 
 
@@ -55,6 +56,9 @@ function love.load()
 	fonts.medium = love.graphics.newFont(22)
 	fonts.large = love.graphics.newFont(40)
 	fonts.title = love.graphics.newFont(96)
+
+	-- Load images
+	images.duck = love.graphics.newImage("images/duck.png")
 
 	-- Load menu state
 	nextState = states.menu.new()
@@ -74,6 +78,9 @@ end
 
 function love.draw()
 	state:draw()
+
+	love.graphics.setColor(1, 1, 1)
+	love.graphics.draw(images.duck, 6, 14, -0.2, 0.075)
 end
 
 
