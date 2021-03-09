@@ -23,6 +23,7 @@ require "classes/opponentPhaseBouncing"
 require "classes/opponentPhaseCharge"
 require "classes/opponentPhaseChargeShot"
 require "classes/opponentPhaseChase"
+require "classes/opponentPhaseWeakspot"
 require "classes/opponentPhaseFireworkShot"
 require "classes/opponentPhaseSpin"
 require "classes/opponentPhaseOrbit"
@@ -105,4 +106,14 @@ function toCartesian(mag, ang)
 	local y = mag * math.sin(ang)
 
 	return x, y
+end
+
+function normalizeAngle(ang)
+	while ang > math.pi do
+		ang = ang - 2 * math.pi
+	end
+	while ang <= -math.pi do
+		ang = ang + 2 * math.pi
+	end
+	return ang
 end
