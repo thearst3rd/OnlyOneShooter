@@ -107,3 +107,13 @@ function toCartesian(mag, ang)
 
 	return x, y
 end
+
+function normalizeAngle(ang)
+	while ang > math.pi do
+		ang = ang - 2 * math.pi
+	end
+	while ang <= -math.pi do
+		ang = ang + 2 * math.pi
+	end
+	return ang
+end
