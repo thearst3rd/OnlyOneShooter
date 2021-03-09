@@ -11,7 +11,7 @@ opponentPhasePortals.__index = opponentPhasePortals
 function opponentPhasePortals.new()
 	local self = classes.opponentBase.new(opponentPhasePortals)
 
-	self.CHASE_SPEED = 200							--Is there a danger in having the same variable names across different phases/files?
+	self.CHASE_SPEED = 200
 	self.SHOT_COOLDOWN = 1
 	self.SHOTS_BETWEEN_PORTALS = 5
 	self.shotCooldown = self.SHOT_COOLDOWN
