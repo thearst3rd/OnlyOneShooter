@@ -167,6 +167,10 @@ end
 function opponentBase:onDestroy()
 	-- Setup the opponent spawner to spawn the next opponent after a delay
 	state.opponentSpawner:triggerNext(2.5)
+
+	for i, bullet in ipairs(state.bullets) do
+		bullet.markForDeletion = true
+	end
 end
 
 -- Register class

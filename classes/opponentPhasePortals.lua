@@ -12,11 +12,14 @@ function opponentPhasePortals.new()
 	local self = classes.opponentBase.new(opponentPhasePortals)
 
 	self.CHASE_SPEED = 200
+	self.MAX_TURN_SPEED = 1.5
 	self.SHOT_COOLDOWN = 1
 	self.SHOTS_BETWEEN_PORTALS = 5
+	self.BORDER_OFFSET = 100
 	self.shotCooldown = self.SHOT_COOLDOWN
 	self.shotNumber = 0
 	self.bulletSpeed = 250
+	self.angle = math.atan2(state.player.y - self.y, state.player.x - self.x)
 
 	return self
 end
@@ -29,9 +32,32 @@ function opponentPhasePortals:update(dt)
 
 	if not state.player then return end
 
-	self.angle = math.atan2(state.player.y - self.y, state.player.x - self.x)
+	local newAngle = math.atan2(state.player.y - self.y, state.player.x - self.x)
+	local diff = normalizeAngle(newAngle - self.angle)
+	if diff > self.MAX_TURN_SPEED * dt then
+		self.angle = self.angle + self.MAX_TURN_SPEED * dt
+	elseif diff < -self.MAX_TURN_SPEED * dt then
+		self.angle = self.angle - self.MAX_TURN_SPEED * dt
+	else
+		self.angle = newAngle
+	end
+	self.angle = normalizeAngle(self.angle)
 	self.x = self.x + math.cos(self.angle) * self.CHASE_SPEED * dt
 	self.y = self.y + math.sin(self.angle) * self.CHASE_SPEED * dt
+
+	-- Collide with walls
+	if self.x < self.radius + self.BORDER_OFFSET then
+		self.x = self.radius + self.BORDER_OFFSET
+	end
+	if self.x > ARENA_WIDTH - self.radius - self.BORDER_OFFSET then
+		self.x = ARENA_WIDTH - self.radius - self.BORDER_OFFSET
+	end
+	if self.y < self.radius + self.BORDER_OFFSET then
+		self.y = self.radius + self.BORDER_OFFSET
+	end
+	if self.y > ARENA_HEIGHT - self.radius - self.BORDER_OFFSET then
+		self.y = ARENA_HEIGHT - self.radius - self.BORDER_OFFSET
+	end
 
 	self.shotCooldown = self.shotCooldown - dt
 	if self.shotCooldown <= 0 and self.shotNumber % self.SHOTS_BETWEEN_PORTALS == 0 then
