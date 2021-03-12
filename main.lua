@@ -104,7 +104,7 @@ end
 ----------------------
 
 function toPolar(x, y)
-	local mag = math.sqrt(x * x + y * y)
+	local mag = hypot(x, y)
 	local ang = math.atan2(y, x)
 
 	return mag, ang
@@ -127,8 +127,11 @@ function normalizeAngle(ang)
 	return ang
 end
 
+-- Hypotenuse, https://en.wikipedia.org/wiki/Hypot
+function hypot(x, y)
+	return math.sqrt(x * x + y * y)
+end
+
 function calcDist(x1, y1, x2, y2)
-	local xx = x2 - x1
-	local yy = y2 - y1
-	return math.sqrt(xx * xx + yy * yy)
+	return hypot(x2 - x1, y2 - y1)
 end

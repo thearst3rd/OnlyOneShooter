@@ -49,8 +49,7 @@ function opponentBase:update(dt)
 		else
 			for i, bullet in ipairs(state.bullets) do
 				if bullet.friendly then
-					if math.sqrt((self.x - bullet.x) ^ 2 + (self.y - bullet.y) ^ 2) <= (self.radius +
-							bullet.radius) then
+					if calcDist(self.x, self.y, bullet.x, bullet.y) <= (self.radius + bullet.radius) then
 						self.life = self.life - 1
 						if self.life == 0 then self.markForDeletion = true end
 						self.stunned = true

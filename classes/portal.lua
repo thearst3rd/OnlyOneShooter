@@ -32,20 +32,23 @@ function portal:update(dt)
 
 	if not otherPortal then return end
 
-	if state.player and not state.player.portaled and math.sqrt((self.x - state.player.x) ^ 2 + (self.y - state.player.y) ^ 2) <= (self.collisionRadius + state.player.radius) then
+	if state.player and not state.player.portaled and calcDist(self.x, self.y, state.player.x, state.player.y) <=
+			(self.collisionRadius + state.player.radius) then
 		state.player.x = otherPortal.x
 		state.player.y = otherPortal.y
 		state.player.portaled = self.SUMMONING_SICKNESS
 	end
 
-	if state.opponent and not state.opponent.portaled and math.sqrt((self.x - state.opponent.x) ^ 2 + (self.y - state.opponent.y) ^ 2) <= (self.collisionRadius + state.opponent.radius) then
+	if state.opponent and not state.opponent.portaled and calcDist(self.x, self.y, state.opponent.x, state.opponent.y)
+			<= (self.collisionRadius + state.opponent.radius) then
 		state.opponent.x = otherPortal.x
 		state.opponent.y = otherPortal.y
 		state.opponent.portaled = self.SUMMONING_SICKNESS
 	end
 
 	for i, bullet in ipairs(state.bullets) do
-		if not bullet.portaled and math.sqrt((self.x - bullet.x) ^ 2 + (self.y - bullet.y) ^ 2) <= (self.collisionRadius + bullet.radius) then
+		if not bullet.portaled and calcDist(self.x, self.y, bullet.x, bullet.y) <=
+				(self.collisionRadius + bullet.radius) then
 			bullet.x = otherPortal.x
 			bullet.y = otherPortal.y
 			bullet.portaled = self.SUMMONING_SICKNESS
