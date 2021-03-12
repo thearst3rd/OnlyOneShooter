@@ -15,6 +15,7 @@ classes = {}
 require "classes/player"
 require "classes/bullet"
 require "classes/bulletFirework"
+require "classes/bulletPortal"
 require "classes/opponentSpawner"
 require "classes/opponentBase"
 require "classes/opponentPhaseNormal"
@@ -28,8 +29,10 @@ require "classes/opponentPhaseFireworkShot"
 require "classes/opponentPhaseSpin"
 require "classes/opponentPhaseOrbit"
 require "classes/opponentPhaseTeleport"
+require "classes/opponentPhasePortals"
 require "classes/opponentPhaseFakeout"
 require "classes/gameOverTimer"
+require "classes/portal"
 
 -- Global variables
 state = nil 		-- Currently loaded state

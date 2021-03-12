@@ -30,6 +30,11 @@ function bullet:update(dt)
 	self.x = self.x + self.xspeed * dt
 	self.y = self.y + self.yspeed * dt
 
+	if self.portaled then
+		self.portaled = self.portaled - dt
+		if self.portaled <= 0 then self.portaled = nil end
+	end
+
 	if self.x < -self.radius
 			or self.x > ARENA_WIDTH + self.radius
 			or self.y < -self.radius
