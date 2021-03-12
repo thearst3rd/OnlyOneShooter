@@ -64,8 +64,7 @@ function player:update(dt)
 		self.yspeed = self.yspeed + accelVector.y * dt
 	end
 
-	local speed = math.sqrt(self.xspeed * self.xspeed + self.yspeed * self.yspeed)
-	local ang = math.atan2(self.yspeed, self.xspeed)
+	local speed, ang = toPolar(self.xspeed, self.yspeed)
 
 	if speed > PLAYER_MAXSPEED then
 		speed = PLAYER_MAXSPEED
@@ -107,7 +106,8 @@ function player:update(dt)
 		if self.iframeTime < 0 then self.iframeTime = 0 end
 	else
 		if state.opponent and not state.opponent.intangible then
-			if math.sqrt((self.x - state.opponent.x) ^ 2 + (self.y - state.opponent.y) ^ 2) <= (self.radius + state.opponent.radius) then
+			if calcDist(self.x, self.y, state.opponent.x, state.opponent.y) <= (self.radius + state.opponent.radius)
+					then
 				self.health = self.health - 1
 				if self.health == 0 then self.markForDeletion = true end
 				self.iframeTime = self.IFRAME_LENGTH
@@ -117,7 +117,7 @@ function player:update(dt)
 		for i, bullet in ipairs(state.bullets) do
 			if self.iframeTime > 0 then break end
 			if not bullet.friendly then
-				if math.sqrt((self.x - bullet.x) ^ 2 + (self.y - bullet.y) ^ 2) <= (self.radius + bullet.radius) then
+				if calcDist(self.x, self.y, bullet.x, bullet.y) <= (self.radius + bullet.radius) then
 					self.health = self.health - 1
 					if self.health == 0 then self.markForDeletion = true end
 					self.iframeTime = self.IFRAME_LENGTH

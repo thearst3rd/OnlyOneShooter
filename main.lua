@@ -27,6 +27,8 @@ require "classes/opponentPhaseChase"
 require "classes/opponentPhaseWeakspot"
 require "classes/opponentPhaseFireworkShot"
 require "classes/opponentPhaseSpin"
+require "classes/opponentPhaseDucks"
+require "classes/duck"
 require "classes/opponentPhaseOrbit"
 require "classes/opponentPhaseTeleport"
 require "classes/opponentPhasePortals"
@@ -41,7 +43,8 @@ nextState = nil 	-- State to load when the frame is done
 -- Debug variables
 debug = false
 
--- Fonts
+-- Assets
+images = {}
 fonts = {}
 
 
@@ -58,6 +61,9 @@ function love.load()
 	fonts.medium = love.graphics.newFont(22)
 	fonts.large = love.graphics.newFont(40)
 	fonts.title = love.graphics.newFont(96)
+
+	-- Load images
+	images.duck = love.graphics.newImage("images/duck.png")
 
 	-- Load menu state
 	nextState = states.menu.new()
@@ -98,7 +104,7 @@ end
 ----------------------
 
 function toPolar(x, y)
-	local mag = math.sqrt(x * x + y * y)
+	local mag = hypot(x, y)
 	local ang = math.atan2(y, x)
 
 	return mag, ang
@@ -119,4 +125,13 @@ function normalizeAngle(ang)
 		ang = ang + 2 * math.pi
 	end
 	return ang
+end
+
+-- Hypotenuse, https://en.wikipedia.org/wiki/Hypot
+function hypot(x, y)
+	return math.sqrt(x * x + y * y)
+end
+
+function calcDist(x1, y1, x2, y2)
+	return hypot(x2 - x1, y2 - y1)
 end
