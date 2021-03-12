@@ -94,7 +94,7 @@ function love.keypressed(key, scancode, isrepeat)
 	if key == "f12" then
 		debug = not debug
 	else
-		state:keypressed(key, scancode, isrepeat)
+		if state and state.keypressed then state:keypressed(key, scancode, isrepeat) end
 	end
 end
 

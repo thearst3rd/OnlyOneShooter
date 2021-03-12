@@ -22,10 +22,10 @@ function bulletPortal:update(dt)
 	-- Call superclass method
 	classes.bullet.update(self, dt)
 
-	if self.x < -self.radius + self.PORTAL_PLACEMENT_OFFSET
-			or self.x > ARENA_WIDTH + self.radius - self.PORTAL_PLACEMENT_OFFSET
-			or self.y < -self.radius + self.PORTAL_PLACEMENT_OFFSET
-			or self.y > ARENA_HEIGHT + self.radius - self.PORTAL_PLACEMENT_OFFSET then
+	if self.x < self.PORTAL_PLACEMENT_OFFSET
+			or self.x > ARENA_WIDTH - self.PORTAL_PLACEMENT_OFFSET
+			or self.y < self.PORTAL_PLACEMENT_OFFSET
+			or self.y > ARENA_HEIGHT - self.PORTAL_PLACEMENT_OFFSET then
 		self.markForDeletion = true
 	end
 end
@@ -47,10 +47,10 @@ function bulletPortal:onDestroy()
 
 	if self.noSpawnPortal then return end
 
-	if self.x < -self.radius + self.PORTAL_PLACEMENT_OFFSET
-			or self.x > ARENA_WIDTH + self.radius - self.PORTAL_PLACEMENT_OFFSET
-			or self.y < -self.radius + self.PORTAL_PLACEMENT_OFFSET
-			or self.y > ARENA_HEIGHT + self.radius - self.PORTAL_PLACEMENT_OFFSET then
+	if self.x < self.PORTAL_PLACEMENT_OFFSET
+			or self.x > ARENA_WIDTH - self.PORTAL_PLACEMENT_OFFSET
+			or self.y < self.PORTAL_PLACEMENT_OFFSET
+			or self.y > ARENA_HEIGHT - self.PORTAL_PLACEMENT_OFFSET then
 		local newPortal = classes.portal.new(self.x, self.y, self.color)
 		if self.color == "blue" then
 			state.bluePortal = newPortal

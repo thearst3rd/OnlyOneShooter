@@ -16,8 +16,8 @@ function opponentPhaseCharge.new()
 	local self = classes.opponentBase.new(opponentPhaseCharge)
 
 	self.isCharging = false
-	self.chargeTime = 1.5
-	self.chargeUpTime = 1.5
+	self.chargeTime = 1
+	self.chargeUpTime = 1
 	self.CHARGE_SPEED = 500
 
 	return self
@@ -43,7 +43,7 @@ function opponentPhaseCharge:update(dt)
 	if self.x - self.radius < 0 then self.x = self.radius end
 	if self.x + self.radius >= ARENA_WIDTH then self.x = ARENA_WIDTH - self.radius - 1 end
 	if self.y - self.radius < 0 then self.y = self.radius end
-	if self.y + self.radius >= ARENA_HEIGHT then self.x = ARENA_HEIGHT - self.radius - 1 end
+	if self.y + self.radius >= ARENA_HEIGHT then self.y = ARENA_HEIGHT - self.radius - 1 end
 
 	if self.chargeUpTime <= 0 then
 		self.isCharging = true
