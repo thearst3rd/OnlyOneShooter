@@ -54,21 +54,11 @@ function duck:draw()
 	love.graphics.setColor(1, 1, 1)
 	love.graphics.draw(images.duck, self.x, self.y, self.angle, scaleFactor, scaleFactor, dw / 2, dh / 2)
 	if debug then
-		--love.graphics.setColor(1, 1, 0)
-		--love.graphics.circle("fill", self.x, self.y, self.radius)
 		love.graphics.setColor(0, 0, 0)
 		love.graphics.circle("line", self.x, self.y, self.radius)
 		love.graphics.line(self.x, self.y, self.x + self.radius * math.cos(self.angle), self.y + self.radius * math.sin(self.angle))
 	end
 end
 
-
----------------------
--- OTHER CALLBACKS --
----------------------
-
-function duck:keypressed(key, scancode, isrepeat)
-	-- TODO: write or delete this function
-end
 
 classes.duck = duck
