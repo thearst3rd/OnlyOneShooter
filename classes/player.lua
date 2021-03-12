@@ -76,6 +76,13 @@ function player:update(dt)
 	self.x = self.x + self.xspeed * dt
 	self.y = self.y + self.yspeed * dt
 
+	-- Apply friction
+	if speed > 0 then
+		speed = speed - PLAYER_FRICTION * dt
+		if speed < 0 then speed = 0 end
+		self.xspeed, self.yspeed = toCartesian(speed, ang)
+	end
+
 	-- Collide with walls
 	if self.x < self.radius then
 		self.x = self.radius
@@ -92,13 +99,6 @@ function player:update(dt)
 	if self.y > ARENA_HEIGHT - self.radius then
 		self.y = ARENA_HEIGHT - self.radius
 		self.yspeed = 0
-	end
-
-	-- Apply friction
-	if speed > 0 then
-		speed = speed - PLAYER_FRICTION * dt
-		if speed < 0 then speed = 0 end
-		self.xspeed, self.yspeed = toCartesian(speed, ang)
 	end
 
 	-- Check for hurt
