@@ -111,17 +111,17 @@ function player:update(dt)
 				self.health = self.health - 1
 				if self.health == 0 then self.markForDeletion = true end
 				self.iframeTime = self.IFRAME_LENGTH
-			else
-				for i, bullet in ipairs(state.bullets) do
-					if not bullet.friendly then
-						if math.sqrt((self.x - bullet.x) ^ 2 + (self.y - bullet.y) ^ 2) <= (self.radius + bullet.radius) then
-							self.health = self.health - 1
-							if self.health == 0 then self.markForDeletion = true end
-							self.iframeTime = self.IFRAME_LENGTH
-							bullet.markForDeletion = true
-							break
-						end
-					end
+			end
+		end
+
+		for i, bullet in ipairs(state.bullets) do
+			if self.iframeTime > 0 then break end
+			if not bullet.friendly then
+				if math.sqrt((self.x - bullet.x) ^ 2 + (self.y - bullet.y) ^ 2) <= (self.radius + bullet.radius) then
+					self.health = self.health - 1
+					if self.health == 0 then self.markForDeletion = true end
+					self.iframeTime = self.IFRAME_LENGTH
+					bullet.markForDeletion = true
 				end
 			end
 		end
