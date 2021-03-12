@@ -27,6 +27,8 @@ require "classes/opponentPhaseChase"
 require "classes/opponentPhaseWeakspot"
 require "classes/opponentPhaseFireworkShot"
 require "classes/opponentPhaseSpin"
+require "classes/opponentPhaseDucks"
+require "classes/duck"
 require "classes/opponentPhaseOrbit"
 require "classes/opponentPhaseTeleport"
 require "classes/opponentPhasePortals"
@@ -81,9 +83,6 @@ end
 
 function love.draw()
 	state:draw()
-
-	love.graphics.setColor(1, 1, 1)
-	love.graphics.draw(images.duck, 6, 14, -0.2, 0.075)
 end
 
 
@@ -126,4 +125,10 @@ function normalizeAngle(ang)
 		ang = ang + 2 * math.pi
 	end
 	return ang
+end
+
+function calcDist(x1, y1, x2, y2)
+	local xx = x2 - x1
+	local yy = y2 - y1
+	return math.sqrt(xx * xx + yy * yy)
 end
