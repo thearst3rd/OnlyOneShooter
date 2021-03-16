@@ -5,6 +5,7 @@ opponentPhaseBouncing.__index = opponentPhaseBouncing
 
 local OPPONENT_GRAVITY = 400
 
+opponentPhaseBouncing.SPAWN_Y = 100
 opponentPhaseBouncing.DEFAULT_BULLET_COOLDOWN = 1
 
 --------------------
