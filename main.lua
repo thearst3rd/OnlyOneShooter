@@ -133,7 +133,7 @@ end
 function love.keypressed(key, scancode, isrepeat)
 	if key == "f12" then
 		debug = not debug
-	elseif key == "return" and love.keyboard.isDown("lalt") then
+	elseif key == "return" and love.keyboard.isDown("lalt", "ralt") then
 		love.window.setFullscreen(not love.window.getFullscreen())
 	else
 		if state and state.keypressed then state:keypressed(key, scancode, isrepeat) end
