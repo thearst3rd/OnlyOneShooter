@@ -34,7 +34,7 @@ end
 
 function player:update(dt)
 	-- Update player values
-	self.angle = math.atan2(love.mouse.getY() - self.y, love.mouse.getX() - self.x)
+	self.angle = math.atan2(relMouse.y - self.y, relMouse.x - self.x)
 	self.timeSinceLastShot = self.timeSinceLastShot + dt
 
 	-- Move player
