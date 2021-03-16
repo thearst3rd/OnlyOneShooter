@@ -39,6 +39,11 @@ require "classes/portal"
 -- Global variables
 state = nil 		-- Currently loaded state
 nextState = nil 	-- State to load when the frame is done
+relMouse = {x = 0, y = 0} 	-- Relative mouse coordinates
+
+-- Screen scaling variables
+local targetRatio = (ARENA_WIDTH / ARENA_HEIGHT)
+local ratio, scale, xOff, yOff
 
 -- Debug variables
 debug = false
@@ -73,6 +78,26 @@ function love.update(dt)
 	-- Limit dt
 	if dt > 1/15 then dt = 1/15 end
 
+	-- Poll mouse into world-space
+	local w, h = love.graphics.getDimensions()
+	ratio = w / h
+
+	if ratio > targetRatio then
+		-- More wide than 16:9
+		scale = h / ARENA_HEIGHT
+		xOff = (w - ARENA_WIDTH * scale) / 2
+		yOff = 0
+	else
+		-- More tall than 16:9 (or exactly 16:9)
+		scale = w / ARENA_WIDTH
+		xOff = 0
+		yOff = (h - ARENA_HEIGHT * scale) / 2
+	end
+
+	relMouse.x, relMouse.y = love.mouse.getPosition()
+	relMouse.x = (relMouse.x - xOff) / scale
+	relMouse.y = (relMouse.y - yOff) / scale
+
 	if nextState then
 		state = nextState
 		nextState = nil
@@ -82,7 +107,22 @@ function love.update(dt)
 end
 
 function love.draw()
+	-- Transform view to best 16:9 view
+	love.graphics.translate(xOff, yOff)
+	love.graphics.scale(scale)
 	state:draw()
+
+	-- Draw black bars
+	local w, h = love.graphics.getDimensions()
+	love.graphics.origin()
+	love.graphics.setColor(0, 0, 0)
+	if ratio > targetRatio then
+		love.graphics.rectangle("fill", 0, 0, xOff, h)
+		love.graphics.rectangle("fill", w-xOff, 0, xOff, h)
+	elseif ratio < targetRatio then
+		love.graphics.rectangle("fill", 0, 0, w, yOff)
+		love.graphics.rectangle("fill", 0, h-yOff, w, yOff)
+	end
 end
 
 
@@ -93,6 +133,8 @@ end
 function love.keypressed(key, scancode, isrepeat)
 	if key == "f12" then
 		debug = not debug
+	elseif key == "return" and love.keyboard.isDown("lalt") then
+		love.window.setFullscreen(not love.window.getFullscreen())
 	else
 		if state and state.keypressed then state:keypressed(key, scancode, isrepeat) end
 	end
