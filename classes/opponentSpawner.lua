@@ -9,19 +9,19 @@ function opponentSpawner.new(startIndex)
 	self.index = startIndex or 1
 	self.list =
 	{
+		classes.opponentPhaseNoBehavior,
 		classes.opponentPhaseNormal,
 		classes.opponentPhaseBouncing,
-		classes.opponentPhaseNoBehavior,
+		classes.opponentPhaseOrbit,
+		classes.opponentPhaseSpin,
 		classes.opponentPhaseCharge,
 		classes.opponentPhaseChargeShot,
 		classes.opponentPhaseChase,
-		classes.opponentPhaseWeakspot,
 		classes.opponentPhaseTeleport,
 		classes.opponentPhasePortals,
-		classes.opponentPhaseSpin,
-		classes.opponentPhaseDucks,
-		classes.opponentPhaseOrbit,
 		classes.opponentPhaseFireworkShot,
+		classes.opponentPhaseWeakspot,
+		classes.opponentPhaseDucks,
 		classes.opponentPhaseFakeout,
 	}
 

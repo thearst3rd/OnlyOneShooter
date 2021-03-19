@@ -15,7 +15,7 @@ function opponentBase.new(implClass)
 	self.y = implClass.SPAWN_Y or (ARENA_HEIGHT / 2)
 	self.angle = implClass.SPAWN_ANG or (math.pi / 2)
 
-	self.life = implClass.NUM_LIVES or 3
+	self.life = implClass.NUM_LIVES or 6
 	self.iframeTime = 0
 	self.stunned = false
 	self.stunTime = 0

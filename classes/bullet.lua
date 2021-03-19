@@ -4,7 +4,7 @@ local bullet = {}
 bullet.__index = bullet
 
 local PLAYER_BULLET_SPEED = 1000
-local OPPONENT_BULLET_SPEED = 250
+local OPPONENT_BULLET_SPEED = 350
 
 function bullet.new(x, y, angle, friendly, speed)
 	x = x or 100

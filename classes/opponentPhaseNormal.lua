@@ -4,6 +4,7 @@ local opponentPhaseNormal = {}
 opponentPhaseNormal.__index = opponentPhaseNormal
 
 
+opponentPhaseNormal.SPAWN_Y = 100
 opponentPhaseNormal.DEFAULT_BULLET_COOLDOWN = 1
 
 --------------------
