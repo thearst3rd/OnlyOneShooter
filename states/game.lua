@@ -111,14 +111,14 @@ function game:draw()
 	-- Draw the HUD
 	-- Draw the player lives
 	love.graphics.setColor(1, 0, 0)
-	if state.player then
-		if state.player.health >= 1 then
+	if self.player then
+		if self.player.health >= 1 then
 			love.graphics.rectangle("fill", 50, ARENA_HEIGHT - 50, 25, 25)
 		end
-		if state.player.health >= 2 then
+		if self.player.health >= 2 then
 			love.graphics.rectangle("fill", 100, ARENA_HEIGHT - 50, 25, 25)
 		end
-		if state.player.health == 3 then
+		if self.player.health == 3 then
 			love.graphics.rectangle("fill", 150, ARENA_HEIGHT - 50, 25, 25)
 		end
 	end
@@ -128,7 +128,7 @@ function game:draw()
 	love.graphics.rectangle("line", 150, ARENA_HEIGHT - 50, 25, 25)
 	-- Draw the opponent health bar
 	love.graphics.setColor(1, 0, 0)
-	if state.opponent then love.graphics.rectangle("fill", 50, 50, (ARENA_WIDTH / 2 - 100) * state.opponent.life / (state.opponent.NUM_LIVES or 6), 25) end
+	if self.opponent then love.graphics.rectangle("fill", 50, 50, (ARENA_WIDTH / 2 - 100) * self.opponent.life / (self.opponent.NUM_LIVES or 6), 25) end
 	love.graphics.setColor(0, 0, 0)
 	love.graphics.rectangle("line", 50, 50, ARENA_WIDTH / 2 - 100, 25)
 
