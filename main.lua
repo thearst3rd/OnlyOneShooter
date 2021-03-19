@@ -140,6 +140,12 @@ function love.keypressed(key, scancode, isrepeat)
 	end
 end
 
+function love.mousepressed(x, y, button, istouch, presses)
+	x = (x - xOff) / scale
+	y = (y - yOff) / scale
+	if state and state.mousepressed then state:mousepressed(x, y, button, istouch, presses) end
+end
+
 
 ----------------------
 -- HELPER FUNCTIONS --
@@ -176,4 +182,27 @@ end
 
 function calcDist(x1, y1, x2, y2)
 	return hypot(x2 - x1, y2 - y1)
+end
+
+function isWithinBox(x, y, x1, y1, width, height)
+	return x >= x1 and y >= y1 and x < (x1 + width) and y < (y1 + height)
+end
+
+function checkAndClickButton(x, y, button)
+	if isWithinBox(x, y, button.x, button.y, button.width, button.height) then
+		button.onPress()
+		return true
+	end
+	return false
+end
+
+function drawButton(button)
+	if isWithinBox(relMouse.x, relMouse.y, button.x, button.y, button.width, button.height) then
+		love.graphics.setColor(1, 1, 1, 0.3)
+		love.graphics.rectangle("fill", button.x, button.y, button.width, button.height)
+	end
+	love.graphics.setColor(0, 0, 0)
+	love.graphics.setFont(fonts.medium)
+	love.graphics.rectangle("line", button.x, button.y, button.width, button.height)
+	love.graphics.printf(button.text, button.x, button.y, button.width, "center")
 end
