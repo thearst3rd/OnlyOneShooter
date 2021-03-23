@@ -23,6 +23,7 @@ function opponentSpawner.new(startIndex)
 		classes.opponentPhaseWeakspot,
 		classes.opponentPhaseDucks,
 		classes.opponentPhaseFakeout,
+		classes.opponentPhaseBullethell1,
 	}
 
 	self.spawning = false
