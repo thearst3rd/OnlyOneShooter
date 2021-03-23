@@ -33,6 +33,7 @@ require "classes/opponentPhaseOrbit"
 require "classes/opponentPhaseTeleport"
 require "classes/opponentPhasePortals"
 require "classes/opponentPhaseFakeout"
+require "classes/opponentPhaseBullethell1"
 require "classes/gameOverTimer"
 require "classes/portal"
 
