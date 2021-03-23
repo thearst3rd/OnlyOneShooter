@@ -44,7 +44,8 @@ function bullet:update(dt)
 end
 
 function bullet:draw()
-	love.graphics.setColor(0.7, 0.1, 0.1)
+	local color = self.friendly and {0.8, 0.8, 0.2} or {0.7, 0.1, 0.1}
+	love.graphics.setColor(color)
 	love.graphics.circle("fill", self.x, self.y, self.radius)
 end
 

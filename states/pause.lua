@@ -13,13 +13,14 @@ function pause.new(savedGame)
 
 	self.gameState = savedGame
 	self.pauseButtons = {
-		{x = ARENA_WIDTH / 2 - 150, y = 200, width = 300, height = 25, text = "Continue", onPress = function() self:resume() end},
-		{x = ARENA_WIDTH / 2 - 150, y = 250, width = 300, height = 25, text = "Options", onPress = function() self.buttons = self.optionButtons end},
-		{x = ARENA_WIDTH / 2 - 150, y = 300, width = 300, height = 25, text = "Exit to menu", onPress = function() self:exit() end},
+		{x = ARENA_WIDTH / 2 - 150, y = 200, width = 300, height = 28, text = "Continue", onPress = function() self:resume() end},
+		{x = ARENA_WIDTH / 2 - 150, y = 250, width = 300, height = 28, text = "Options", onPress = function() self.buttons = self.optionButtons end},
+		{x = ARENA_WIDTH / 2 - 150, y = 300, width = 300, height = 28, text = "Exit to menu", onPress = function() self:exit() end},
+		{x = ARENA_WIDTH / 2 - 150, y = 350, width = 300, height = 28, text = "Quit game", onPress = function() love.event.quit() end},
 	}
 	self.optionButtons = {
-		{x = ARENA_WIDTH / 2 - 150, y = 200, width = 300, height = 25, text = "Toggle Fullscreen", onPress = function() love.window.setFullscreen(not love.window.getFullscreen()) end},
-		{x = ARENA_WIDTH / 2 - 150, y = 250, width = 300, height = 25, text = "Back", onPress = function() self.buttons = self.pauseButtons end},
+		{x = ARENA_WIDTH / 2 - 150, y = 200, width = 300, height = 28, text = "Toggle Fullscreen", onPress = function() love.window.setFullscreen(not love.window.getFullscreen()) end},
+		{x = ARENA_WIDTH / 2 - 150, y = 250, width = 300, height = 28, text = "Back", onPress = function() self.buttons = self.pauseButtons end},
 	}
 	self.buttons = self.pauseButtons
 
@@ -48,7 +49,11 @@ end
 function pause:keypressed(key, scancode, isrepeat)
 	-- Return to the game
 	if key == "escape" then
-		self:resume()
+		if self.buttons == self.optionButtons then
+			self.buttons = self.pauseButtons
+		else
+			self:resume()
+		end
 	elseif key == "return" then
 		self:exit()
 	end
