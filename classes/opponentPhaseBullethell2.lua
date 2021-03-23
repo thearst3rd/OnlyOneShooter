@@ -14,6 +14,8 @@ local ORBIT_FOCAL_Y = ARENA_HEIGHT / 2
 local MAX_TURN_SPEED = 1
 local BOUNCY_BULLET_SPREAD = 0.3
 
+local BOUNCY_BULLET_COOLDOWN_TIME = 0.6
+
 
 opponentPhaseBullethell2.RADIUS = 40
 opponentPhaseBullethell2.SPAWN_X = ORBIT_FOCAL_X + ORBIT_RADIUS_X * math.cos(ORBIT_START_ANG)
@@ -28,16 +30,9 @@ opponentPhaseBullethell2.NUM_LIVES = 12
 function opponentPhaseBullethell2.new()
 	local self = classes.opponentBase.new(opponentPhaseBullethell2)
 
-	self.currentCooldown = 0
-	self.bulletCooldownTime = 0.1
-	self.shotAng = "horizontal"
-	self.numShotsToSwitch = 3
 	self.orbitAng = ORBIT_START_ANG
 
 	self.bouncyCurrentCooldown = 0
-	self.bouncyBulletCooldownTime = 0.6
-
-	self.NUM_BULLETS = 6
 
 	if state.player then
 		self.angle = math.atan2(state.player.y - self.y, state.player.x - self.x)
@@ -52,33 +47,6 @@ function opponentPhaseBullethell2:update(dt)
 
 	if self.stunned then return end
 
-	--[[
-	--Shoot bullets
-	self.currentCooldown = self.currentCooldown - dt
-	if self.currentCooldown <= 0 then
-		if self.shotAng == "horizontal" then
-			self.baseAng = 0
-		else --if self.shotAng == "vertical"
-			self.baseAng = math.pi / self.NUM_BULLETS
-		end
-		for i = 1, self.NUM_BULLETS do
-			local ang = (2 * math.pi * i / self.NUM_BULLETS) + self.baseAng
-			table.insert(state.bullets, classes.bullet.new(self.x, self.y, ang, false, self.bulletSpeed))
-		end
-		self.currentCooldown = self.currentCooldown + self.bulletCooldownTime
-		self.numShotsToSwitch = self.numShotsToSwitch - 1
-		if self.numShotsToSwitch <= 0 then
-			if self.shotAng == "horizontal" then
-				self.shotAng = "vertical"
-			else --if self.shotAng == "vertical"
-				self.shotAng = "horizontal"
-			end
-			self.numShotsToSwitch = 3
-			self.currentCooldown = 1
-		end
-	end
-	--]]
-
 	-- Shoot bouncy bullets
 	self.bouncyCurrentCooldown = self.bouncyCurrentCooldown - dt
 	if self.bouncyCurrentCooldown < 0 then
@@ -87,7 +55,7 @@ function opponentPhaseBullethell2:update(dt)
 			table.insert(state.bullets, classes.bulletBouncy.new(self.x, self.y, bulletAng, false, self.bulletSpeed))
 			bulletAng = bulletAng + (BOUNCY_BULLET_SPREAD / 2)
 		end
-		self.bouncyCurrentCooldown = self.bouncyCurrentCooldown + self.bouncyBulletCooldownTime
+		self.bouncyCurrentCooldown = self.bouncyCurrentCooldown + BOUNCY_BULLET_COOLDOWN_TIME
 	end
 
 	--Move
