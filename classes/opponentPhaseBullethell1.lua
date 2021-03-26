@@ -4,7 +4,7 @@ local opponentPhaseBullethell1 = {}
 opponentPhaseBullethell1.__index = opponentPhaseBullethell1
 
 local ORBIT_START_ANG = -math.pi / 2
-local ORBIT_ANG_SPEED = 1.2 	-- How many radians per second should the opponent advance in orbit?
+local ORBIT_ANG_SPEED = 1.0 	-- How many radians per second should the opponent advance in orbit?
 local ORBIT_RADIUS_X = 400
 local ORBIT_RADIUS_Y = 250
 
@@ -12,6 +12,7 @@ local ORBIT_FOCAL_X = ARENA_WIDTH / 2
 local ORBIT_FOCAL_Y = ARENA_HEIGHT / 2
 
 
+opponentPhaseBullethell1.RADIUS = 30
 opponentPhaseBullethell1.SPAWN_X = ORBIT_FOCAL_X + ORBIT_RADIUS_X * math.cos(ORBIT_START_ANG)
 opponentPhaseBullethell1.SPAWN_Y = ORBIT_FOCAL_Y + ORBIT_RADIUS_Y * math.sin(2 * ORBIT_START_ANG)
 opponentPhaseBullethell1.NUM_LIVES = 12

@@ -95,21 +95,22 @@ function opponentPhaseWeakspot:update(dt)
 		self.y = ARENA_HEIGHT - self.radius
 	end
 
-	self.xDamage = self.x - math.cos(self.angle) * 0.5 * self.radius
-	self.yDamage = self.y - math.sin(self.angle) * 0.5 * self.radius
+	self.xDamage = self.x - math.cos(self.angle) * 0.75 * self.radius
+	self.yDamage = self.y - math.sin(self.angle) * 0.75 * self.radius
 end
 
 function opponentPhaseWeakspot:draw()
 	-- Optional - draw default opponent
-	classes.opponentBase.draw(self)
+	local fillColorOverride = {0.6, 0.6, 0.6}
+	local alpha = classes.opponentBase.draw(self, nil, fillColorOverride)
 
-	love.graphics.setColor(0, 0, 0)
+	love.graphics.setColor(0, 0, 0, alpha)
 	love.graphics.circle("fill", self.xDamage, self.yDamage, self.radius / 2)
 
-	love.graphics.setColor(0, 0, 1)
+	love.graphics.setColor(0, 0, 1, alpha)
 	love.graphics.circle("fill", self.xDamage, self.yDamage, self.radius / 4)
 
-	love.graphics.setColor(1, 1, 1)
+	love.graphics.setColor(1, 1, 1, alpha)
 	love.graphics.circle("fill", self.xDamage, self.yDamage, self.radius / 8)
 end
 

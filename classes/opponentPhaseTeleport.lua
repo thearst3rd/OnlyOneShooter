@@ -23,7 +23,7 @@ function opponentPhaseTeleport.new()
 	self.timeToTele = 0
 
 	self.xspeed = 0
-	self.yspeed = 0
+	self.yspeed = MAX_SPEED / 2
 
 	return self
 end

@@ -57,12 +57,15 @@ function portal:update(dt)
 end
 
 function portal:draw()
+	local thickness = love.graphics.getLineWidth()
+	love.graphics.setLineWidth(5)
 	if self.color == "blue" then
 		love.graphics.setColor(0, 0.396, 1)
 	elseif self.color == "orange" then
 		love.graphics.setColor(1, 0.365, 0)
 	end
 	love.graphics.circle("line", self.x, self.y, self.radius)
+	love.graphics.setLineWidth(thickness)
 end
 
 

@@ -16,6 +16,7 @@ function opponentPhaseFakeout.new()
 	local self = classes.opponentBase.new(opponentPhaseFakeout)
 
 	self.APPROACH_SPEED = 100
+	self.angle = math.atan2(state.player.y - self.y, state.player.x - self.x)
 
 	return self
 end
