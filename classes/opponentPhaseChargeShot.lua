@@ -14,6 +14,7 @@ function opponentPhaseChargeShot.new()
 	self.CHARGE_TIME = 3
 	self.shotCooldown = self.CHARGE_TIME
 	self.bulletSpeed = 1000
+	self.angle = math.atan2(state.player.y - self.y, state.player.x - self.x)
 
 	return self
 end

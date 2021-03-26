@@ -110,9 +110,15 @@ end
 
 local opponentPolygon3Tri = love.math.triangulate(opponentPolygon3)
 
-function opponentBase:draw(alphaOverride)
+function opponentBase:draw(alphaOverride, fillColorOverride)
 	local fillColor = {0.1, 0.4, 0.7, 1}
 	local outlineColor = {0, 0, 0, 1}
+	-- Override fill color if need be
+	if fillColorOverride then
+		fillColor[1] = fillColorOverride[1]
+		fillColor[2] = fillColorOverride[2]
+		fillColor[3] = fillColorOverride[3]
+	end
 	if self.stunned then
 		fillColor = {0.8, 0.2, 0.2, 0.8}
 		outlineColor = {0.4, 0, 0, 0.8}
@@ -161,6 +167,9 @@ function opponentBase:draw(alphaOverride)
 		love.graphics.setColor(1, 0, 0)
 		love.graphics.circle("line", self.x, self.y, self.radius)
 	end
+
+	-- Return alpha value (to let other things blink along)
+	return fillColor[4]
 end
 
 function opponentBase:onDestroy()

@@ -19,6 +19,7 @@ function opponentPhaseCharge.new()
 	self.chargeTime = 1
 	self.chargeUpTime = 1
 	self.CHARGE_SPEED = 500
+	self.angle = math.atan2(state.player.y - self.y, state.player.x - self.x)
 
 	return self
 end

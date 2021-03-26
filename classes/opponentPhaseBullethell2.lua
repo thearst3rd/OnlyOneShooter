@@ -17,9 +17,9 @@ local BOUNCY_BULLET_SPREAD = 0.3
 local BOUNCY_BULLET_COOLDOWN_TIME = 0.6
 
 
-opponentPhaseBullethell2.RADIUS = 40
+opponentPhaseBullethell2.RADIUS = 35
 opponentPhaseBullethell2.SPAWN_X = ORBIT_FOCAL_X + ORBIT_RADIUS_X * math.cos(ORBIT_START_ANG)
-opponentPhaseBullethell2.SPAWN_Y = ORBIT_FOCAL_Y + ORBIT_RADIUS_Y * math.sin(3 * ORBIT_START_ANG)
+opponentPhaseBullethell2.SPAWN_Y = ORBIT_FOCAL_Y + ORBIT_RADIUS_Y * -0.7 * math.sin(3 * ORBIT_START_ANG)
 opponentPhaseBullethell2.NUM_LIVES = 12
 
 
@@ -61,7 +61,7 @@ function opponentPhaseBullethell2:update(dt)
 	--Move
 	self.orbitAng = self.orbitAng + ORBIT_ANG_SPEED * dt
 	self.x = ORBIT_FOCAL_X + ORBIT_RADIUS_X * math.cos(self.orbitAng)
-	self.y = ORBIT_FOCAL_Y + ORBIT_RADIUS_Y * math.sin(3 * self.orbitAng)
+	self.y = ORBIT_FOCAL_Y + ORBIT_RADIUS_Y * -0.7 * math.sin(3 * self.orbitAng)
 
 	-- Aim at player
 	if state.player then
