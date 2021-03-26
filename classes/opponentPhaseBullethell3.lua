@@ -1,4 +1,4 @@
--- The template opponent phase
+-- How good is your movement?
 
 local opponentPhaseBullethell3 = {}
 opponentPhaseBullethell3.__index = opponentPhaseBullethell3
@@ -9,12 +9,12 @@ local ORBIT_ANG_SPEED = 1.2 	-- How many radians per second should the opponent 
 local ORBIT_RADIUS_X = 400
 local ORBIT_RADIUS_Y = 250
 
-local MAX_TURN_SPEED = 1
+local MAX_TURN_SPEED = 10
 
 local ORBIT_FOCAL_X = ARENA_WIDTH / 2
 local ORBIT_FOCAL_Y = ARENA_HEIGHT / 2
 
-opponentPhaseBullethell3.RADIUS = 55
+opponentPhaseBullethell3.RADIUS = 45
 opponentPhaseBullethell3.SPAWN_X = ORBIT_FOCAL_X + ORBIT_RADIUS_X * math.cos(ORBIT_START_ANG)
 opponentPhaseBullethell3.SPAWN_Y = ORBIT_FOCAL_Y + ORBIT_RADIUS_Y * math.sin(2 * ORBIT_START_ANG)
 opponentPhaseBullethell3.NUM_LIVES = 12
@@ -48,7 +48,16 @@ function opponentPhaseBullethell3:update(dt)
 
 	--Aim
 	if state.player then
-		self.angle = math.atan2(state.player.y - self.y, state.player.x - self.x)
+		local targetAng = math.atan2(state.player.y - self.y, state.player.x - self.x)
+		local diff = normalizeAngle(targetAng - self.angle)
+
+		if diff > MAX_TURN_SPEED * dt then
+			self.angle = self.angle + MAX_TURN_SPEED * dt
+		elseif diff < -MAX_TURN_SPEED * dt then
+			self.angle = self.angle - MAX_TURN_SPEED * dt
+		else
+			self.angle = targetAng
+		end
 	end
 
 	--Shoot
