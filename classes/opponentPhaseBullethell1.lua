@@ -1,4 +1,4 @@
--- The template opponent phase
+-- Intro to bullet hell
 
 local opponentPhaseBullethell1 = {}
 opponentPhaseBullethell1.__index = opponentPhaseBullethell1
