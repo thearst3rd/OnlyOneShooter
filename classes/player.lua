@@ -125,6 +125,17 @@ function player:update(dt)
 				end
 			end
 		end
+
+		if state.opponent and state.opponent.ducks then
+			for i, duck in ipairs(state.opponent.ducks) do
+				if self.iframeTime > 0 then break end
+				if calcDist(self.x, self.y, duck.x, duck.y) <= (self.radius + duck.radius) then
+					self.health = self.health - 1
+					if self.health == 0 then self.markForDeletion = true end
+					self.iframeTime = self.IFRAME_LENGTH
+				end
+			end
+		end
 	end
 
 	if self.portaled then
