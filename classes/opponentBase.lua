@@ -173,8 +173,10 @@ function opponentBase:draw(alphaOverride, fillColorOverride)
 end
 
 function opponentBase:onDestroy()
-	-- Setup the opponent spawner to spawn the next opponent after a delay
-	state.opponentSpawner:triggerNext(2.5)
+	-- Setup the opponent spawner to spawn the next opponent after a delay (only if player is alive)
+	if state.player and not state.player.markForDeletion then
+		state.opponentSpawner:triggerNext(2.5)
+	end
 
 	for i, bullet in ipairs(state.bullets) do
 		bullet.markForDeletion = true

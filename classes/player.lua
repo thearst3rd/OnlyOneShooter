@@ -182,6 +182,10 @@ end
 
 function player:onDestroy()
 	state.gameOverTimer = classes.gameOverTimer.new()
+
+	for i, bullet in ipairs(state.bullets) do
+		bullet.markForDeletion = true
+	end
 end
 
 
