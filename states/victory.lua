@@ -10,11 +10,18 @@ victory.__index = victory
 
 function victory.new()
 	local self = setmetatable({}, victory)
+
+	self.timer = 0
+	self.TIME_TO_MENU = 10
+
 	return self
 end
 
 function victory:update(dt)
-	-- TODO: write this function
+	self.timer = self.timer + dt
+	if self.timer >= self.TIME_TO_MENU then
+		nextState = states.menu.new()
+	end
 end
 
 function victory:draw()

@@ -14,8 +14,9 @@ function portal.new(x, y, color)
 	self.x = x
 	self.y = y
 	self.color = color
-	self.collisionRadius = 5
-	self.radius = 32
+	self.collisionRadius = 15
+	self.xradius = 20
+	self.yradius = 32
 	self.SUMMONING_SICKNESS = 1
 
 	return self
@@ -64,7 +65,7 @@ function portal:draw()
 	elseif self.color == "orange" then
 		love.graphics.setColor(1, 0.365, 0)
 	end
-	love.graphics.circle("line", self.x, self.y, self.radius)
+	love.graphics.ellipse("line", self.x, self.y, self.xradius, self.yradius)
 	love.graphics.setLineWidth(thickness)
 end
 

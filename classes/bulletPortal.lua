@@ -13,6 +13,7 @@ function bulletPortal.new(x, y, angle, friendly, speed, color)
 	setmetatable(self, bulletPortal)
 
 	self.color = color
+	self.timer = 1.5
 	self.PORTAL_PLACEMENT_OFFSET = 100
 
 	return self
@@ -22,7 +23,10 @@ function bulletPortal:update(dt)
 	-- Call superclass method
 	classes.bullet.update(self, dt)
 
-	if self.x < self.PORTAL_PLACEMENT_OFFSET
+	self.timer = self.timer - dt
+
+	if self.timer <= 0
+			or self.x < self.PORTAL_PLACEMENT_OFFSET
 			or self.x > ARENA_WIDTH - self.PORTAL_PLACEMENT_OFFSET
 			or self.y < self.PORTAL_PLACEMENT_OFFSET
 			or self.y > ARENA_HEIGHT - self.PORTAL_PLACEMENT_OFFSET then
@@ -47,16 +51,11 @@ function bulletPortal:onDestroy()
 
 	if self.noSpawnPortal then return end
 
-	if self.x < self.PORTAL_PLACEMENT_OFFSET
-			or self.x > ARENA_WIDTH - self.PORTAL_PLACEMENT_OFFSET
-			or self.y < self.PORTAL_PLACEMENT_OFFSET
-			or self.y > ARENA_HEIGHT - self.PORTAL_PLACEMENT_OFFSET then
-		local newPortal = classes.portal.new(self.x, self.y, self.color)
-		if self.color == "blue" then
-			state.bluePortal = newPortal
-		else --self.color == "orange" then
-			state.orangePortal = newPortal
-		end
+	local newPortal = classes.portal.new(self.x, self.y, self.color)
+	if self.color == "blue" then
+		state.bluePortal = newPortal
+	else --self.color == "orange" then
+		state.orangePortal = newPortal
 	end
 end
 
