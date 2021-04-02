@@ -37,6 +37,7 @@ require "classes/opponentPhaseFakeout"
 require "classes/opponentPhaseBullethell1"
 require "classes/opponentPhaseBullethell2"
 require "classes/opponentPhaseBullethell3"
+require "classes/opponentPhaseBullethell4"
 require "classes/gameOverTimer"
 require "classes/portal"
 

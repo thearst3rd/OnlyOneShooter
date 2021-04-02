@@ -26,6 +26,7 @@ function opponentSpawner.new(startIndex)
 		classes.opponentPhaseBullethell1,
 		classes.opponentPhaseBullethell2,
 		classes.opponentPhaseBullethell3,
+		classes.opponentPhaseBullethell4,
 	}
 
 	self.spawning = false
