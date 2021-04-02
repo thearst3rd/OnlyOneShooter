@@ -24,7 +24,7 @@ function menu:draw()
 	love.graphics.setFont(fonts.title)
 	love.graphics.printf("ONLY ONE SHOOTER", 0, 100, ARENA_WIDTH, "center")
 	love.graphics.setFont(fonts.medium)
-	love.graphics.printf("press space to go to game\npress alt+enter to toggle fullscreen", 0, 500, ARENA_WIDTH, "center")
+	love.graphics.printf("press space to go to game\npress alt+enter to toggle fullscreen\npress esc to pause", 0, 500, ARENA_WIDTH, "center")
 end
 
 
