@@ -8,7 +8,7 @@ bulletFirework.__index = bulletFirework
 -- MAIN CALLBACKS --
 --------------------
 
-function bulletFirework.new(x, y, angle, friendly, speed)
+function bulletFirework.new(x, y, angle, friendly, speed, bulletType)
 	local self = classes.bullet.new(x, y, angle, friendly, speed)
 	setmetatable(self, bulletFirework)
 
@@ -23,6 +23,8 @@ function bulletFirework.new(x, y, angle, friendly, speed)
 	self.NUM_BULLETS = 6
 	self.OUTGOING_BULLET_SPEED = 200
 	self.SHAKE_OFFSET = 5
+
+	self.bulletType = bulletType or classes.bullet
 
 	return self
 end
@@ -47,7 +49,7 @@ function bulletFirework:update(dt)
 		if self.shakeTime <= 0 then
 			for i = 1, self.NUM_BULLETS do
 				local ang = 2 * math.pi * i / self.NUM_BULLETS
-				table.insert(state.bullets, classes.bullet.new(self.x, self.y, ang, self.friendly, self.OUTGOING_BULLET_SPEED))
+				table.insert(state.bullets, self.bulletType.new(self.x, self.y, ang, self.friendly, self.OUTGOING_BULLET_SPEED))
 			end
 			self.countdownTime = 1.5
 			self.shake = false

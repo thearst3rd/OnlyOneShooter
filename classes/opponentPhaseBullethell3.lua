@@ -14,7 +14,7 @@ local MAX_TURN_SPEED = 10
 local ORBIT_FOCAL_X = ARENA_WIDTH / 2
 local ORBIT_FOCAL_Y = ARENA_HEIGHT / 2
 
-opponentPhaseBullethell3.RADIUS = 45
+opponentPhaseBullethell3.RADIUS = 40
 opponentPhaseBullethell3.SPAWN_X = ORBIT_FOCAL_X + ORBIT_RADIUS_X * math.cos(ORBIT_START_ANG)
 opponentPhaseBullethell3.SPAWN_Y = ORBIT_FOCAL_Y + ORBIT_RADIUS_Y * math.sin(2 * ORBIT_START_ANG)
 opponentPhaseBullethell3.NUM_LIVES = 12
@@ -27,6 +27,8 @@ opponentPhaseBullethell3.NUM_LIVES = 12
 function opponentPhaseBullethell3.new()
 	local self = classes.opponentBase.new(opponentPhaseBullethell3)
 
+	self.BULLET_COOLDOWN_TIME = 1
+
 	self.orbitAng = ORBIT_START_ANG
 	if state.player then
 		self.angle = math.atan2(state.player.y - self.y, state.player.x - self.x)
@@ -34,7 +36,6 @@ function opponentPhaseBullethell3.new()
 	self.shotState = "focus"
 
 	self.currentCooldown = 0
-	self.bulletCooldownTime = 1
 	self.numBullets = 3
 
 	return self
@@ -68,7 +69,7 @@ function opponentPhaseBullethell3:update(dt)
 				local ang = self.angle + (i * 0.1)
 				table.insert(state.bullets, classes.bullet.new(self.x, self.y, ang, false, self.bulletSpeed))
 			end
-			self.currentCooldown = self.currentCooldown + self.bulletCooldownTime
+			self.currentCooldown = self.currentCooldown + self.BULLET_COOLDOWN_TIME
 			self.shotState = "corner"
 		elseif self.shotState == "corner" then
 			for i = -15, -5 do
@@ -79,14 +80,14 @@ function opponentPhaseBullethell3:update(dt)
 				local ang = self.angle + (i * 0.1)
 				table.insert(state.bullets, classes.bullet.new(self.x, self.y, ang, false, self.bulletSpeed))
 			end
-			self.currentCooldown = self.currentCooldown + self.bulletCooldownTime
+			self.currentCooldown = self.currentCooldown + self.BULLET_COOLDOWN_TIME
 			self.shotState = "spread"
 		else --if self.shotState == "spread" then
 			for i = -5, 5 do
 				local ang = self.angle + (i * 0.2)
 				table.insert(state.bullets, classes.bullet.new(self.x, self.y, ang, false, self.bulletSpeed))
 			end
-			self.currentCooldown = self.currentCooldown + self.bulletCooldownTime
+			self.currentCooldown = self.currentCooldown + self.BULLET_COOLDOWN_TIME
 			self.shotState = "focus"
 		end
 	end
