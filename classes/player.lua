@@ -6,8 +6,8 @@ player.__index = player
 
 -- Constants
 local PLAYER_MAXSPEED = 450
-local PLAYER_ACCEL = 900
-local PLAYER_FRICTION = 150
+local PLAYER_ACCEL = 1500
+local PLAYER_FRICTION = 400
 local PLAYER_BULLET_COOLDOWN = 0.25
 
 
