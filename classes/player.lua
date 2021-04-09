@@ -195,7 +195,9 @@ function player:onDestroy()
 	state.gameOverTimer = classes.gameOverTimer.new()
 
 	for i, bullet in ipairs(state.bullets) do
-		bullet.markForDeletion = true
+		if bullet.friendly then
+			bullet.markForDeletion = true
+		end
 	end
 end
 

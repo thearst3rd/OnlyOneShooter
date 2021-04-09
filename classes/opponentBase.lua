@@ -179,7 +179,9 @@ function opponentBase:onDestroy()
 	end
 
 	for i, bullet in ipairs(state.bullets) do
-		bullet.markForDeletion = true
+		if not bullet.friendly then
+			bullet.markForDeletion = true
+		end
 	end
 end
 
