@@ -16,6 +16,7 @@ local ORBIT_FOCAL_Y = ARENA_HEIGHT / 2
 opponentPhaseOrbit.SPAWN_X = ORBIT_FOCAL_X + ORBIT_RADIUS_X * math.cos(ORBIT_START_ANG)
 opponentPhaseOrbit.SPAWN_Y = ORBIT_FOCAL_Y + ORBIT_RADIUS_Y * math.sin(ORBIT_START_ANG)
 opponentPhaseOrbit.DEFAULT_BULLET_COOLDOWN = 0.4
+opponentPhaseOrbit.NUM_LIVES = 4
 
 
 --------------------

@@ -6,6 +6,7 @@ opponentPhaseCharge.__index = opponentPhaseCharge
 
 opponentPhaseCharge.SPAWN_Y = 150
 opponentPhaseCharge.DEFAULT_BULLET_COOLDOWN = 1
+opponentPhaseCharge.NUM_LIVES = 4
 
 
 --------------------

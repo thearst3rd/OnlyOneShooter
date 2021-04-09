@@ -128,7 +128,7 @@ function game:draw()
 	love.graphics.rectangle("line", 150, ARENA_HEIGHT - 50, 25, 25)
 	-- Draw the opponent health bar
 	love.graphics.setColor(1, 0, 0)
-	if self.opponent then love.graphics.rectangle("fill", 50, 50, (ARENA_WIDTH / 2 - 100) * self.opponent.life / (self.opponent.NUM_LIVES or 6), 25) end
+	if self.opponent then love.graphics.rectangle("fill", 50, 50, (ARENA_WIDTH / 2 - 100) * self.opponent.life / (self.opponent.NUM_LIVES or 8), 25) end
 	love.graphics.setColor(0, 0, 0)
 	love.graphics.rectangle("line", 50, 50, ARENA_WIDTH / 2 - 100, 25)
 

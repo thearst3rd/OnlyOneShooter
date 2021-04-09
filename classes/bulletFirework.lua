@@ -61,7 +61,17 @@ end
 
 function bulletFirework:draw()
 	love.graphics.setColor(0.1, 0.7, 0.1)
-	love.graphics.circle("fill", self.x + self.offsetX, self.y + self.offsetY, self.radius)
+	local x = self.x + self.offsetX
+	local y = self.y + self.offsetY
+	love.graphics.circle("fill", x, y, self.radius)
+
+	if self.bulletType == classes.bulletFirework then
+		local prevWidth = love.graphics.getLineWidth()
+		love.graphics.setLineWidth(3)
+		love.graphics.setColor(0, 0, 0)
+		love.graphics.circle("line", x, y, self.radius)
+		love.graphics.setLineWidth(prevWidth)
+	end
 end
 
 function bulletFirework:onDestroy()
