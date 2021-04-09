@@ -20,7 +20,7 @@ function player.new()
 	-- Variables
 	self.x = ARENA_WIDTH / 2
 	self.y = ARENA_HEIGHT * (4 / 5)
-	self.radius = 15
+	self.radius = 8
 	self.xspeed = 0
 	self.yspeed = 0
 	self.angle = 0
