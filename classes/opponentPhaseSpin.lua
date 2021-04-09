@@ -5,6 +5,7 @@ opponentPhaseSpin.__index = opponentPhaseSpin
 
 opponentPhaseSpin.DEFAULT_BULLET_COOLDOWN = 0.3
 opponentPhaseSpin.DEFAULT_BULLET_SPEED = 750
+opponentPhaseSpin.NUM_LIVES = 4
 
 --------------------
 -- MAIN CALLBACKS --
