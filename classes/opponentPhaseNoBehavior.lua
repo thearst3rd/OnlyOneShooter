@@ -3,6 +3,7 @@
 local opponentPhaseNoBehavior = {}
 opponentPhaseNoBehavior.__index = opponentPhaseNoBehavior
 
+opponentPhaseNoBehavior.NUM_LIVES = 4
 
 --------------------
 -- MAIN CALLBACKS --

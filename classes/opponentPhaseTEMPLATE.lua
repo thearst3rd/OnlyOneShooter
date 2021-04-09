@@ -11,7 +11,7 @@ opponentPhaseTEMPLATE.__index = opponentPhaseTEMPLATE
 --opponentPhaseTEMPLATE.SPAWN_X = (ARENA_WIDTH / 2)
 --opponentPhaseTEMPLATE.SPAWN_Y = (ARENA_HEIGHT / 2)
 --opponentPhaseTEMPLATE.SPAWN_ANG = (math.pi / 2)
---opponentPhaseTEMPLATE.NUM_LIVES = 3
+--opponentPhaseTEMPLATE.NUM_LIVES = 8
 --opponentPhaseTEMPLATE.DEFAULT_BULLET_COOLDOWN = nil 	-- nil means don't use default shooting method
 --opponentPhaseTEMPLATE.DEFAULT_BULLET_SPEED = nil 	-- nil means use default speed
 
