@@ -11,9 +11,9 @@ opponentPhasePortals.__index = opponentPhasePortals
 function opponentPhasePortals.new()
 	local self = classes.opponentBase.new(opponentPhasePortals)
 
-	self.CHASE_SPEED = 200
-	self.MAX_TURN_SPEED = 1.5
-	self.SHOT_COOLDOWN = 1
+	self.CHASE_SPEED = 250
+	self.MAX_TURN_SPEED = 2
+	self.SHOT_COOLDOWN = 0.7
 	self.SHOTS_BETWEEN_PORTALS = 5
 	self.BORDER_OFFSET = 100
 	self.shotCooldown = self.SHOT_COOLDOWN
@@ -65,7 +65,7 @@ function opponentPhasePortals:update(dt)
 		table.insert(state.bullets, bluePortalBullet)
 		self.shotCooldown = self.shotCooldown + self.SHOT_COOLDOWN
 		self.shotNumber = self.shotNumber + 1
-	elseif self.shotCooldown <= 0 and self.shotNumber % self.SHOTS_BETWEEN_PORTALS == 3 then
+	elseif self.shotCooldown <= 0 and self.shotNumber % self.SHOTS_BETWEEN_PORTALS == 2 then
 		local orangePortalBullet = classes.bulletPortal.new(self.x, self.y, self.angle, false, self.bulletSpeed, "orange")
 		table.insert(state.bullets, orangePortalBullet)
 		self.shotCooldown = self.shotCooldown + self.SHOT_COOLDOWN
