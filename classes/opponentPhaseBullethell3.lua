@@ -90,6 +90,12 @@ function opponentPhaseBullethell3:update(dt)
 			self.currentCooldown = self.currentCooldown + self.BULLET_COOLDOWN_TIME
 			self.shotState = "focus"
 		end
+
+		if self.life <= math.ceil(opponentPhaseBullethell3.NUM_LIVES / 2) then
+			table.insert(state.bullets, classes.bulletBouncy.new(self.x, self.y, self.angle + math.pi / 2, false, self.bulletSpeed))
+			table.insert(state.bullets, classes.bulletBouncy.new(self.x, self.y, self.angle - math.pi / 2, false, self.bulletSpeed))
+			table.insert(state.bullets, classes.bulletBouncy.new(self.x, self.y, self.angle - math.pi, false, self.bulletSpeed))
+		end
 	end
 
 	--Move
