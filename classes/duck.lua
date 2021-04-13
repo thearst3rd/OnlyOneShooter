@@ -12,7 +12,8 @@ function duck.new(orbitAng, opponentX, opponentY)
 	local self = setmetatable({}, duck)
 
 	self.radius = 25
-	self.orbitSpeed = 1
+	self.orbitSpeed = love.math.random()
+	if self.orbitSpeed < 0.5 then self.orbitSpeed = self.orbitSpeed - 1 end
 	self.orbitRadius = 100
 	self.hp = 2
 
