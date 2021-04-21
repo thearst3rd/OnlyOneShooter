@@ -16,13 +16,13 @@ function game.new(startIndex)
 	-- startIndex is optional - used for "continues" to start part way through
 	local self = setmetatable({}, game)
 
+	sounds.musicNormal:stop()
+	sounds.musicBosses:stop()
+
 	self.player = classes.player.new()
 	self.opponentSpawner = classes.opponentSpawner.new(startIndex)
 	self.opponent = nil
 	self.bullets = {}
-
-	sounds.musicNormal:stop()
-	sounds.musicBosses:stop()
 
 	-- Wait a bit to spawn the first enemy
 	self.opponentSpawner:triggerNext(1)
