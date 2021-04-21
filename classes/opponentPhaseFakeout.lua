@@ -18,6 +18,8 @@ function opponentPhaseFakeout.new()
 	self.APPROACH_SPEED = 100
 	self.angle = math.atan2(state.player.y - self.y, state.player.x - self.x)
 
+	self.deathEpic = true
+
 	return self
 end
 

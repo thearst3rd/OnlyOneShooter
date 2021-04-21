@@ -43,6 +43,8 @@ function opponentPhaseBullethell4.new()
 	self.bouncyCurrentCooldown = BOUNCY_BULLET_COOLDOWN_TIME
 	self.fireworkCurrentCooldown = FIREWORK_COOLDOWN_TIME
 
+	self.deathEpic = true
+
 	return self
 end
 

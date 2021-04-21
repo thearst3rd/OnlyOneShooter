@@ -108,9 +108,7 @@ function player:update(dt)
 		if state.opponent and not state.opponent.intangible then
 			if calcDist(self.x, self.y, state.opponent.x, state.opponent.y) <= (self.radius + state.opponent.radius)
 					then
-				self.health = self.health - 1
-				if self.health == 0 then self.markForDeletion = true end
-				self.iframeTime = self.IFRAME_LENGTH
+				self:damage()
 			end
 		end
 
@@ -118,9 +116,7 @@ function player:update(dt)
 			if self.iframeTime > 0 then break end
 			if not bullet.friendly then
 				if calcDist(self.x, self.y, bullet.x, bullet.y) <= (self.radius + bullet.radius) then
-					self.health = self.health - 1
-					if self.health == 0 then self.markForDeletion = true end
-					self.iframeTime = self.IFRAME_LENGTH
+					self:damage()
 					bullet.markForDeletion = true
 				end
 			end
@@ -130,9 +126,7 @@ function player:update(dt)
 			for i, duck in ipairs(state.opponent.ducks) do
 				if self.iframeTime > 0 then break end
 				if calcDist(self.x, self.y, duck.x, duck.y) <= (self.radius + duck.radius) then
-					self.health = self.health - 1
-					if self.health == 0 then self.markForDeletion = true end
-					self.iframeTime = self.IFRAME_LENGTH
+					self:damage()
 				end
 			end
 		end
@@ -198,6 +192,20 @@ function player:onDestroy()
 		if bullet.friendly then
 			bullet.markForDeletion = true
 		end
+	end
+end
+
+
+function player:damage()
+	self.health = self.health - 1
+	if self.health <= 0 then
+		self.markForDeletion = true
+		sounds.playerDeath:stop()
+		sounds.playerDeath:play()
+	else
+		self.iframeTime = self.IFRAME_LENGTH
+		sounds.playerHit:stop()
+		sounds.playerHit:play()
 	end
 end
 

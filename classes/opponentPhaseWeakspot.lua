@@ -42,10 +42,7 @@ function opponentPhaseWeakspot:update(dt)
 					if calcDist(self.x, self.y, bullet.x, bullet.y) <= (self.radius + bullet.radius) then
 						if calcDist(self.xDamage, self.yDamage, bullet.x, bullet.y) <=
 								(self.radius / 2 + bullet.radius) then
-							self.life = self.life - 1
-							if self.life == 0 then self.markForDeletion = true end
-							self.stunned = true
-							self.stunTime = self.STUN_LENGTH
+							classes.opponentBase.damage(self)
 						end
 						bullet.markForDeletion = true
 						break

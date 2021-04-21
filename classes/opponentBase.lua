@@ -50,11 +50,7 @@ function opponentBase:update(dt)
 			for i, bullet in ipairs(state.bullets) do
 				if bullet.friendly then
 					if calcDist(self.x, self.y, bullet.x, bullet.y) <= (self.radius + bullet.radius) then
-						self.life = self.life - 1
-						if self.life == 0 then self.markForDeletion = true end
-						self.stunned = true
-						self.stunTime = self.STUN_LENGTH
-
+						opponentBase.damage(self)
 						bullet.markForDeletion = true
 						break
 					end
@@ -182,6 +178,25 @@ function opponentBase:onDestroy()
 		if not bullet.friendly then
 			bullet.markForDeletion = true
 		end
+	end
+end
+
+function opponentBase:damage()
+	self.life = self.life - 1
+	if self.life == 0 then
+		self.markForDeletion = true
+		if self.deathEpic then
+			sounds.opponentDeathEpic:stop()
+			sounds.opponentDeathEpic:play()
+		else
+			sounds.opponentDeath:stop()
+			sounds.opponentDeath:play()
+		end
+	else
+		self.stunned = true
+		self.stunTime = self.STUN_LENGTH
+		sounds.opponentHit:stop()
+		sounds.opponentHit:play()
 	end
 end
 
