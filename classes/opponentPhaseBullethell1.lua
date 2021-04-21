@@ -33,6 +33,10 @@ function opponentPhaseBullethell1.new()
 
 	self.NUM_BULLETS = 6
 
+	if not sounds.musicBosses:isPlaying() then
+		sounds.musicBosses:play()
+	end
+
 	return self
 end
 

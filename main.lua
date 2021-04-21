@@ -56,6 +56,7 @@ debug = false
 -- Assets
 images = {}
 fonts = {}
+sounds = {}
 
 
 --------------------
@@ -74,6 +75,20 @@ function love.load()
 
 	-- Load images
 	images.duck = love.graphics.newImage("images/duck.png")
+
+	-- Load sounds
+	sounds.playerHit = love.audio.newSource("sounds/player_hit.wav", "static")
+	sounds.playerDeath = love.audio.newSource("sounds/player_death.wav", "static")
+	sounds.opponentHit = love.audio.newSource("sounds/opponent_hit.wav", "static")
+	sounds.opponentDeath = love.audio.newSource("sounds/opponent_death.wav", "static")
+	sounds.opponentDeathEpic = love.audio.newSource("sounds/opponent_death_epic.wav", "static")
+
+	sounds.musicNormal = love.audio.newSource("sounds/music_drive.ogg", "stream")
+	sounds.musicBosses = love.audio.newSource("sounds/music_rush.ogg", "stream")
+	sounds.musicNormal:setVolume(0.4)
+	sounds.musicBosses:setVolume(0.4)
+	sounds.musicNormal:setLooping(true)
+	sounds.musicBosses:setLooping(true)
 
 	-- Load menu state
 	nextState = states.menu.new()

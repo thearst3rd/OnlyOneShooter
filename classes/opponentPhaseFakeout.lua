@@ -18,6 +18,8 @@ function opponentPhaseFakeout.new()
 	self.APPROACH_SPEED = 100
 	self.angle = math.atan2(state.player.y - self.y, state.player.x - self.x)
 
+	self.deathEpic = true
+
 	return self
 end
 
@@ -40,6 +42,7 @@ end
 function opponentPhaseFakeout:onDestroy()
 	-- Call default superclass method
 	classes.opponentBase.onDestroy(self)
+	sounds.musicNormal:stop()
 end
 
 classes.opponentPhaseFakeout = opponentPhaseFakeout

@@ -32,6 +32,12 @@ function opponentSpawner.new(startIndex)
 	self.spawning = false
 	self.spawningTimeRemaining = 0
 
+	if self.index < 15 then
+		sounds.musicNormal:play()
+	else
+		sounds.musicBosses:play()
+	end
+
 	return self
 end
 

@@ -43,6 +43,8 @@ function opponentPhaseBullethell4.new()
 	self.bouncyCurrentCooldown = BOUNCY_BULLET_COOLDOWN_TIME
 	self.fireworkCurrentCooldown = FIREWORK_COOLDOWN_TIME
 
+	self.deathEpic = true
+
 	return self
 end
 
@@ -101,6 +103,7 @@ end
 function opponentPhaseBullethell4:onDestroy()
 	-- Call default superclass method
 	classes.opponentBase.onDestroy(self)
+	sounds.musicBosses:stop()
 end
 
 classes.opponentPhaseBullethell4 = opponentPhaseBullethell4
