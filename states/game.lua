@@ -21,6 +21,9 @@ function game.new(startIndex)
 	self.opponent = nil
 	self.bullets = {}
 
+	sounds.musicNormal:stop()
+	sounds.musicBosses:stop()
+
 	-- Wait a bit to spawn the first enemy
 	self.opponentSpawner:triggerNext(1)
 
