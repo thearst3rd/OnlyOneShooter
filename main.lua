@@ -82,6 +82,8 @@ function love.load()
 	sounds.opponentHit = love.audio.newSource("sounds/opponent_hit.wav", "static")
 	sounds.opponentDeath = love.audio.newSource("sounds/opponent_death.wav", "static")
 	sounds.opponentDeathEpic = love.audio.newSource("sounds/opponent_death_epic.wav", "static")
+	sounds.teleport = love.audio.newSource("sounds/teleport.wav", "static")
+	sounds.teleport:setVolume(0.1)
 
 	sounds.musicNormal = love.audio.newSource("sounds/music_drive.ogg", "stream")
 	sounds.musicBosses = love.audio.newSource("sounds/music_rush.ogg", "stream")

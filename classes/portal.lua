@@ -38,6 +38,7 @@ function portal:update(dt)
 		state.player.x = otherPortal.x
 		state.player.y = otherPortal.y
 		state.player.portaled = self.SUMMONING_SICKNESS
+		sounds.teleport:clone():play()
 	end
 
 	if state.opponent and not state.opponent.portaled and calcDist(self.x, self.y, state.opponent.x, state.opponent.y)
@@ -45,6 +46,7 @@ function portal:update(dt)
 		state.opponent.x = otherPortal.x
 		state.opponent.y = otherPortal.y
 		state.opponent.portaled = self.SUMMONING_SICKNESS
+		sounds.teleport:clone():play()
 	end
 
 	for i, bullet in ipairs(state.bullets) do
@@ -53,6 +55,7 @@ function portal:update(dt)
 			bullet.x = otherPortal.x
 			bullet.y = otherPortal.y
 			bullet.portaled = self.SUMMONING_SICKNESS
+			sounds.teleport:clone():play()
 		end
 	end
 end
