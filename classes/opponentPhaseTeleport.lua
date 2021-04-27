@@ -19,6 +19,12 @@ local FRICTION_LOSS = 50
 function opponentPhaseTeleport.new()
 	local self = classes.opponentBase.new(opponentPhaseTeleport)
 
+	-- Use two seperate teleport sources so they can play simultaneously
+	self.teleSource1 = sounds.teleport:clone()
+	self.teleSource2 = sounds.teleport:clone()
+	self.teleSource1:setVolume(0.25)
+	self.teleSource2:setVolume(0.25)
+
 	self:initTeleport()
 	self.timeToTele = 0
 
@@ -36,9 +42,12 @@ function opponentPhaseTeleport:update(dt)
 			self.teleporting = false
 			self.timeToTele = TIME_BETWEEN_TELE
 			self.intangible = false
-		elseif self.teleProgress >= 0.5 then
+		elseif self.teleProgress >= 0.5 and not self.halfway then
 			self.x = self.teleX
 			self.y = self.teleY
+			self.halfway = true
+			self.teleSource2:stop()
+			self.teleSource2:play()
 		end
 		return
 	end
@@ -107,10 +116,13 @@ end
 function opponentPhaseTeleport:initTeleport()
 	self.teleporting = true
 	self.teleProgress = 0 	-- between 0 and 1, how far through the tele are we
+	self.halfway = false
 	self.teleX = self.radius + (love.math.random() * (ARENA_WIDTH - 2 * self.radius))
 	self.teleY = self.radius + (love.math.random() * (ARENA_HEIGHT - 2 * self.radius))
-
 	self.intangible = true
+
+	self.teleSource1:stop()
+	self.teleSource1:play()
 end
 
 
