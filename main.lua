@@ -96,6 +96,7 @@ function love.load()
 	--sounds.ineffectiveOpponentDamage = love.audio.newSource("sounds/ineffective_opponent_damage_v2.wav", "static")
 	sounds.portalOpening = love.audio.newSource("sounds/portal_opening.wav", "static")
 	sounds.teleport = love.audio.newSource("sounds/teleport.wav", "static")
+	sounds.teleport:setVolume(0.1)
 
 	sounds.musicNormal = love.audio.newSource("sounds/music_drive.ogg", "stream")
 	sounds.musicBosses = love.audio.newSource("sounds/music_rush.ogg", "stream")
