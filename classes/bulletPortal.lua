@@ -57,6 +57,8 @@ function bulletPortal:onDestroy()
 	else --self.color == "orange" then
 		state.orangePortal = newPortal
 	end
+	sounds.portalOpening:stop()
+	sounds.portalOpening:play()
 end
 
 classes.bulletPortal = bulletPortal

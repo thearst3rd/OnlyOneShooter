@@ -65,11 +65,15 @@ function opponentPhasePortals:update(dt)
 		table.insert(state.bullets, bluePortalBullet)
 		self.shotCooldown = self.shotCooldown + self.SHOT_COOLDOWN
 		self.shotNumber = self.shotNumber + 1
+		sounds.bulletFiringOpponentPortal:stop()
+		sounds.bulletFiringOpponentPortal:play()
 	elseif self.shotCooldown <= 0 and self.shotNumber % self.SHOTS_BETWEEN_PORTALS == 2 then
 		local orangePortalBullet = classes.bulletPortal.new(self.x, self.y, self.angle, false, self.bulletSpeed, "orange")
 		table.insert(state.bullets, orangePortalBullet)
 		self.shotCooldown = self.shotCooldown + self.SHOT_COOLDOWN
 		self.shotNumber = self.shotNumber + 1
+		sounds.bulletFiringOpponentPortal:stop()
+		sounds.bulletFiringOpponentPortal:play()
 	elseif self.shotCooldown <= 0 then
 		table.insert(state.bullets, classes.bullet.new(self.x, self.y, self.angle, false, self.bulletSpeed))
 		self.shotCooldown = self.shotCooldown + self.SHOT_COOLDOWN

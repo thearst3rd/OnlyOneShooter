@@ -43,6 +43,9 @@ function opponentPhaseWeakspot:update(dt)
 						if calcDist(self.xDamage, self.yDamage, bullet.x, bullet.y) <=
 								(self.radius / 2 + bullet.radius) then
 							classes.opponentBase.damage(self)
+						else
+							sounds.ineffectiveOpponentDamage:stop()
+							sounds.ineffectiveOpponentDamage:play()
 						end
 						bullet.markForDeletion = true
 						break

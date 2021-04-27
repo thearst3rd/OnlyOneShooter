@@ -110,6 +110,9 @@ function opponentPhaseTeleport:initTeleport()
 	self.teleX = self.radius + (love.math.random() * (ARENA_WIDTH - 2 * self.radius))
 	self.teleY = self.radius + (love.math.random() * (ARENA_HEIGHT - 2 * self.radius))
 
+	sounds.teleport:stop()
+	sounds.teleport:play()
+
 	self.intangible = true
 end
 

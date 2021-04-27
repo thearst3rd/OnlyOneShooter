@@ -79,6 +79,8 @@ function bulletFirework:onDestroy()
 	if classes.bullet.onDestroy then
 		classes.bullet.onDestroy(self)
 	end
+	sounds.bulletFireworkPopping:stop()
+	sounds.bulletFireworkPopping:play()
 end
 
 classes.bulletFirework = bulletFirework

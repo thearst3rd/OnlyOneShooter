@@ -56,6 +56,8 @@ function opponentPhaseBullethell2:update(dt)
 			bulletAng = bulletAng + (BOUNCY_BULLET_SPREAD / 2)
 		end
 		self.bouncyCurrentCooldown = self.bouncyCurrentCooldown + BOUNCY_BULLET_COOLDOWN_TIME
+		sounds.bulletFiringOpponentBouncy:stop()
+		sounds.bulletFiringOpponentBouncy:play()
 	end
 
 	--Move

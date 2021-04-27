@@ -61,6 +61,8 @@ function opponentPhaseFireworkShot:update(dt)
 		local fireworkBullet = classes.bulletFirework.new(self.x, self.y, self.angle, false, self.bulletSpeed)
 		table.insert(state.bullets, fireworkBullet)
 		self.shotCooldown = self.shotCooldown + self.SHOT_COOLDOWN
+		sounds.bulletFiringOpponentFirework:stop()
+		sounds.bulletFiringOpponentFirework:play()
 	end
 end
 
