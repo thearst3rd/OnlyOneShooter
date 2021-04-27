@@ -55,6 +55,8 @@ function bulletFirework:update(dt)
 			self.shake = false
 			self.shakeTime = 0.5
 			self.markForDeletion = true
+			sounds.bulletFireworkPopping:stop()
+			sounds.bulletFireworkPopping:play()
 		end
 	end
 end

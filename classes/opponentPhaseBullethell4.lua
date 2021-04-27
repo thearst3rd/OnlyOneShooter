@@ -75,6 +75,8 @@ function opponentPhaseBullethell4:update(dt)
 	if self.currentCooldown <= 0 then
 		table.insert(state.bullets, classes.bullet.new(self.x, self.y, self.angle, false, BULLET_SPEED))
 		self.currentCooldown = BULLET_COOLDOWN_TIME
+		sounds.bulletFiringOpponent:stop()
+		sounds.bulletFiringOpponent:play()
 	end
 	if self.bouncyCurrentCooldown <= 0 then
 		local bulletAng = self.angle - math.pi / 4
@@ -83,10 +85,14 @@ function opponentPhaseBullethell4:update(dt)
 			bulletAng = bulletAng + math.pi / 2
 		end
 		self.bouncyCurrentCooldown = self.bouncyCurrentCooldown + BOUNCY_BULLET_COOLDOWN_TIME
+		sounds.bulletFiringOpponentBouncy:stop()
+		sounds.bulletFiringOpponentBouncy:play()
 	end
 	if self.fireworkCurrentCooldown <= 0 then
 		table.insert(state.bullets, classes.bulletFirework.new(self.x, self.y, self.angle, false, FIREWORK_BULLET_SPEED, classes.bulletFirework))
 		self.fireworkCurrentCooldown = FIREWORK_COOLDOWN_TIME
+		sounds.bulletFiringOpponentFirework:stop()
+		sounds.bulletFiringOpponentFirework:play()
 	end
 
 	--Move

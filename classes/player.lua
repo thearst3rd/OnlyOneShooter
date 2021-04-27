@@ -141,6 +141,8 @@ function player:update(dt)
 	if love.mouse.isDown(1) and self.timeSinceLastShot > PLAYER_BULLET_COOLDOWN then
 		table.insert(state.bullets, classes.bullet.new(self.x, self.y, self.angle, true))
 		self.timeSinceLastShot = 0
+		sounds.bulletFiringFriendly:stop()
+		sounds.bulletFiringFriendly:play()
 	end
 end
 

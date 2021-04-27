@@ -69,6 +69,7 @@ function opponentPhaseBullethell1:update(dt)
 			self.numShotsToSwitch = 3
 			self.currentCooldown = 1
 		end
+		sounds.bulletFiringOpponent:clone():play()
 	end
 
 	--Move

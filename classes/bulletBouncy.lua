@@ -24,21 +24,25 @@ function bulletBouncy:update(dt)
 			self.x = self.radius
 			self.xspeed = math.abs(self.xspeed)
 			self.bouncesLeft = self.bouncesLeft - 1
+			self:bounce()
 		end
 		if self.x > ARENA_WIDTH - self.radius then
 			self.x = ARENA_WIDTH - self.radius
 			self.xspeed = -math.abs(self.xspeed)
 			self.bouncesLeft = self.bouncesLeft - 1
+			self:bounce()
 		end
 		if self.y < self.radius then
 			self.y = self.radius
 			self.yspeed = math.abs(self.yspeed)
 			self.bouncesLeft = self.bouncesLeft - 1
+			self:bounce()
 		end
 		if self.y > ARENA_HEIGHT - self.radius then
 			self.y = ARENA_HEIGHT - self.radius
 			self.yspeed = -math.abs(self.yspeed)
 			self.bouncesLeft = self.bouncesLeft - 1
+			self:bounce()
 		end
 	end
 
@@ -63,6 +67,10 @@ function bulletBouncy:onDestroy()
 	if classes.bullet.onDestroy then
 		classes.bullet.onDestroy(self)
 	end
+end
+
+function bulletBouncy:bounce()
+	sounds.bulletBounce:clone():play()
 end
 
 classes.bulletBouncy = bulletBouncy

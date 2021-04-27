@@ -31,6 +31,8 @@ function bulletPortal:update(dt)
 			or self.y < self.PORTAL_PLACEMENT_OFFSET
 			or self.y > ARENA_HEIGHT - self.PORTAL_PLACEMENT_OFFSET then
 		self.markForDeletion = true
+		sounds.portalOpening:stop()
+		sounds.portalOpening:play()
 	end
 end
 
