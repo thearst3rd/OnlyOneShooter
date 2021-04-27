@@ -70,8 +70,7 @@ function bulletBouncy:onDestroy()
 end
 
 function bulletBouncy:bounce()
-	sounds.bulletBounce:stop()
-	sounds.bulletBounce:play()
+	sounds.bulletBounce:clone():play()
 end
 
 classes.bulletBouncy = bulletBouncy

@@ -22,8 +22,6 @@ function opponentPhaseTeleport.new()
 	-- Use two seperate teleport sources so they can play simultaneously
 	self.teleSource1 = sounds.teleport:clone()
 	self.teleSource2 = sounds.teleport:clone()
-	self.teleSource1:setVolume(0.25)
-	self.teleSource2:setVolume(0.25)
 
 	self:initTeleport()
 	self.timeToTele = 0
