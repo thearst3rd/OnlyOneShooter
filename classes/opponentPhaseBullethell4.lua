@@ -109,7 +109,7 @@ end
 function opponentPhaseBullethell4:onDestroy()
 	-- Call default superclass method
 	classes.opponentBase.onDestroy(self)
-	sounds.musicBosses:stop()
+	musics.musicBosses:stop()
 end
 
 classes.opponentPhaseBullethell4 = opponentPhaseBullethell4

@@ -71,8 +71,8 @@ end
 
 function pause:exit()
 	nextState = states.menu.new()
-	sounds.musicNormal:stop()
-	sounds.musicBosses:stop()
+	musics.musicNormal:stop()
+	musics.musicBosses:stop()
 end
 
 states.pause = pause
