@@ -85,28 +85,28 @@ end
 
 function pause:soundVolumeDown()
 	soundVolume = soundVolume - 0.1
-	if soundVolume < 0 then soundVolume = 1 end
+	if soundVolume < 0 then soundVolume = 0 end
 	setSoundVolumes(soundVolume)
 	self:setVolumeButtonTexts()
 end
 
 function pause:soundVolumeUp()
 	soundVolume = soundVolume + 0.1
-	if soundVolume > 1 then soundVolume = 0 end
+	if soundVolume > 1 then soundVolume = 1 end
 	setSoundVolumes(soundVolume)
 	self:setVolumeButtonTexts()
 end
 
 function pause:musicVolumeDown()
 	musicVolume = musicVolume - 0.1
-	if musicVolume < 0 then musicVolume = 1 end
+	if musicVolume < 0 then musicVolume = 0 end
 	setMusicVolumes(musicVolume)
 	self:setVolumeButtonTexts()
 end
 
 function pause:musicVolumeUp()
 	musicVolume = musicVolume + 0.1
-	if musicVolume > 1 then musicVolume = 0 end
+	if musicVolume > 1 then musicVolume = 1 end
 	setMusicVolumes(musicVolume)
 	self:setVolumeButtonTexts()
 end
