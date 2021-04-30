@@ -204,8 +204,8 @@ function player:damage()
 		self.markForDeletion = true
 		sounds.playerDeath:stop()
 		sounds.playerDeath:play()
-		sounds.musicNormal:pause()
-		sounds.musicBosses:pause()
+		musics.musicNormal:pause()
+		musics.musicBosses:pause()
 	else
 		self.iframeTime = self.IFRAME_LENGTH
 		sounds.playerHit:stop()

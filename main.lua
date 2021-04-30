@@ -2,6 +2,9 @@
 -- by Kyle Reese and Terry Hearst
 
 
+-- Require all helper modules
+require "sound"
+
 -- Load up all states
 states = {}
 require "states/menu"
@@ -56,7 +59,6 @@ debug = false
 -- Assets
 images = {}
 fonts = {}
-sounds = {}
 
 
 --------------------
@@ -77,42 +79,7 @@ function love.load()
 	images.duck = love.graphics.newImage("images/duck.png")
 
 	-- Load sounds
-	--sounds.playerHit = love.audio.newSource("sounds/player_hit.wav", "static")
-	sounds.playerHit = love.audio.newSource("sounds/player_damage.wav", "static")
-	sounds.playerDeath = love.audio.newSource("sounds/player_death.wav", "static")
-	sounds.opponentHit = love.audio.newSource("sounds/opponent_hit.wav", "static")
-	--sounds.opponentHit = love.audio.newSource("sounds/opponent_damage.wav", "static")
-	sounds.opponentDeath = love.audio.newSource("sounds/opponent_death.wav", "static")
-	sounds.opponentDeathEpic = love.audio.newSource("sounds/opponent_death_epic.wav", "static")
-	sounds.bulletBounce = love.audio.newSource("sounds/bullet_bounce.wav", "static")
-	sounds.bulletBounce:setVolume(0.1)
-	sounds.bulletFireworkPopping = love.audio.newSource("sounds/bullet_firework_popping.wav", "static")
-	sounds.bulletFiringFriendly = love.audio.newSource("sounds/bullet_firing_friendly.wav", "static")
-	sounds.bulletFiringFriendly:setVolume(0.5)
-	sounds.bulletFiringOpponent = love.audio.newSource("sounds/bullet_firing_opponent.wav", "static")
-	sounds.bulletFiringOpponent:setVolume(0.3)
-	sounds.bulletFiringOpponentBouncy = love.audio.newSource("sounds/bullet_firing_opponent_bouncy.wav", "static")
-	sounds.bulletFiringOpponentBouncy:setVolume(0.35)
-	sounds.bulletFiringOpponentFirework = love.audio.newSource("sounds/bullet_firing_opponent_firework.wav", "static")
-	sounds.bulletFiringOpponentFirework:setVolume(0.35)
-	sounds.bulletFiringOpponentLarge = love.audio.newSource("sounds/bullet_firing_opponent_large.wav", "static")
-	sounds.bulletFiringOpponentPortal = love.audio.newSource("sounds/bullet_firing_opponent_portal.wav", "static")
-	sounds.bulletFiringOpponentPortal:setVolume(0.6)
-	--sounds.ineffectiveOpponentDamage = love.audio.newSource("sounds/ineffective_opponent_damage.wav", "static")
-	sounds.ineffectiveOpponentDamage = love.audio.newSource("sounds/ineffective_opponent_damage_v2.wav", "static")
-	sounds.ineffectiveOpponentDamage:setVolume(0.6)
-	sounds.portalOpening = love.audio.newSource("sounds/portal_opening.wav", "static")
-	sounds.portalOpening:setVolume(0.55)
-	sounds.teleport = love.audio.newSource("sounds/teleport.wav", "static")
-	sounds.teleport:setVolume(0.25)
-	sounds.duck = love.audio.newSource("sounds/duck.wav", "static")
-
-	sounds.musicNormal = love.audio.newSource("sounds/music_drive.ogg", "stream")
-	sounds.musicNormal:setVolume(0.4)
-	sounds.musicNormal:setLooping(true)
-	sounds.musicBosses = love.audio.newSource("sounds/music_rush.ogg", "stream")
-	sounds.musicBosses:setVolume(0.4)
-	sounds.musicBosses:setLooping(true)
+	loadSounds()
 
 	-- Load menu state
 	nextState = states.menu.new()
@@ -234,14 +201,14 @@ end
 
 function checkAndClickButton(x, y, button)
 	if isWithinBox(x, y, button.x, button.y, button.width, button.height) then
-		button.onPress()
+		if button.onPress then button.onPress() end
 		return true
 	end
 	return false
 end
 
 function drawButton(button)
-	if isWithinBox(relMouse.x, relMouse.y, button.x, button.y, button.width, button.height) then
+	if button.onPress and isWithinBox(relMouse.x, relMouse.y, button.x, button.y, button.width, button.height) then
 		love.graphics.setColor(1, 1, 1, 0.3)
 		love.graphics.rectangle("fill", button.x, button.y, button.width, button.height)
 	end

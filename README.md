@@ -35,19 +35,18 @@ Any sound not listed here is an original sound created by us. All of our origina
 Sound | Author | Licence | Notes
 --- | --- | --- | ---
 `teleport.wav` | [Freedoom authors](https://github.com/freedoom/freedoom) | [BSD Licence](https://github.com/freedoom/freedoom/blob/master/COPYING.adoc) | File [`dstelept.wav`](https://github.com/freedoom/freedoom/blob/52640d675033ddaba3667c60a4c6475984f38b3b/sounds/dstelept.wav)
-`bullet_bounce.wav` | [The Motion Monkey] | [CC0] | File `Siren1Link.wav`
-`bullet_firework_popping.wav` | [The Motion Monkey] | [CC0] | File `Explosion8.wav`
-`bullet_firing_friendly.wav` | [The Motion Monkey] | [CC0] | File `Swipe1.wav`
-`bullet_firing_opponent_bouncy.wav` | [The Motion Monkey] | [CC0] | File `SciFiGun15.wav`
-`bullet_firing_opponent_firework.wav` | [The Motion Monkey] | [CC0] | File `Beep3.wav`
-`bullet_firing_opponent_large.wav` | [The Motion Monkey] | [CC0] | File `Explosion10.wav`
-`bullet_firing_opponent_portal.wav` | [The Motion Monkey] | [CC0] | File `SciFiGun10.wav`
-`bullet_firing_opponent.wav` | [The Motion Monkey] | [CC0] | File `SciFiGun5.wav`
-`ineffective_opponent_damage_v2.wav` | [The Motion Monkey] | [CC0] | File `Impact10.wav`
-`ineffective_opponent_damage.wav` | [The Motion Monkey] | [CC0] | File `SciFiGun4.wav`. _UNUSED_.
-`opponent_damage.wav` | [The Motion Monkey] | [CC0] | File `Swipe13.wav`
-`player_damage.wav` | [The Motion Monkey] | [CC0] | File `Impact7.wav`
-`portal_opening.wav` | [The Motion Monkey] | [CC0] | File `SciFiGun1.wav`
+`bulletBounce.wav` | [The Motion Monkey] | [CC0] | File `Siren1Link.wav`
+`bulletFireworkPopping.wav` | [The Motion Monkey] | [CC0] | File `Explosion8.wav`
+`bulletFiringFriendly.wav` | [The Motion Monkey] | [CC0] | File `Swipe1.wav`
+`bulletFiringOpponentBouncy.wav` | [The Motion Monkey] | [CC0] | File `SciFiGun15.wav`
+`bulletFiringOpponentFirework.wav` | [The Motion Monkey] | [CC0] | File `Beep3.wav`
+`bulletFiringOpponentLarge.wav` | [The Motion Monkey] | [CC0] | File `Explosion10.wav`
+`bulletFiringOpponentPortal.wav` | [The Motion Monkey] | [CC0] | File `SciFiGun10.wav`
+`bulletFiringOpponent.wav` | [The Motion Monkey] | [CC0] | File `SciFiGun5.wav`
+`ineffectiveOpponentDamage.wav` | [The Motion Monkey] | [CC0] | File `Impact10.wav`
+`opponentDamage.wav` | [The Motion Monkey] | [CC0] | File `Swipe13.wav`
+`playerDamage.wav` | [The Motion Monkey] | [CC0] | File `Impact7.wav`
+`portalOpening.wav` | [The Motion Monkey] | [CC0] | File `SciFiGun1.wav`
 `duck.wav` | [crazyduckman](https://freesound.org/people/crazyduckman/) | [CC BY 3.0] | Sound [`a quack.wav`](https://freesound.org/people/crazyduckman/sounds/185549/)
 
 [CC0]: https://creativecommons.org/share-your-work/public-domain/cc0/

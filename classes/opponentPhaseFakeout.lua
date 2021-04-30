@@ -42,7 +42,7 @@ end
 function opponentPhaseFakeout:onDestroy()
 	-- Call default superclass method
 	classes.opponentBase.onDestroy(self)
-	sounds.musicNormal:stop()
+	musics.musicNormal:stop()
 end
 
 classes.opponentPhaseFakeout = opponentPhaseFakeout

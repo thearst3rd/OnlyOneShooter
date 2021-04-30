@@ -17,8 +17,8 @@ function game.new(startIndex)
 	local self = setmetatable({}, game)
 
 	if not startIndex then
-		sounds.musicNormal:stop()
-		sounds.musicBosses:stop()
+		musics.musicNormal:stop()
+		musics.musicBosses:stop()
 	end
 
 	self.player = classes.player.new()
