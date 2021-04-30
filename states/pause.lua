@@ -45,7 +45,7 @@ function pause:draw()
 	love.graphics.setFont(fonts.medium)
 	love.graphics.printf("WASD to move\nMouse to aim\nLeft Click to shoot\nEsc to pause/unpause", ARENA_WIDTH - 300, 100, 300, "center")
 	for _, button in ipairs(self.buttons) do
-		drawButton(button, button.onPress == nil)
+		drawButton(button)
 	end
 end
 
