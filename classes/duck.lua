@@ -41,6 +41,8 @@ function duck:update(dt)
 				self.hp = self.hp - 1
 				if self.hp < 1 then
 					self.markForDeletion = true
+				else
+					sounds.duck:clone():play()
 				end
 				bullet.markForDeletion = true
 				break
