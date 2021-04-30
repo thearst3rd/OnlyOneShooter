@@ -201,14 +201,14 @@ end
 
 function checkAndClickButton(x, y, button)
 	if isWithinBox(x, y, button.x, button.y, button.width, button.height) then
-		button.onPress()
+		if button.onPress then button.onPress() end
 		return true
 	end
 	return false
 end
 
-function drawButton(button)
-	if isWithinBox(relMouse.x, relMouse.y, button.x, button.y, button.width, button.height) then
+function drawButton(button, noHover)
+	if (not noHover) and isWithinBox(relMouse.x, relMouse.y, button.x, button.y, button.width, button.height) then
 		love.graphics.setColor(1, 1, 1, 0.3)
 		love.graphics.rectangle("fill", button.x, button.y, button.width, button.height)
 	end

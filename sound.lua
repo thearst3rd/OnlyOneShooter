@@ -5,6 +5,9 @@ soundVolumes = {}
 musics = {}
 musicVolumes = {}
 
+soundVolume = 0.7
+musicVolume = 0.4
+
 local function loadSound(name, volume, sourceType)
 	volume = volume or 1
 	sourceType = sourceType or "static"
@@ -42,8 +45,8 @@ function loadSounds()
 	loadMusic("musicNormal", "sounds/music_drive.ogg")
 	loadMusic("musicBosses", "sounds/music_rush.ogg")
 
-	setSoundVolumes(0.6)
-	setMusicVolumes(0.4)
+	setSoundVolumes(soundVolume)
+	setMusicVolumes(musicVolume)
 end
 
 -- Set all source volumes
