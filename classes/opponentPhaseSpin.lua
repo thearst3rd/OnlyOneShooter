@@ -15,7 +15,7 @@ function opponentPhaseSpin.new()
 	local self = classes.opponentBase.new(opponentPhaseSpin)
 
 	-- Randomize direction to one of 8 directions
-	local r = math.random()
+	local r = love.math.random()
 	if r <= 0.5 then
 		self.xspeed = 400
 		self.yspeed = 200
