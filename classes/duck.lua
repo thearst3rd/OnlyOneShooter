@@ -39,6 +39,7 @@ function duck:update(dt)
 		if bullet.friendly then
 			if calcDist(self.x, self.y, bullet.x, bullet.y) <= (self.radius + bullet.radius) then
 				self.hp = self.hp - 1
+				sounds.duck:clone():play()
 				if self.hp < 1 then
 					self.markForDeletion = true
 				end

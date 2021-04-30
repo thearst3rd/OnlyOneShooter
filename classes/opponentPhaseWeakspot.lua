@@ -60,6 +60,7 @@ function opponentPhaseWeakspot:update(dt)
 			if self.currentCooldown <= 0 then
 				table.insert(state.bullets, classes.bullet.new(self.x, self.y, self.angle, false, self.bulletSpeed))
 				self.currentCooldown = self.currentCooldown + self.bulletCooldownTime
+				sounds.bulletFiringOpponent:clone():play()
 			end
 		end
 	end

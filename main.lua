@@ -105,6 +105,7 @@ function love.load()
 	sounds.portalOpening:setVolume(0.55)
 	sounds.teleport = love.audio.newSource("sounds/teleport.wav", "static")
 	sounds.teleport:setVolume(0.25)
+	sounds.duck = love.audio.newSource("sounds/duck.wav", "static")
 
 	sounds.musicNormal = love.audio.newSource("sounds/music_drive.ogg", "stream")
 	sounds.musicNormal:setVolume(0.4)
