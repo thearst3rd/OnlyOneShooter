@@ -10,6 +10,12 @@ menu.__index = menu
 
 function menu.new()
 	local self = setmetatable({}, menu)
+
+	self.buttons = {
+		{x = ARENA_WIDTH / 2 - 150, y = ARENA_HEIGHT / 2, width = 300, height = 28, text = "Play", onPress = function() nextState = states.game.new() end},
+		{x = ARENA_WIDTH / 2 - 150, y = ARENA_HEIGHT / 2 + 50, width = 300, height = 28, text = "Options", onPress = function() nextState = states.pause.new(state) end},
+	}
+
 	return self
 end
 
@@ -24,7 +30,9 @@ function menu:draw()
 	love.graphics.setFont(fonts.title)
 	love.graphics.printf("ONLY ONE SHOOTER", 0, 100, ARENA_WIDTH, "center")
 	love.graphics.setFont(fonts.medium)
-	love.graphics.printf("press space to go to game\npress alt+enter to toggle fullscreen\npress esc to pause", 0, 500, ARENA_WIDTH, "center")
+	for _, button in ipairs(self.buttons) do
+		drawButton(button)
+	end
 end
 
 
@@ -35,6 +43,12 @@ end
 function menu:keypressed(key, scancode, isrepeat)
 	if key == "escape" then
 		love.event.quit()
+	end
+end
+
+function menu:mousepressed(x, y, button, istouch, presses)
+	for _, butt in ipairs(self.buttons) do
+		checkAndClickButton(x, y, butt)
 	end
 end
 

@@ -41,6 +41,7 @@ function loadSounds()
 	loadSound("ineffectiveOpponentDamage", 0.6)
 	loadSound("portalOpening", 0.55)
 	loadSound("teleport", 0.25)
+	loadSound("duck")
 
 	loadMusic("musicNormal", "sounds/music_drive.ogg")
 	loadMusic("musicBosses", "sounds/music_rush.ogg")

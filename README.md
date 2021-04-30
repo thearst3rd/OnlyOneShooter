@@ -47,6 +47,8 @@ Sound | Author | Licence | Notes
 `opponentDamage.wav` | [The Motion Monkey] | [CC0] | File `Swipe13.wav`
 `playerDamage.wav` | [The Motion Monkey] | [CC0] | File `Impact7.wav`
 `portalOpening.wav` | [The Motion Monkey] | [CC0] | File `SciFiGun1.wav`
+`duck.wav` | [crazyduckman](https://freesound.org/people/crazyduckman/) | [CC BY 3.0] | Sound [`a quack.wav`](https://freesound.org/people/crazyduckman/sounds/185549/)
 
 [CC0]: https://creativecommons.org/share-your-work/public-domain/cc0/
+[CC BY 3.0]: https://creativecommons.org/licenses/by/3.0/
 [The Motion Monkey]: https://www.themotionmonkey.co.uk/free-resources/retro-arcade-sounds/

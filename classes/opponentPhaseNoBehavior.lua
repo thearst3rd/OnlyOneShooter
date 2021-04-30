@@ -30,7 +30,7 @@ function opponentPhaseNoBehavior:draw()
 	-- Draw Tutorial Message
 	love.graphics.setColor(0, 0, 0)
 	love.graphics.setFont(fonts.medium)
-	love.graphics.printf("WASD to move\nMouse to aim\nLeft Click to shoot", ARENA_WIDTH - 300, 100, 300, "center")
+	love.graphics.printf("WASD to move\nMouse to aim\nLeft Click to shoot\nEsc to pause/unpause", ARENA_WIDTH - 300, 100, 300, "center")
 end
 
 function opponentPhaseNoBehavior:onDestroy()
