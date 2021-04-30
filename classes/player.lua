@@ -114,7 +114,7 @@ function player:update(dt)
 
 		for i, bullet in ipairs(state.bullets) do
 			if self.iframeTime > 0 then break end
-			if not bullet.friendly and not getmetatable(bullet) == classes.bulletPortal then
+			if not bullet.friendly and not (getmetatable(bullet) == classes.bulletPortal) then
 				if calcDist(self.x, self.y, bullet.x, bullet.y) <= (self.radius + bullet.radius) then
 					self:damage()
 					bullet.markForDeletion = true
