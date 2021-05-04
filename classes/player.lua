@@ -184,6 +184,16 @@ function player:draw()
 	if debug then
 		love.graphics.setColor(1, 0, 0)
 		love.graphics.circle("line", self.x, self.y, self.radius)
+
+		-- Print current music time in seconds
+		-- Also print the checkpoint time the song will go to if you die
+		local currentMusic = musicGetPlaying()
+		if currentMusic then
+			love.graphics.setFont(fonts.medium)
+			local currentSeek = currentMusic:tell()
+			local lastCheckpoint = musicCalculateCheckpoint(currentMusic)
+			love.graphics.print(string.format("%.2f\n%.2f", currentSeek, lastCheckpoint), 10, 400)
+		end
 	end
 end
 
@@ -204,8 +214,7 @@ function player:damage()
 		self.markForDeletion = true
 		sounds.playerDeath:stop()
 		sounds.playerDeath:play()
-		musics.musicNormal:pause()
-		musics.musicBosses:pause()
+		musicPauseAndCheckpoint()
 	else
 		self.iframeTime = self.IFRAME_LENGTH
 		sounds.playerHit:stop()

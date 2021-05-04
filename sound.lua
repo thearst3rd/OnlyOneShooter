@@ -63,3 +63,54 @@ function setMusicVolumes(multiplier)
 	end
 end
 
+-- Music resumes at a phrase mark when unpaused
+local musicDriveMeasure = 4 * (60/125) -- how long one measure is in seconds
+local musicDriveCheckpoints =
+{
+	4 * musicDriveMeasure,
+	8 * musicDriveMeasure,
+	12 * musicDriveMeasure,
+}
+
+local musicRushMeasure = 8 * (60/180)
+local musicRushCheckpoints =
+{
+	2 * musicRushMeasure,
+	6 * musicRushMeasure,
+	10 * musicRushMeasure,
+	18 * musicRushMeasure,
+	26 * musicRushMeasure,
+}
+
+function musicGetPlaying()
+	if musics.musicNormal:isPlaying() then
+		return musics.musicNormal
+	end
+	if musics.musicBosses:isPlaying() then
+		return musics.musicBosses
+	end
+	return nil
+end
+
+function musicPauseAndCheckpoint()
+	local music = musicGetPlaying()
+	if music then
+		music:pause()
+		music:seek(musicCalculateCheckpoint(music))
+	end
+end
+
+function musicCalculateCheckpoint(music)
+	local checkpoints = nil
+	if music == musics.musicNormal then checkpoints = musicDriveCheckpoints end
+	if music == musics.musicBosses then checkpoints = musicRushCheckpoints end
+	if not checkpoints then return 0 end
+
+	local pos = music:tell("seconds")
+	local newPos = 0
+	for _, checkpoint in ipairs(checkpoints) do
+		if checkpoint > pos then break end
+		newPos = checkpoint
+	end
+	return newPos
+end
