@@ -8,10 +8,11 @@ pause.__index = pause
 -- MAIN CALLBACKS --
 --------------------
 
-function pause.new(savedGame)
+function pause.new(savedGame, isMenu)
 	local self = setmetatable({}, pause)
 
 	self.gameState = savedGame
+	self.isMenu = isMenu or false
 	self.pauseButtons = {
 		{x = ARENA_WIDTH / 2 - 150, y = 200, width = 300, height = 28, text = "Continue", onPress = function() self:resume() end},
 		{x = ARENA_WIDTH / 2 - 150, y = 250, width = 300, height = 28, text = "Options", onPress = function() self.buttons = self.optionButtons end},
@@ -26,9 +27,13 @@ function pause.new(savedGame)
 		{x = ARENA_WIDTH / 2 - 150, y = 300, width = 50, height = 28, text = "<", onPress = function() self:musicVolumeDown() end},
 		{x = ARENA_WIDTH / 2 - 150 + 300 - 50, y = 300, width = 50, height = 28, text = ">", onPress = function() self:musicVolumeUp() end},
 		{x = ARENA_WIDTH / 2 - 90, y = 300, width = 180, height = 28, text = "Music Vol: x.x", onPress = nil},
-		{x = ARENA_WIDTH / 2 - 150, y = 350, width = 300, height = 28, text = "Back", onPress = function() self.buttons = self.pauseButtons end},
+		{x = ARENA_WIDTH / 2 - 150, y = 350, width = 300, height = 28, text = "Back", onPress = function() self:backFromOptions() end},
 	}
-	self.buttons = self.pauseButtons
+	if self.isMenu then
+		self.buttons = self.optionButtons
+	else --if not self.isMenu
+		self.buttons = self.pauseButtons
+	end
 
 	self:setVolumeButtonTexts()
 
@@ -40,7 +45,9 @@ function pause:update(dt)
 end
 
 function pause:draw()
-	self.gameState:draw()
+	if not self.isMenu then
+		self.gameState:draw()
+	end
 	love.graphics.setColor(0, 0, 0)
 	love.graphics.setFont(fonts.medium)
 	love.graphics.printf("WASD to move\nMouse to aim\nLeft Click to shoot\nEsc to pause/unpause", ARENA_WIDTH - 300, 100, 300, "center")
@@ -114,6 +121,14 @@ end
 function pause:setVolumeButtonTexts()
 	self.optionButtons[4].text = string.format("Sound Vol: %.1f", soundVolume)
 	self.optionButtons[7].text = string.format("Music Vol: %.1f", musicVolume)
+end
+
+function pause:backFromOptions()
+	if self.isMenu then
+		self:resume()
+	else --if not self.isMenu
+		self.buttons = self.pauseButtons
+	end
 end
 
 states.pause = pause
