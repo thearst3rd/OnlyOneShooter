@@ -12,8 +12,8 @@ function menu.new()
 	local self = setmetatable({}, menu)
 
 	self.buttons = {
-		{x = ARENA_WIDTH / 2 - 150, y = ARENA_HEIGHT / 2, width = 300, height = 28, text = "Play", onPress = function() nextState = states.game.new() end},
-		{x = ARENA_WIDTH / 2 - 150, y = ARENA_HEIGHT / 2 + 50, width = 300, height = 28, text = "Options", onPress = function() nextState = states.pause.new(state) end},
+		{x = ARENA_WIDTH / 2 - 200, y = ARENA_HEIGHT / 2, width = 400, height = 28, text = "Play", onPress = function() nextState = states.game.new() end},
+		{x = ARENA_WIDTH / 2 - 200, y = ARENA_HEIGHT / 2 + 50, width = 400, height = 28, text = "Options", onPress = function() nextState = states.pause.new(state, true) end},
 	}
 
 	return self

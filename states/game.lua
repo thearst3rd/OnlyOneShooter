@@ -158,4 +158,16 @@ function game:keypressed(key, scancode, isrepeat)
 	end
 end
 
+function game:continue()
+	if alwaysRestart then
+		nextState = states.game.new(state.opponentSpawner.index - 1)
+	end
+end
+
+function game:restart()
+	if alwaysRestart then
+		nextState = states.game.new()
+	end
+end
+
 states.game = game

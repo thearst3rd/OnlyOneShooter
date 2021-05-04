@@ -34,13 +34,17 @@ end
 ---------------------
 
 function gameOver:keypressed(key, scancode, isrepeat)
-	if key == "c" then
-		nextState = states.game.new(self.continueIndex)
-	elseif key == "r" then
-		nextState = states.game.new()
-	elseif key == "escape" then
+	if key == "escape" then
 		nextState = states.menu.new()
 	end
+end
+
+function gameOver:continue()
+	nextState = states.game.new(self.continueIndex)
+end
+
+function gameOver:restart()
+	nextState = states.game.new()
 end
 
 states.gameOver = gameOver
