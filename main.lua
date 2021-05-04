@@ -48,6 +48,7 @@ require "classes/portal"
 state = nil 		-- Currently loaded state
 nextState = nil 	-- State to load when the frame is done
 relMouse = {x = 0, y = 0} 	-- Relative mouse coordinates
+alwaysRestart = false
 
 -- Screen scaling variables
 local targetRatio = (ARENA_WIDTH / ARENA_HEIGHT)
@@ -146,6 +147,10 @@ function love.keypressed(key, scancode, isrepeat)
 		debug = not debug
 	elseif key == "return" and love.keyboard.isDown("lalt", "ralt") then
 		love.window.setFullscreen(not love.window.getFullscreen())
+	elseif key == "c" then
+		if state and state.continue then state:continue() end
+	elseif key == "r" then
+		if state and state.restart then state:restart() end
 	else
 		if state and state.keypressed then state:keypressed(key, scancode, isrepeat) end
 	end
