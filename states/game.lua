@@ -19,6 +19,8 @@ function game.new(startIndex)
 	if not startIndex then
 		musics.musicNormal:stop()
 		musics.musicBosses:stop()
+		musics.musicNormal:seek(0)
+		musics.musicBosses:seek(0)
 	end
 
 	self.player = classes.player.new()
