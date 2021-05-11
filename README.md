@@ -58,4 +58,4 @@ Sound | Author | Licence | Notes
 
 Library | Licence | Notes
 --- | --- | ---
-[LIP - Lua INI Parser](https://github.com/Dynodzzo/Lua_INI_Parser) | [MIT Licence]()
+[LIP - Lua INI Parser](https://github.com/Dynodzzo/Lua_INI_Parser) | MIT Licence ([top of file](LIP.lua)) | Tweaked to use `love.filesystem` rather than lua's `io` library
