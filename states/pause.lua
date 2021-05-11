@@ -21,13 +21,13 @@ function pause.new(savedGame, isMenu)
 	}
 	self.optionButtons = {
 		{x = ARENA_WIDTH / 2 - 200, y = 200, width = 400, height = 28, text = "Toggle Fullscreen", onPress = function() toggleFullscreen() end},
-		{x = ARENA_WIDTH / 2 - 200, y = 250, width = 50, height = 28, text = "<", onPress = function() self:soundVolumeDown() end},
-		{x = ARENA_WIDTH / 2 - 200 + 400 - 50, y = 250, width = 50, height = 28, text = ">", onPress = function() self:soundVolumeUp() end},
+		{x = ARENA_WIDTH / 2 - 200, y = 250, width = 50, height = 28, text = "<", hoverText = "Decrease the volume of all sound effects", onPress = function() self:soundVolumeDown() end},
+		{x = ARENA_WIDTH / 2 - 200 + 400 - 50, y = 250, width = 50, height = 28, text = ">", hoverText = "Increase the volume of all sound effects", onPress = function() self:soundVolumeUp() end},
 		{x = ARENA_WIDTH / 2 - 140, y = 250, width = 280, height = 28, text = "Sound Vol: x.x", onPress = nil},
-		{x = ARENA_WIDTH / 2 - 200, y = 300, width = 50, height = 28, text = "<", onPress = function() self:musicVolumeDown() end},
-		{x = ARENA_WIDTH / 2 - 200 + 400 - 50, y = 300, width = 50, height = 28, text = ">", onPress = function() self:musicVolumeUp() end},
+		{x = ARENA_WIDTH / 2 - 200, y = 300, width = 50, height = 28, text = "<", hoverText = "Decrease the volume of the music", onPress = function() self:musicVolumeDown() end},
+		{x = ARENA_WIDTH / 2 - 200 + 400 - 50, y = 300, width = 50, height = 28, text = ">", hoverText = "Increase the volume of the music", onPress = function() self:musicVolumeUp() end},
 		{x = ARENA_WIDTH / 2 - 140, y = 300, width = 280, height = 28, text = "Music Vol: x.x", onPress = nil},
-		{x = ARENA_WIDTH / 2 - 200, y = 350, width = 400, height = 28, text = "Toggle Restart Any Time: Off", onPress = function() self:alwaysRestartToggle() end},
+		{x = ARENA_WIDTH / 2 - 200, y = 350, width = 400, height = 28, text = "Toggle Restart Any Time: Off", hoverText = "While off, restricts the keybinds for restarting/continuing to only the player death screen", onPress = function() self:alwaysRestartToggle() end},
 		{x = ARENA_WIDTH / 2 - 200, y = 400, width = 400, height = 28, text = "Back", onPress = function() self:backFromOptions() end},
 	}
 	if self.isMenu then
