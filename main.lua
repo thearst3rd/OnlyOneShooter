@@ -48,7 +48,7 @@ require "classes/portal"
 state = nil 		-- Currently loaded state
 nextState = nil 	-- State to load when the frame is done
 relMouse = {x = 0, y = 0} 	-- Relative mouse coordinates
-alwaysRestart = false
+alwaysRestart = true
 
 -- Screen scaling variables
 local targetRatio = (ARENA_WIDTH / ARENA_HEIGHT)
@@ -216,6 +216,11 @@ function drawButton(button)
 	if button.onPress and isWithinBox(relMouse.x, relMouse.y, button.x, button.y, button.width, button.height) then
 		love.graphics.setColor(1, 1, 1, 0.3)
 		love.graphics.rectangle("fill", button.x, button.y, button.width, button.height)
+		if button.hoverText then
+			love.graphics.setColor(0, 0, 0)
+			love.graphics.setFont(fonts.medium)
+			love.graphics.printf(button.hoverText, ARENA_WIDTH / 2 + 250, button.y, 250, "left")
+		end
 	end
 	love.graphics.setColor(0, 0, 0)
 	love.graphics.setFont(fonts.medium)
