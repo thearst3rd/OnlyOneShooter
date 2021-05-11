@@ -36,7 +36,7 @@ Any sound not listed here is an original sound created by us. All of our origina
 
 Sound | Author | Licence | Notes
 --- | --- | --- | ---
-`teleport.wav` | [Freedoom authors](https://github.com/freedoom/freedoom) | [BSD Licence](https://github.com/freedoom/freedoom/blob/master/COPYING.adoc) | File [`dstelept.wav`](https://github.com/freedoom/freedoom/blob/52640d675033ddaba3667c60a4c6475984f38b3b/sounds/dstelept.wav)
+`teleport.wav` | [Freedoom authors](https://github.com/freedoom/freedoom) | [BSD Licence](freedoom-licence.txt) | File [`dstelept.wav`](https://github.com/freedoom/freedoom/blob/52640d675033ddaba3667c60a4c6475984f38b3b/sounds/dstelept.wav)
 `bulletBounce.wav` | [The Motion Monkey] | [CC0] | File `Siren1Link.wav`
 `bulletFireworkPopping.wav` | [The Motion Monkey] | [CC0] | File `Explosion8.wav`
 `bulletFiringFriendly.wav` | [The Motion Monkey] | [CC0] | File `Swipe1.wav`
@@ -60,4 +60,4 @@ Sound | Author | Licence | Notes
 
 Library | Licence | Notes
 --- | --- | ---
-[LIP - Lua INI Parser](https://github.com/Dynodzzo/Lua_INI_Parser) | MIT Licence ([top of file](LIP.lua)) | Tweaked to use `love.filesystem` rather than lua's `io` library
+[LIP - Lua INI Parser](https://github.com/Dynodzzo/Lua_INI_Parser) | [MIT Licence](lip-licence.txt) | Tweaked to use `love.filesystem` rather than lua's `io` library

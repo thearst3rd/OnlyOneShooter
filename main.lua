@@ -13,6 +13,7 @@ require "states/game"
 require "states/pause"
 require "states/victory"
 require "states/gameOver"
+require "states/credits"
 
 -- Load up all classes
 classes = {}
