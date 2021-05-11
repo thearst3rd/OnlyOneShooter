@@ -29,6 +29,28 @@ function opponentSpawner.new(startIndex)
 		classes.opponentPhaseBullethell4,
 	}
 
+	self.introText =
+	{
+		"Hello World", -- Tutorial
+		"", -- Space Invaders
+		"", -- Bouncing
+		"", -- Orbit
+		"", -- DVD
+		"", -- Charge
+		"", -- Charge Shot
+		"", -- Chase
+		"", -- Teleport
+		"This is the part where he kills you", -- Portals
+		"", -- Firework
+		"", -- Weakspot
+		"", -- Ducks
+		"", -- Fakeout
+		"", -- Bullethell 1
+		"", -- Bullethell 2
+		"", -- Bullethell 3
+		"", -- Bullethell 4
+	}
+
 	self.spawning = false
 	self.spawningTimeRemaining = 0
 
@@ -69,9 +91,13 @@ function opponentSpawner:draw()
 			local originX = next.SPAWN_X or (ARENA_WIDTH / 2)
 			local originY = next.SPAWN_Y or (ARENA_HEIGHT / 2)
 
-			love.graphics.circle("line", originX, originY, self.spawningTimeRemaining * 1200)
+			love.graphics.circle("line", originX, originY, (self.spawningTimeRemaining * 30) ^ 2)
 
 			love.graphics.setLineWidth(prevWidth)
+
+			love.graphics.setFont(fonts.large)
+			love.graphics.printf(self.introText[self.index], 200, ARENA_HEIGHT / 4, ARENA_WIDTH - 400, "center")
+			love.graphics.setFont(fonts.small)
 		end
 	end
 
