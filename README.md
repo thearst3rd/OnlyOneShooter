@@ -28,6 +28,8 @@ On Windows, you can also drag the sources folder onto `love.exe` or a shortcut o
 
 ## Credits
 
+Our game is licenced under the [MIT Licence](LICENCE), so feel free to use our code in your project with a compatible licence.
+
 ### Sounds
 
 Any sound not listed here is an original sound created by us. All of our original sounds are licenced under [CC0] which means you can use them freely, even without attribution. Go nuts!
