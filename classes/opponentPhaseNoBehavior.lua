@@ -4,6 +4,7 @@ local opponentPhaseNoBehavior = {}
 opponentPhaseNoBehavior.__index = opponentPhaseNoBehavior
 
 opponentPhaseNoBehavior.NUM_LIVES = 4
+opponentPhaseNoBehavior.INTRO_TEXT = "Hello World"
 
 --------------------
 -- MAIN CALLBACKS --

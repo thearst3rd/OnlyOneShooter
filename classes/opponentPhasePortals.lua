@@ -3,6 +3,8 @@
 local opponentPhasePortals = {}
 opponentPhasePortals.__index = opponentPhasePortals
 
+opponentPhasePortals.INTRO_TEXT = "This is the part where he kills you"
+
 
 --------------------
 -- MAIN CALLBACKS --
