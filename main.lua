@@ -4,6 +4,7 @@
 
 -- Require all helper modules
 require "sound"
+require "config"
 
 -- Load up all states
 states = {}
@@ -48,7 +49,6 @@ require "classes/portal"
 state = nil 		-- Currently loaded state
 nextState = nil 	-- State to load when the frame is done
 relMouse = {x = 0, y = 0} 	-- Relative mouse coordinates
-alwaysRestart = false
 
 -- Screen scaling variables
 local targetRatio = (ARENA_WIDTH / ARENA_HEIGHT)
@@ -79,8 +79,10 @@ function love.load()
 	-- Load images
 	images.duck = love.graphics.newImage("images/duck.png")
 
-	-- Load sounds
+	loadConfig()
 	loadSounds()
+
+	actOnConfigs()
 
 	-- Load menu state
 	nextState = states.menu.new()
@@ -146,7 +148,7 @@ function love.keypressed(key, scancode, isrepeat)
 	if key == "f12" then
 		debug = not debug
 	elseif key == "return" and love.keyboard.isDown("lalt", "ralt") then
-		love.window.setFullscreen(not love.window.getFullscreen())
+		toggleFullscreen()
 	elseif key == "c" then
 		if state and state.continue then state:continue() end
 	elseif key == "r" then
@@ -226,4 +228,14 @@ function drawButton(button)
 	love.graphics.setFont(fonts.medium)
 	love.graphics.rectangle("line", button.x, button.y, button.width, button.height)
 	love.graphics.printf(button.text, button.x, button.y, button.width, "center")
+end
+
+function toggleFullscreen()
+	config.fullscreen = not config.fullscreen
+	actOnConfigs()
+end
+
+function quitGame()
+	saveConfig()
+	love.event.quit()
 end

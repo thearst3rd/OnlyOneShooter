@@ -53,3 +53,9 @@ Sound | Author | Licence | Notes
 [CC0]: https://creativecommons.org/share-your-work/public-domain/cc0/
 [CC BY 3.0]: https://creativecommons.org/licenses/by/3.0/
 [The Motion Monkey]: https://www.themotionmonkey.co.uk/free-resources/retro-arcade-sounds/
+
+### Libraries
+
+Library | Licence | Notes
+--- | --- | ---
+[LIP - Lua INI Parser](https://github.com/Dynodzzo/Lua_INI_Parser) | MIT Licence ([top of file](LIP.lua)) | Tweaked to use `love.filesystem` rather than lua's `io` library
