@@ -69,9 +69,14 @@ function opponentSpawner:draw()
 			local originX = next.SPAWN_X or (ARENA_WIDTH / 2)
 			local originY = next.SPAWN_Y or (ARENA_HEIGHT / 2)
 
-			love.graphics.circle("line", originX, originY, self.spawningTimeRemaining * 1200)
+			love.graphics.circle("line", originX, originY, (self.spawningTimeRemaining * 30) ^ 2)
 
 			love.graphics.setLineWidth(prevWidth)
+
+			if next.INTRO_TEXT then
+				love.graphics.setFont(fonts.large)
+				love.graphics.printf(next.INTRO_TEXT, 200, ARENA_HEIGHT / 4, ARENA_WIDTH - 400, "center")
+			end
 		end
 	end
 

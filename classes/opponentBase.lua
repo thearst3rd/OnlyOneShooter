@@ -172,7 +172,7 @@ end
 function opponentBase:onDestroy()
 	-- Setup the opponent spawner to spawn the next opponent after a delay (only if player is alive)
 	if state.player and not state.player.markForDeletion then
-		state.opponentSpawner:triggerNext(2.5)
+		state.opponentSpawner:triggerNext(3.5)
 	end
 
 	for i, bullet in ipairs(state.bullets) do
