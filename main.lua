@@ -48,7 +48,7 @@ require "classes/portal"
 state = nil 		-- Currently loaded state
 nextState = nil 	-- State to load when the frame is done
 relMouse = {x = 0, y = 0} 	-- Relative mouse coordinates
-alwaysRestart = true
+alwaysRestart = false
 
 -- Screen scaling variables
 local targetRatio = (ARENA_WIDTH / ARENA_HEIGHT)
