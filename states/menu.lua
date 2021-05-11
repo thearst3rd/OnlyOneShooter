@@ -42,7 +42,7 @@ end
 
 function menu:keypressed(key, scancode, isrepeat)
 	if key == "escape" then
-		love.event.quit()
+		quitGame()
 	end
 end
 

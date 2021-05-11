@@ -17,10 +17,10 @@ function pause.new(savedGame, isMenu)
 		{x = ARENA_WIDTH / 2 - 200, y = 200, width = 400, height = 28, text = "Continue", onPress = function() self:resume() end},
 		{x = ARENA_WIDTH / 2 - 200, y = 250, width = 400, height = 28, text = "Options", onPress = function() self.buttons = self.optionButtons end},
 		{x = ARENA_WIDTH / 2 - 200, y = 300, width = 400, height = 28, text = "Exit to menu", onPress = function() self:exit() end},
-		{x = ARENA_WIDTH / 2 - 200, y = 350, width = 400, height = 28, text = "Quit game", onPress = function() love.event.quit() end},
+		{x = ARENA_WIDTH / 2 - 200, y = 350, width = 400, height = 28, text = "Quit game", onPress = function() quitGame() end},
 	}
 	self.optionButtons = {
-		{x = ARENA_WIDTH / 2 - 200, y = 200, width = 400, height = 28, text = "Toggle Fullscreen", onPress = function() love.window.setFullscreen(not love.window.getFullscreen()) end},
+		{x = ARENA_WIDTH / 2 - 200, y = 200, width = 400, height = 28, text = "Toggle Fullscreen", onPress = function() toggleFullscreen() end},
 		{x = ARENA_WIDTH / 2 - 200, y = 250, width = 50, height = 28, text = "<", onPress = function() self:soundVolumeDown() end},
 		{x = ARENA_WIDTH / 2 - 200 + 400 - 50, y = 250, width = 50, height = 28, text = ">", onPress = function() self:soundVolumeUp() end},
 		{x = ARENA_WIDTH / 2 - 140, y = 250, width = 280, height = 28, text = "Sound Vol: x.x", onPress = nil},
@@ -87,13 +87,13 @@ function pause:resume()
 end
 
 function pause:continue()
-	if alwaysRestart and not self.isMenu then
+	if config.alwaysRestart and not self.isMenu then
 		nextState = states.game.new(self.gameState.opponentSpawner.index - 1)
 	end
 end
 
 function pause:restart()
-	if alwaysRestart and not self.isMenu then
+	if config.alwaysRestart and not self.isMenu then
 		nextState = states.game.new()
 	end
 end
@@ -105,47 +105,47 @@ function pause:exit()
 end
 
 function pause:soundVolumeDown()
-	soundVolume = soundVolume - 0.1
-	if soundVolume < 0 then soundVolume = 0 end
-	setSoundVolumes(soundVolume)
+	config.soundVolume = config.soundVolume - 0.1
+	if config.soundVolume < 0 then config.soundVolume = 0 end
+	refreshAudioVolumes()
 	self:setVolumeButtonTexts()
 end
 
 function pause:soundVolumeUp()
-	soundVolume = soundVolume + 0.1
-	if soundVolume > 1 then soundVolume = 1 end
-	setSoundVolumes(soundVolume)
+	config.soundVolume = config.soundVolume + 0.1
+	if config.soundVolume > 1 then config.soundVolume = 1 end
+	refreshAudioVolumes()
 	self:setVolumeButtonTexts()
 end
 
 function pause:musicVolumeDown()
-	musicVolume = musicVolume - 0.1
-	if musicVolume < 0 then musicVolume = 0 end
-	setMusicVolumes(musicVolume)
+	config.musicVolume = config.musicVolume - 0.1
+	if config.musicVolume < 0 then config.musicVolume = 0 end
+	refreshAudioVolumes()
 	self:setVolumeButtonTexts()
 end
 
 function pause:musicVolumeUp()
-	musicVolume = musicVolume + 0.1
-	if musicVolume > 1 then musicVolume = 1 end
-	setMusicVolumes(musicVolume)
+	config.musicVolume = config.musicVolume + 0.1
+	if config.musicVolume > 1 then config.musicVolume = 1 end
+	refreshAudioVolumes()
 	self:setVolumeButtonTexts()
 end
 
 function pause:alwaysRestartToggle()
-	alwaysRestart = not alwaysRestart
+	config.alwaysRestart = not config.alwaysRestart
 	self:setAlwaysRestartToggleText()
 end
 
 function pause:setVolumeButtonTexts()
-	self.optionButtons[4].text = string.format("Sound Vol: %.1f", soundVolume)
-	self.optionButtons[7].text = string.format("Music Vol: %.1f", musicVolume)
+	self.optionButtons[4].text = string.format("Sound Vol: %.1f", config.soundVolume)
+	self.optionButtons[7].text = string.format("Music Vol: %.1f", config.musicVolume)
 end
 
 function pause:setAlwaysRestartToggleText()
-	if alwaysRestart then
+	if config.alwaysRestart then
 		self.optionButtons[8].text = "Toggle Restart Any Time: On"
-	else --if not alwaysRestart then
+	else --if not config.alwaysRestart then
 		self.optionButtons[8].text = "Toggle Restart Any Time: Off"
 	end
 end

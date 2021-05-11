@@ -5,9 +5,6 @@ soundVolumes = {}
 musics = {}
 musicVolumes = {}
 
-soundVolume = 0.7
-musicVolume = 0.4
-
 local function loadSound(name, volume, sourceType)
 	volume = volume or 1
 	sourceType = sourceType or "static"
@@ -46,21 +43,15 @@ function loadSounds()
 
 	loadMusic("musicNormal", "sounds/music_drive.ogg")
 	loadMusic("musicBosses", "sounds/music_rush.ogg")
-
-	setSoundVolumes(soundVolume)
-	setMusicVolumes(musicVolume)
 end
 
 -- Set all source volumes
-function setSoundVolumes(multiplier)
+function refreshAudioVolumes(multiplier)
 	for name, sound in pairs(sounds) do
-		sound:setVolume(soundVolumes[name] * multiplier)
+		sound:setVolume(soundVolumes[name] * config.soundVolume)
 	end
-end
-
-function setMusicVolumes(multiplier)
 	for name, sound in pairs(musics) do
-		sound:setVolume(musicVolumes[name] * multiplier)
+		sound:setVolume(musicVolumes[name] * config.musicVolume)
 	end
 end
 
