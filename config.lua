@@ -35,5 +35,6 @@ function actOnConfigs()
 	refreshAudioVolumes()
 	if love.window.getFullscreen() ~= config.fullscreen then
 		love.window.setFullscreen(config.fullscreen)
+		loadFonts()
 	end
 end
