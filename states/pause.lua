@@ -20,7 +20,7 @@ function pause.new(savedGame, isMenu)
 	}
 
 	if not IS_HTML then
-		self.pauseButtons[4] = {x = ARENA_WIDTH / 2 - 200, y = 350, width = 400, height = 28, text = "Quit game", onPress = function() quitGame() end}
+		self.pauseButtons[4] = {x = ARENA_WIDTH / 2 - 200, y = 350, width = 400, height = 28, text = "Quit game", onPress = function() love.event.quit() end}
 	end
 
 	self.optionButtons = {
