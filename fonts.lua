@@ -13,7 +13,7 @@ function loadFonts()
 	fonts.title = love.graphics.newFont(96, "normal", dpiScale)
 end
 
--- Get how
+-- Get the DPI scale, factoring in our resolution scaling
 function getScaledDpiScale()
 	local w, h = love.graphics.getDimensions()
 	local scale

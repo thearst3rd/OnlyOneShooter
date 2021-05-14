@@ -11,13 +11,13 @@ credits.__index = credits
 function credits.new()
 	local self = setmetatable({}, credits)
 
-	self.showingOpenSource = false
+	self.onLicencePage = false
 
 	self.lipLicence = love.filesystem.read("lip-licence.txt")
 	self.freedoomLicence = love.filesystem.read("freedoom-licence.txt")
 
 	self.backButton = {x = 100, y = 235, width = 250, height = 32, text = "Back", onPress = function() self:back() end}
-	self.openSourceButton = {x = ARENA_WIDTH / 2 - 150, y = ARENA_HEIGHT - 150, width = 300, height = 32, text = "Open Source Licences", onPress = function() self.showingOpenSource = true end}
+	self.openSourceButton = {x = ARENA_WIDTH / 2 - 150, y = ARENA_HEIGHT - 150, width = 300, height = 32, text = "Open Source Licences", onPress = function() self.onLicencePage = true end}
 
 	return self
 end
@@ -29,12 +29,9 @@ end
 function credits:draw()
 	love.graphics.setColor(0, 0, 0)
 	love.graphics.setFont(fonts.title)
-	if self.showingOpenSource then
+	if self.onLicencePage then
 		love.graphics.printf("OPEN SOURCE LICENCES", 0, 100, ARENA_WIDTH, "center")
 		love.graphics.setFont(fonts.medium)
-		--[[love.graphics.printf("We use open source libraries and resource in various ways.\n" ..
-				"For more information, check out:\nhttps://github.com/thearst3rd/OnlyOneShooter",
-				0, 180, ARENA_WIDTH, "center")]]
 		love.graphics.setFont(fonts.large)
 		love.graphics.printf("LIP licence", 0, 300, ARENA_WIDTH / 2, "center")
 		love.graphics.printf("Freedoom licence", ARENA_WIDTH / 2, 300, ARENA_WIDTH / 2, "center")
@@ -75,8 +72,8 @@ function credits:keypressed(key, scancode, isrepeat)
 end
 
 function credits:back()
-	if self.showingOpenSource then
-		self.showingOpenSource = false
+	if self.onLicencePage then
+		self.onLicencePage = false
 	else
 		nextState = states.menu.new()
 	end
