@@ -5,6 +5,7 @@
 -- Require all helper modules
 require "sound"
 require "config"
+require "fonts"
 
 -- Load up all states
 states = {}
@@ -13,6 +14,7 @@ require "states/game"
 require "states/pause"
 require "states/victory"
 require "states/gameOver"
+require "states/credits"
 
 -- Load up all classes
 classes = {}
@@ -73,15 +75,10 @@ function love.load()
 	-- Set default background color
 	love.graphics.setBackgroundColor(0.1, 0.3, 0.5)
 
-	-- Create some fonts
-	fonts.small = love.graphics.newFont(14)
-	fonts.medium = love.graphics.newFont(22)
-	fonts.large = love.graphics.newFont(40)
-	fonts.title = love.graphics.newFont(96)
-
 	-- Load images
 	images.duck = love.graphics.newImage("images/duck.png")
 
+	loadFonts()
 	loadConfig()
 	loadSounds()
 
@@ -165,6 +162,10 @@ function love.mousepressed(x, y, button, istouch, presses)
 	x = (x - xOff) / scale
 	y = (y - yOff) / scale
 	if state and state.mousepressed then state:mousepressed(x, y, button, istouch, presses) end
+end
+
+function love.resize(w, h)
+	loadFonts()
 end
 
 
