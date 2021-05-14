@@ -7,6 +7,7 @@ opponentPhaseCharge.__index = opponentPhaseCharge
 opponentPhaseCharge.SPAWN_Y = 150
 opponentPhaseCharge.DEFAULT_BULLET_COOLDOWN = 0.15
 opponentPhaseCharge.NUM_LIVES = 4
+opponentPhaseCharge.INTRO_TEXT = "Toro, toro!"
 
 
 --------------------

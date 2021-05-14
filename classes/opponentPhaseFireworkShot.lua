@@ -4,6 +4,9 @@ local opponentPhaseFireworkShot = {}
 opponentPhaseFireworkShot.__index = opponentPhaseFireworkShot
 
 
+opponentPhaseFireworkShot.INTRO_TEXT = "Do you ever feel\nLike a plastic bag"
+
+
 --------------------
 -- MAIN CALLBACKS --
 --------------------

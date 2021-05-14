@@ -45,6 +45,9 @@ require "classes/opponentPhaseBullethell4"
 require "classes/gameOverTimer"
 require "classes/portal"
 
+-- Global constants
+IS_HTML = false
+
 -- Global variables
 state = nil 		-- Currently loaded state
 nextState = nil 	-- State to load when the frame is done

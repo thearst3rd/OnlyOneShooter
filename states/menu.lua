@@ -41,7 +41,7 @@ end
 ---------------------
 
 function menu:keypressed(key, scancode, isrepeat)
-	if key == "escape" then
+	if key == "escape" and not IS_HTML then
 		quitGame()
 	end
 end

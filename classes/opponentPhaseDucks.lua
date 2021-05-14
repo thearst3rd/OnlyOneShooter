@@ -5,6 +5,7 @@ opponentPhaseDucks.__index = opponentPhaseDucks
 
 opponentPhaseDucks.DEFAULT_BULLET_COOLDOWN = 0.4
 opponentPhaseDucks.DEFAULT_BULLET_SPEED = 500
+opponentPhaseDucks.INTRO_TEXT = "Quack"
 
 
 local NUM_DUCKS = 40

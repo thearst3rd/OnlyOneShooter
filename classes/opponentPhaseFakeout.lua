@@ -6,6 +6,7 @@ opponentPhaseFakeout.__index = opponentPhaseFakeout
 
 opponentPhaseFakeout.RADIUS = 75
 opponentPhaseFakeout.NUM_LIVES = 1
+opponentPhaseFakeout.INTRO_TEXT = "This is where the real challenge begins"
 
 
 --------------------
