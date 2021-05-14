@@ -3,6 +3,8 @@
 local opponentPhaseChargeShot = {}
 opponentPhaseChargeShot.__index = opponentPhaseChargeShot
 
+opponentPhaseChargeShot.INTRO_TEXT = "Ready... Aim..."
+
 
 local AIM_TIME = 2
 local CHARGE_TIME = 0.6

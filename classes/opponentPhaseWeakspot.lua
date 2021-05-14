@@ -5,6 +5,7 @@ opponentPhaseWeakspot.__index = opponentPhaseWeakspot
 
 
 opponentPhaseWeakspot.DEFAULT_BULLET_COOLDOWN = 1
+opponentPhaseWeakspot.INTRO_TEXT = "What's with that abnormally large eye?"
 
 
 --------------------

@@ -5,6 +5,7 @@ opponentPhaseTeleport.__index = opponentPhaseTeleport
 
 
 opponentPhaseTeleport.DEFAULT_BULLET_COOLDOWN = 1
+opponentPhaseTeleport.INTRO_TEXT = "Nothing personnel, kid"
 
 local TELE_TIME = 1.5 	-- animation time in seconds
 local TIME_BETWEEN_TELE = 3
