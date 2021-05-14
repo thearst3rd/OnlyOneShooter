@@ -15,8 +15,10 @@ function menu.new()
 		{x = ARENA_WIDTH / 2 - 200, y = ARENA_HEIGHT / 2,       width = 400, height = 28, text = "Play", onPress = function() nextState = states.game.new() end},
 		{x = ARENA_WIDTH / 2 - 200, y = ARENA_HEIGHT / 2 +  50, width = 400, height = 28, text = "Options", onPress = function() nextState = states.pause.new(state, true) end},
 		{x = ARENA_WIDTH / 2 - 200, y = ARENA_HEIGHT / 2 + 100, width = 400, height = 28, text = "Credits", onPress = function() nextState = states.credits.new() end},
-		{x = ARENA_WIDTH / 2 - 200, y = ARENA_HEIGHT / 2 + 150, width = 400, height = 28, text = "Quit", onPress = function() quitGame() end},
 	}
+	if not IS_HTML then
+		self.buttons[4] = {x = ARENA_WIDTH / 2 - 200, y = ARENA_HEIGHT / 2 + 150, width = 400, height = 28, text = "Quit", onPress = function() love.event.quit() end}
+	end
 
 	return self
 end
@@ -44,7 +46,7 @@ end
 
 function menu:keypressed(key, scancode, isrepeat)
 	if key == "escape" and not IS_HTML then
-		quitGame()
+		love.event.quit()
 	end
 end
 

@@ -168,6 +168,10 @@ function love.resize(w, h)
 	loadFonts()
 end
 
+function love.quit()
+	saveConfig()
+end
+
 
 ----------------------
 -- HELPER FUNCTIONS --
@@ -237,9 +241,4 @@ end
 function toggleFullscreen()
 	config.fullscreen = not config.fullscreen
 	actOnConfigs()
-end
-
-function quitGame()
-	saveConfig()
-	love.event.quit()
 end
