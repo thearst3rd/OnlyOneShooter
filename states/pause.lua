@@ -17,13 +17,12 @@ function pause.new(savedGame, isMenu)
 		{x = ARENA_WIDTH / 2 - 200, y = 200, width = 400, height = 28, text = "Continue", onPress = function() self:resume() end},
 		{x = ARENA_WIDTH / 2 - 200, y = 250, width = 400, height = 28, text = "Options", onPress = function() self.buttons = self.optionButtons end},
 		{x = ARENA_WIDTH / 2 - 200, y = 300, width = 400, height = 28, text = "Exit to menu", onPress = function() self:exit() end},
-		{x = ARENA_WIDTH / 2 - 200, y = 350, width = 400, height = 28, text = "Quit game", onPress = function() quitGame() end},
 	}
-	self.pauseButtonsHTML = {
-		{x = ARENA_WIDTH / 2 - 200, y = 200, width = 400, height = 28, text = "Continue", onPress = function() self:resume() end},
-		{x = ARENA_WIDTH / 2 - 200, y = 250, width = 400, height = 28, text = "Options", onPress = function() self.buttons = self.optionButtons end},
-		{x = ARENA_WIDTH / 2 - 200, y = 300, width = 400, height = 28, text = "Exit to menu", onPress = function() self:exit() end},
-	}
+
+	if not IS_HTML then
+		self.pauseButtons[4] = {x = ARENA_WIDTH / 2 - 200, y = 350, width = 400, height = 28, text = "Quit game", onPress = function() quitGame() end},
+	end
+
 	self.optionButtons = {
 		{x = ARENA_WIDTH / 2 - 200, y = 200, width = 400, height = 28, text = "Toggle Fullscreen", onPress = function() toggleFullscreen() end},
 		{x = ARENA_WIDTH / 2 - 200, y = 250, width = 50, height = 28, text = "<", hoverText = "Decrease the volume of all sound effects", onPress = function() self:soundVolumeDown() end},
@@ -38,11 +37,7 @@ function pause.new(savedGame, isMenu)
 	if self.isMenu then
 		self.buttons = self.optionButtons
 	else --if not self.isMenu then
-		if IS_HTML then
-			self.buttons = self.pauseButtonsHTML
-		else --if not IS_HTML then
-			self.buttons = self.pauseButtons
-		end
+		self.buttons = self.pauseButtons
 	end
 
 	self:setVolumeButtonTexts()
@@ -163,11 +158,7 @@ function pause:backFromOptions()
 	if self.isMenu then
 		self:resume()
 	else --if not self.isMenu then
-		if IS_HTML then
-			self.buttons = self.pauseButtonsHTML
-		else --if not IS_HTML then
-			self.buttons = self.pauseButtons
-		end
+		self.buttons = self.pauseButtons
 	end
 end
 
