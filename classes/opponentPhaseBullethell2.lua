@@ -21,6 +21,7 @@ opponentPhaseBullethell2.RADIUS = 35
 opponentPhaseBullethell2.SPAWN_X = ORBIT_FOCAL_X + ORBIT_RADIUS_X * math.cos(ORBIT_START_ANG)
 opponentPhaseBullethell2.SPAWN_Y = ORBIT_FOCAL_Y + ORBIT_RADIUS_Y * -0.7 * math.sin(3 * ORBIT_START_ANG)
 opponentPhaseBullethell2.NUM_LIVES = 12
+opponentPhaseBullethell2.INTRO_TEXT = "Boing! 2: Electric Boogaloo"
 
 
 --------------------

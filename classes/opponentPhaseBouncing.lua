@@ -8,6 +8,7 @@ local OPPONENT_GRAVITY = 400
 opponentPhaseBouncing.SPAWN_Y = 100
 opponentPhaseBouncing.DEFAULT_BULLET_COOLDOWN = 1
 opponentPhaseBouncing.NUM_LIVES = 4
+opponentPhaseBouncing.INTRO_TEXT = "Boing!"
 
 --------------------
 -- MAIN CALLBACKS --
