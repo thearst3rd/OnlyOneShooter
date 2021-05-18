@@ -35,7 +35,7 @@ function opponentPhaseBullethell3.new()
 	end
 	self.shotState = "focus"
 
-	self.currentCooldown = 0
+	self.currentCooldown = 0.5
 	self.numBullets = 3
 
 	return self

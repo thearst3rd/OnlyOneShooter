@@ -25,7 +25,7 @@ opponentPhaseBullethell1.NUM_LIVES = 12
 function opponentPhaseBullethell1.new()
 	local self = classes.opponentBase.new(opponentPhaseBullethell1)
 
-	self.currentCooldown = 0
+	self.currentCooldown = 0.5
 	self.bulletCooldownTime = 0.1
 	self.shotAng = "horizontal"
 	self.numShotsToSwitch = 3
