@@ -159,7 +159,7 @@ function game:keypressed(key, scancode, isrepeat)
 end
 
 function game:continue()
-	if config.alwaysRestart then
+	if config.alwaysRestart and state.opponent then
 		nextState = states.game.new(state.opponentSpawner.index - 1)
 	end
 end
