@@ -81,7 +81,7 @@ end
 
 function credits:mousepressed(x, y, button, istouch, presses)
 	checkAndClickButton(x, y, self.backButton)
-	if not self.showingOpenSource then
+	if not self.onLicencePage then
 		checkAndClickButton(x, y, self.openSourceButton)
 	end
 end
