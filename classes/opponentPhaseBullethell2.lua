@@ -33,7 +33,7 @@ function opponentPhaseBullethell2.new()
 
 	self.orbitAng = ORBIT_START_ANG
 
-	self.bouncyCurrentCooldown = 0
+	self.bouncyCurrentCooldown = 0.5
 
 	if state.player then
 		self.angle = math.atan2(state.player.y - self.y, state.player.x - self.x)

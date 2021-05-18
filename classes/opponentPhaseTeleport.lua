@@ -20,11 +20,12 @@ local FRICTION_LOSS = 50
 function opponentPhaseTeleport.new()
 	local self = classes.opponentBase.new(opponentPhaseTeleport)
 
-	self:initTeleport()
-	self.timeToTele = 0
+	self.teleporting = false
+	self.timeToTele = 0.75
 
+	self.angle = math.atan2(state.player.y - self.y, state.player.x - self.x)
 	self.xspeed = 0
-	self.yspeed = MAX_SPEED / 2
+	self.yspeed = 0
 
 	return self
 end

@@ -54,6 +54,12 @@ function opponentSpawner:update(dt)
 			else
 				nextState = states.victory.new()
 			end
+		else
+			if self.spawningTimeRemaining < 1.5
+					and not sounds.opponentSpawn:isPlaying()
+					and self.list[self.index] ~= nil then
+				sounds.opponentSpawn:play()
+			end
 		end
 	end
 end

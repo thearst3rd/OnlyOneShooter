@@ -29,7 +29,7 @@ function game.new(startIndex)
 	self.bullets = {}
 
 	-- Wait a bit to spawn the first enemy
-	self.opponentSpawner:triggerNext(1)
+	self.opponentSpawner:triggerNext(2)
 
 	return self
 end
