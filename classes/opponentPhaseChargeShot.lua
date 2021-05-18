@@ -9,6 +9,7 @@ opponentPhaseChargeShot.INTRO_TEXT = "Ready... Aim..."
 local AIM_TIME = 2
 local CHARGE_TIME = 0.6
 local TOTAL_TIME = AIM_TIME + CHARGE_TIME
+local MAX_TURN_SPEED = 8
 
 
 --------------------
@@ -35,7 +36,16 @@ function opponentPhaseChargeShot:update(dt)
 
 	self.timer = self.timer + dt
 	if self.timer <= AIM_TIME then
-		self.angle = math.atan2(state.player.y - self.y, state.player.x - self.x)
+		local target = math.atan2(state.player.y - self.y, state.player.x - self.x)
+		local diff = target - self.angle
+		diff = normalizeAngle(diff)
+		if diff > MAX_TURN_SPEED * dt then
+			self.angle = self.angle + MAX_TURN_SPEED * dt
+		elseif diff < -MAX_TURN_SPEED * dt then
+			self.angle = self.angle - MAX_TURN_SPEED * dt
+		else
+			self.angle = target
+		end
 	elseif self.timer > TOTAL_TIME then
 		local bigBullet = classes.bullet.new(self.x, self.y, self.angle, false, self.bulletSpeed)
 		bigBullet.radius = 100
