@@ -27,6 +27,7 @@ function game.new(startIndex)
 	self.opponentSpawner = classes.opponentSpawner.new(startIndex)
 	self.opponent = nil
 	self.bullets = {}
+	self.particles = {}
 
 	-- Wait a bit to spawn the first enemy
 	self.opponentSpawner:triggerNext(2)
@@ -89,6 +90,16 @@ function game:update(dt)
 		end
 	end
 
+	-- Update particles (in reverse so deletion works properly)
+	for i = #self.particles, 1, -1 do
+		local particle = self.particles[i]
+		particle:update(dt)
+		if particle.markForDeletion then
+			if particle.onDestroy then particle:onDestroy() end
+			table.remove(self.particles, i)
+		end
+	end
+
 	-- Update game over timer
 	if self.gameOverTimer then
 		self.gameOverTimer:update(dt)
@@ -141,6 +152,11 @@ function game:draw()
 
 	-- Draw the opponent spawner
 	if self.opponentSpawner then self.opponentSpawner:draw() end
+
+	-- Draw the particles
+	for _, particle in ipairs(self.particles) do
+		particle:draw()
+	end
 
 	-- Update game over timer
 	if self.gameOverTimer then self.gameOverTimer:draw() end
