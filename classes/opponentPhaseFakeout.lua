@@ -8,6 +8,8 @@ opponentPhaseFakeout.RADIUS = 75
 opponentPhaseFakeout.NUM_LIVES = 1
 opponentPhaseFakeout.INTRO_TEXT = "This is where the real challenge begins"
 
+local MAX_TURN_SPEED = 4
+
 
 --------------------
 -- MAIN CALLBACKS --
@@ -30,7 +32,16 @@ function opponentPhaseFakeout:update(dt)
 
 	if not state.player then return end
 
-	self.angle = math.atan2(state.player.y - self.y, state.player.x - self.x)
+	local target = math.atan2(state.player.y - self.y, state.player.x - self.x)
+	local diff = normalizeAngle(target - self.angle)
+	if diff > MAX_TURN_SPEED * dt then
+		self.angle = self.angle + MAX_TURN_SPEED * dt
+	elseif diff < -MAX_TURN_SPEED * dt then
+		self.angle = self.angle - MAX_TURN_SPEED * dt
+	else
+		self.angle = target
+	end
+	self.angle = normalizeAngle(self.angle)
 	self.x = self.x + math.cos(self.angle) * self.APPROACH_SPEED * dt
 	self.y = self.y + math.sin(self.angle) * self.APPROACH_SPEED * dt
 end
