@@ -9,6 +9,9 @@ opponentPhaseCharge.DEFAULT_BULLET_COOLDOWN = 0.15
 opponentPhaseCharge.NUM_LIVES = 4
 opponentPhaseCharge.INTRO_TEXT = "Toro, toro!"
 
+local MAX_TURN_SPEED_PREPARATION = 8
+local MAX_TURN_SPEED_CHASING = 3
+
 
 --------------------
 -- MAIN CALLBACKS --
@@ -22,7 +25,7 @@ function opponentPhaseCharge.new()
 	self.preparationTime = 1
 	self.chargeTime = 1
 	self.chaseTime = 1
-	self.MAX_TURN_SPEED = 3
+	self.maxTurnSpeed = MAX_TURN_SPEED_PREPARATION
 	self.CHARGE_SPEED = 800
 	self.CHASE_SPEED = 400
 	self.angle = math.atan2(state.player.y - self.y, state.player.x - self.x)
@@ -46,10 +49,10 @@ function opponentPhaseCharge:update(dt)
 	elseif self.chargeState == "chasing" then
 		local newAngle = math.atan2(state.player.y - self.y, state.player.x - self.x)
 		local diff = normalizeAngle(newAngle - self.angle)
-		if diff > self.MAX_TURN_SPEED * dt then
-			self.angle = self.angle + self.MAX_TURN_SPEED * dt
-		elseif diff < -self.MAX_TURN_SPEED * dt then
-			self.angle = self.angle - self.MAX_TURN_SPEED * dt
+		if diff > self.maxTurnSpeed * dt then
+			self.angle = self.angle + self.maxTurnSpeed * dt
+		elseif diff < -self.maxTurnSpeed * dt then
+			self.angle = self.angle - self.maxTurnSpeed * dt
 		else
 			self.angle = newAngle
 		end
@@ -58,7 +61,16 @@ function opponentPhaseCharge:update(dt)
 		self.y = self.y + math.sin(self.angle) * self.CHASE_SPEED * dt
 		self.chaseTime = self.chaseTime - dt
 	else --if self.chargeState == "preparation" then
-		self.angle = math.atan2(state.player.y - self.y, state.player.x - self.x)
+		local newAngle = math.atan2(state.player.y - self.y, state.player.x - self.x)
+		local diff = normalizeAngle(newAngle - self.angle)
+		if diff > self.maxTurnSpeed * dt then
+			self.angle = self.angle + self.maxTurnSpeed * dt
+		elseif diff < -self.maxTurnSpeed * dt then
+			self.angle = self.angle - self.maxTurnSpeed * dt
+		else
+			self.angle = newAngle
+		end
+		self.angle = normalizeAngle(self.angle)
 		self.preparationTime = self.preparationTime - dt
 	end
 
@@ -76,10 +88,12 @@ function opponentPhaseCharge:update(dt)
 		self.chargeState = "chasing"
 		self.bulletSpeed = 350 + self.CHASE_SPEED
 		self.chargeTime = 1
+		self.maxTurnSpeed = MAX_TURN_SPEED_CHASING
 	elseif self.chaseTime <= 0 then
 		self.chargeState = "preparation"
 		self.useDefaultShooting = false
 		self.chaseTime = 1
+		self.maxTurnSpeed = MAX_TURN_SPEED_PREPARATION
 	end
 end
 
