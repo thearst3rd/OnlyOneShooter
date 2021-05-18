@@ -7,6 +7,7 @@ opponentPhaseChase.__index = opponentPhaseChase
 opponentPhaseChase.SPAWN_Y = 150
 opponentPhaseChase.DEFAULT_BULLET_COOLDOWN = 0.5
 opponentPhaseChase.DEFAULT_BULLET_SPEED = 1000
+opponentPhaseChase.INTRO_TEXT = "Hot on your six"
 
 
 --------------------

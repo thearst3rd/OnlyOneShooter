@@ -25,6 +25,7 @@ opponentPhaseBullethell4.RADIUS = 45
 opponentPhaseBullethell4.SPAWN_X = ORBIT_FOCAL_X + ORBIT_RADIUS_X * math.cos(ORBIT_START_ANG)
 opponentPhaseBullethell4.SPAWN_Y = ORBIT_FOCAL_Y + ORBIT_RADIUS_Y * math.sin(5 * ORBIT_START_ANG)
 opponentPhaseBullethell4.NUM_LIVES = 12
+opponentPhaseBullethell4.INTRO_TEXT = "We're in the endgame now"
 
 
 --------------------

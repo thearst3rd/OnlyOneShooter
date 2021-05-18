@@ -18,6 +18,7 @@ opponentPhaseBullethell3.RADIUS = 40
 opponentPhaseBullethell3.SPAWN_X = ORBIT_FOCAL_X + ORBIT_RADIUS_X * math.cos(ORBIT_START_ANG)
 opponentPhaseBullethell3.SPAWN_Y = ORBIT_FOCAL_Y + ORBIT_RADIUS_Y * math.sin(2 * ORBIT_START_ANG)
 opponentPhaseBullethell3.NUM_LIVES = 12
+opponentPhaseBullethell3.INTRO_TEXT = "Mind the gap"
 
 
 --------------------

@@ -17,6 +17,7 @@ opponentPhaseOrbit.SPAWN_X = ORBIT_FOCAL_X + ORBIT_RADIUS_X * math.cos(ORBIT_STA
 opponentPhaseOrbit.SPAWN_Y = ORBIT_FOCAL_Y + ORBIT_RADIUS_Y * math.sin(ORBIT_START_ANG)
 opponentPhaseOrbit.DEFAULT_BULLET_COOLDOWN = 0.4
 opponentPhaseOrbit.NUM_LIVES = 4
+opponentPhaseOrbit.INTRO_TEXT = "You spin me right round baby right round"
 
 
 --------------------

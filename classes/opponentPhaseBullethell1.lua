@@ -16,6 +16,7 @@ opponentPhaseBullethell1.RADIUS = 30
 opponentPhaseBullethell1.SPAWN_X = ORBIT_FOCAL_X + ORBIT_RADIUS_X * math.cos(ORBIT_START_ANG)
 opponentPhaseBullethell1.SPAWN_Y = ORBIT_FOCAL_Y + ORBIT_RADIUS_Y * math.sin(2 * ORBIT_START_ANG)
 opponentPhaseBullethell1.NUM_LIVES = 12
+opponentPhaseBullethell1.INTRO_TEXT = "PSYCH! But actually now" --Here is where the real challenge begins
 
 
 --------------------
