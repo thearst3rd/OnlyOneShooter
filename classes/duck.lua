@@ -42,6 +42,10 @@ function duck:update(dt)
 				if self.hp < 1 then
 					self.markForDeletion = true
 					sounds.duckDeath:clone():play()
+					for i = 1, 10 do
+						local particle = classes.particle.new(self.x, self.y, 4 + 4 * love.math.random(), {0.75, 0.75, 0})
+						table.insert(state.particles, particle)
+					end
 				else
 					sounds.duckHit:clone():play()
 				end

@@ -46,6 +46,7 @@ require "classes/opponentPhaseBullethell3"
 require "classes/opponentPhaseBullethell4"
 require "classes/gameOverTimer"
 require "classes/portal"
+require "classes/particle"
 
 -- Global constants
 IS_HTML = false
