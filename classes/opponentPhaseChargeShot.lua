@@ -50,6 +50,7 @@ function opponentPhaseChargeShot:update(dt)
 		local bigBullet = classes.bullet.new(self.x, self.y, self.angle, false, self.bulletSpeed)
 		bigBullet.radius = 100
 		table.insert(state.bullets, bigBullet)
+		state:screenShake()
 		self.timer = self.timer - TOTAL_TIME
 		sounds.bulletFiringOpponentLarge:stop()
 		sounds.bulletFiringOpponentLarge:play()

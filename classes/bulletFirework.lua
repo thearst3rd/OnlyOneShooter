@@ -47,6 +47,7 @@ function bulletFirework:update(dt)
 			self.timeBetweenShakes = self.timeBetweenShakes + 0.1
 		end
 		if self.shakeTime <= 0 then
+			state:screenShake()
 			for i = 1, self.NUM_BULLETS do
 				local ang = 2 * math.pi * i / self.NUM_BULLETS
 				table.insert(state.bullets, self.bulletType.new(self.x, self.y, ang, self.friendly, self.OUTGOING_BULLET_SPEED))

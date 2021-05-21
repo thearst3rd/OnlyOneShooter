@@ -7,6 +7,8 @@ game.__index = game
 ARENA_WIDTH = 1600
 ARENA_HEIGHT = 900
 
+local SCREEN_SHAKE_PERIOD = 1/20
+
 
 --------------------
 -- MAIN CALLBACKS --
@@ -31,6 +33,12 @@ function game.new(startIndex)
 
 	-- Wait a bit to spawn the first enemy
 	self.opponentSpawner:triggerNext(2)
+
+	self.screenShakeDuration = 0
+	self.screenShakeIntensity = 0
+	self.screenShakeOffsetX = 0
+	self.screenShakeOffsetY = 0
+	self.screenShakeCalcOffsetTime = 0
 
 	return self
 end
@@ -108,9 +116,30 @@ function game:update(dt)
 			self.gameOverTimer = nil
 		end
 	end
+
+	-- Update screen shaking
+	if self.screenShakeDuration > 0 then
+		self.screenShakeDuration = self.screenShakeDuration - dt
+		if self.screenShakeDuration <= 0 then
+			self.screenShakeDuration = 0
+			self.screenShakeOffsetX = 0
+			self.screenShakeOffsetY = 0
+		else
+			self.screenShakeCalcOffsetTime = self.screenShakeCalcOffsetTime - dt
+			if self.screenShakeCalcOffsetTime <= 0 then
+				self.screenShakeCalcOffsetTime = self.screenShakeCalcOffsetTime + SCREEN_SHAKE_PERIOD
+				local ang = love.math.random() * 2 * math.pi
+				self.screenShakeOffsetX = self.screenShakeIntensity * math.cos(ang)
+				self.screenShakeOffsetY = self.screenShakeIntensity * math.sin(ang)
+			end
+		end
+	end
 end
 
 function game:draw()
+	love.graphics.push()
+	love.graphics.translate(self.screenShakeOffsetX, self.screenShakeOffsetY)
+
 	-- Draw the bullets
 	for _, bullet in ipairs(self.bullets) do
 		bullet:draw()
@@ -126,7 +155,16 @@ function game:draw()
 	if self.bluePortal then self.bluePortal:draw() end
 	if self.orangePortal then self.orangePortal:draw() end
 
-	-- Draw the HUD
+	-- Draw the opponent spawner
+	if self.opponentSpawner then self.opponentSpawner:draw() end
+
+	-- Draw the particles
+	for _, particle in ipairs(self.particles) do
+		particle:draw()
+	end
+
+	-- HUD code begins here
+
 	-- Draw the player lives
 	love.graphics.setColor(1, 0, 0)
 	if self.player then
@@ -140,6 +178,10 @@ function game:draw()
 			love.graphics.rectangle("fill", 150, ARENA_HEIGHT - 50, 25, 25)
 		end
 	end
+
+	-- Update game over timer
+	if self.gameOverTimer then self.gameOverTimer:draw() end
+
 	love.graphics.setColor(0, 0, 0)
 	love.graphics.rectangle("line", 50, ARENA_HEIGHT - 50, 25, 25)
 	love.graphics.rectangle("line", 100, ARENA_HEIGHT - 50, 25, 25)
@@ -150,16 +192,7 @@ function game:draw()
 	love.graphics.setColor(0, 0, 0)
 	love.graphics.rectangle("line", 50, 50, ARENA_WIDTH / 2 - 100, 25)
 
-	-- Draw the opponent spawner
-	if self.opponentSpawner then self.opponentSpawner:draw() end
-
-	-- Draw the particles
-	for _, particle in ipairs(self.particles) do
-		particle:draw()
-	end
-
-	-- Update game over timer
-	if self.gameOverTimer then self.gameOverTimer:draw() end
+	love.graphics.pop()
 end
 
 
@@ -183,6 +216,20 @@ end
 function game:restart()
 	if config.alwaysRestart then
 		nextState = states.game.new()
+	end
+end
+
+function game:screenShake(duration, intensity)
+	self.screenShakeDuration = duration or 0.2
+	self.screenShakeIntensity = intensity or 5
+	if self.screenShakeDuration > 0 then
+		self.screenShakeCalcOffsetTime = SCREEN_SHAKE_PERIOD
+		local ang = love.math.random() * 2 * math.pi
+		self.screenShakeOffsetX = self.screenShakeIntensity * math.cos(ang)
+		self.screenShakeOffsetY = self.screenShakeIntensity * math.sin(ang)
+	else
+		self.screenShakeOffsetX = 0
+		self.screenShakeOffsetY = 0
 	end
 end
 
