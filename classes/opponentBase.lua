@@ -193,11 +193,13 @@ function opponentBase:damage()
 			sounds.opponentDeath:stop()
 			sounds.opponentDeath:play()
 		end
+		state:screenShake(0.5, 10)
 	else
 		self.stunned = true
 		self.stunTime = self.STUN_LENGTH
 		sounds.opponentHit:stop()
 		sounds.opponentHit:play()
+		state:screenShake()
 	end
 end
 

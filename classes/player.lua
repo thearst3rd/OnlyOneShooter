@@ -215,10 +215,12 @@ function player:damage()
 		sounds.playerDeath:stop()
 		sounds.playerDeath:play()
 		musicPauseAndCheckpoint()
+		state:screenShake(0.75, 15)
 	else
 		self.iframeTime = self.IFRAME_LENGTH
 		sounds.playerHit:stop()
 		sounds.playerHit:play()
+		state:screenShake()
 	end
 end
 
