@@ -7,7 +7,7 @@ game.__index = game
 ARENA_WIDTH = 1600
 ARENA_HEIGHT = 900
 
-local SCREEN_SHAKE_PERIOD = 1/20
+local SCREEN_SHAKE_PERIOD = 1/24
 
 
 --------------------
