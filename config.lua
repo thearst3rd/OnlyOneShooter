@@ -24,6 +24,7 @@ function loadConfig()
 	for name, value in pairs(configDefaults) do
 		if not config[name] then config[name] = value end
 	end
+	if IS_HTML then config.fullscreen = false end
 end
 
 function saveConfig()
