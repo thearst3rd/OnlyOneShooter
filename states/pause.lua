@@ -17,12 +17,8 @@ function pause.new(savedGame, isMenu)
 		{x = ARENA_WIDTH / 2 - 200, y = 200, width = 400, height = 28, text = "Continue", onPress = function() self:resume() end},
 		{x = ARENA_WIDTH / 2 - 200, y = 250, width = 400, height = 28, text = "Options", onPress = function() self.buttons = self.optionButtons end},
 		{x = ARENA_WIDTH / 2 - 200, y = 300, width = 400, height = 28, text = "Exit to menu", onPress = function() self:exit() end},
+		{x = ARENA_WIDTH / 2 - 200, y = 350, width = 400, height = 28, text = "Quit game", onPress = function() love.event.quit() end},
 	}
-
-	if not IS_HTML then
-		self.pauseButtons[4] = {x = ARENA_WIDTH / 2 - 200, y = 350, width = 400, height = 28, text = "Quit game", onPress = function() love.event.quit() end}
-	end
-
 	self.optionButtons = {
 		{x = ARENA_WIDTH / 2 - 200, y = 200, width = 400, height = 28, text = "Toggle Fullscreen", onPress = function() toggleFullscreen() end},
 		{x = ARENA_WIDTH / 2 - 200, y = 250, width = 50, height = 28, text = "<", hoverText = "Decrease the volume of all sound effects", onPress = function() self:soundVolumeDown() end},
@@ -34,6 +30,14 @@ function pause.new(savedGame, isMenu)
 		{x = ARENA_WIDTH / 2 - 200, y = 350, width = 400, height = 28, text = "Toggle Restart Any Time: Off", hoverText = "While off, restricts the keybinds for restarting/continuing to only the player death screen", onPress = function() self:alwaysRestartToggle() end},
 		{x = ARENA_WIDTH / 2 - 200, y = 400, width = 400, height = 28, text = "Back", onPress = function() self:backFromOptions() end},
 	}
+
+	if IS_HTML then
+		self.pauseButtons[4] = nil
+		-- Nasty hack... but we need the indices to stay the same because we were bad
+		self.optionButtons[1].y = -1000
+		self.optionButtons[1].onPress = nil
+	end
+
 	if self.isMenu then
 		self.buttons = self.optionButtons
 	else --if not self.isMenu then
