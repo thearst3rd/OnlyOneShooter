@@ -11,13 +11,13 @@ credits.__index = credits
 function credits.new()
 	local self = setmetatable({}, credits)
 
-	self.onLicencePage = false
+	self.onLicensePage = false
 
-	self.lipLicence = love.filesystem.read("lip-licence.txt")
-	self.freedoomLicence = love.filesystem.read("freedoom-licence.txt")
+	self.lipLicense = love.filesystem.read("lip-license.txt")
+	self.freedoomLicense = love.filesystem.read("freedoom-license.txt")
 
 	self.backButton = {x = 100, y = 235, width = 250, height = 32, text = "Back", onPress = function() self:back() end}
-	self.openSourceButton = {x = ARENA_WIDTH / 2 - 150, y = ARENA_HEIGHT - 150, width = 300, height = 32, text = "Open Source Licences", onPress = function() self.onLicencePage = true end}
+	self.openSourceButton = {x = ARENA_WIDTH / 2 - 150, y = ARENA_HEIGHT - 150, width = 300, height = 32, text = "Open Source Licenses", onPress = function() self.onLicensePage = true end}
 
 	return self
 end
@@ -29,15 +29,15 @@ end
 function credits:draw()
 	love.graphics.setColor(0, 0, 0)
 	love.graphics.setFont(fonts.title)
-	if self.onLicencePage then
-		love.graphics.printf("OPEN SOURCE LICENCES", 0, 100, ARENA_WIDTH, "center")
+	if self.onLicensePage then
+		love.graphics.printf("OPEN SOURCE LICENSES", 0, 100, ARENA_WIDTH, "center")
 		love.graphics.setFont(fonts.medium)
 		love.graphics.setFont(fonts.large)
-		love.graphics.printf("LIP licence", 0, 300, ARENA_WIDTH / 2, "center")
-		love.graphics.printf("Freedoom licence", ARENA_WIDTH / 2, 300, ARENA_WIDTH / 2, "center")
+		love.graphics.printf("LIP license", 0, 300, ARENA_WIDTH / 2, "center")
+		love.graphics.printf("Freedoom license", ARENA_WIDTH / 2, 300, ARENA_WIDTH / 2, "center")
 		love.graphics.setFont(fonts.small)
-		love.graphics.print(self.lipLicence, 40, 375)
-		love.graphics.print(self.freedoomLicence, ARENA_WIDTH / 2 + 40, 375)
+		love.graphics.print(self.lipLicense, 40, 375)
+		love.graphics.print(self.freedoomLicense, ARENA_WIDTH / 2 + 40, 375)
 	else
 		love.graphics.printf("CREDITS", 0, 100, ARENA_WIDTH, "center")
 		love.graphics.setFont(fonts.medium)
@@ -72,8 +72,8 @@ function credits:keypressed(key, scancode, isrepeat)
 end
 
 function credits:back()
-	if self.onLicencePage then
-		self.onLicencePage = false
+	if self.onLicensePage then
+		self.onLicensePage = false
 	else
 		nextState = states.menu.new()
 	end
@@ -81,7 +81,7 @@ end
 
 function credits:mousepressed(x, y, button, istouch, presses)
 	checkAndClickButton(x, y, self.backButton)
-	if not self.onLicencePage then
+	if not self.onLicensePage then
 		checkAndClickButton(x, y, self.openSourceButton)
 	end
 end
