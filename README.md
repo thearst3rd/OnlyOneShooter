@@ -8,9 +8,9 @@ OnlyOneShooter is a top down shooter where you fight only a single enemy - multi
 
 ## Running the game
 
-### Download dependancies
+### Download dependencies
 
-The only dependancy of this project is [Love2D](https://love2d.org/) version [11.3](https://love2d.org/wiki/11.3). Other versions might work, but 11.3 is the most recent version as of writing and it's the version we used to develop this game.
+The only dependency of this project is [Love2D](https://love2d.org/) version [11.3](https://love2d.org/wiki/11.3). Other versions might work, but 11.3 is the most recent version as of writing and it's the version we used to develop this game.
 
 ### Run the game in Love2D
 
@@ -28,15 +28,15 @@ On Windows, you can also drag the sources folder onto `love.exe` or a shortcut o
 
 ## Credits
 
-Our game is licenced under the [MIT Licence](LICENCE), so feel free to use our code in your project with a compatible licence.
+Our game is licensed under the [MIT License](LICENSE), so feel free to use our code in your project with a compatible license.
 
 ### Sounds
 
-Any sound not listed here is an original sound created by us. All of our original sounds are licenced under [CC0] which means you can use them freely, even without attribution. Go nuts!
+Any sound not listed here is an original sound created by us. All of our original sounds are licensed under [CC0] which means you can use them freely, even without attribution. Go nuts!
 
-Sound | Author | Licence | Notes
+Sound | Author | License | Notes
 --- | --- | --- | ---
-`teleport.wav` | [Freedoom authors](https://github.com/freedoom/freedoom) | [BSD Licence](freedoom-licence.txt) | File [`dstelept.wav`](https://github.com/freedoom/freedoom/blob/52640d675033ddaba3667c60a4c6475984f38b3b/sounds/dstelept.wav)
+`teleport.wav` | [Freedoom authors](https://github.com/freedoom/freedoom) | [BSD License](freedoom-license.txt) | File [`dstelept.wav`](https://github.com/freedoom/freedoom/blob/52640d675033ddaba3667c60a4c6475984f38b3b/sounds/dstelept.wav)
 `bulletBounce.wav` | [The Motion Monkey] | [CC0] | File `Siren1Link.wav`
 `bulletFireworkPopping.wav` | [The Motion Monkey] | [CC0] | File `Explosion8.wav`
 `bulletFiringFriendly.wav` | [The Motion Monkey] | [CC0] | File `Swipe1.wav`
@@ -59,6 +59,6 @@ Sound | Author | Licence | Notes
 
 ### Libraries
 
-Library | Licence | Notes
+Library | License | Notes
 --- | --- | ---
-[LIP - Lua INI Parser](https://github.com/Dynodzzo/Lua_INI_Parser) | [MIT Licence](lip-licence.txt) | Tweaked to use `love.filesystem` rather than lua's `io` library
+[LIP - Lua INI Parser](https://github.com/Dynodzzo/Lua_INI_Parser) | [MIT License](lip-license.txt) | Tweaked to use `love.filesystem` rather than lua's `io` library
